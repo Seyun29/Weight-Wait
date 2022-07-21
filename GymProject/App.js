@@ -13,26 +13,24 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen.js';
-import Main1Screen from './screens/Main1Screen.js';
-import NotificationScreen from './screens/Notification.js';
+import ReserveScreen from './screens/ReserveScreen.js';
 import SettingScreen from './screens/SettingScreen.js';
+import LoginScreen from './screens/LoginScreen.js';
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
-    /*
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
-        screenOptions={{headerShown: false}}>
+      <Tab.Navigator initialRouteName="Login">
+        <Tab.Screen name="Login" component={LoginScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Main1" component={Main1Screen} />
-        <Tab.Screen name="Notification" component={NotificationScreen} />
+        <Tab.Screen name="Reserve" component={ReserveScreen} />
         <Tab.Screen name="Setting" component={SettingScreen} />
       </Tab.Navigator>
     </NavigationContainer>
-    */
+
+    /*
     <SafeAreaView style={{flex:1}}>
         <View style={{flex:1, alignItems : 'center'}}>
             <View style={styles.block1}>
@@ -57,26 +55,25 @@ const App = () => {
             </View>
         </View>
     </SafeAreaView>
+    */
   );
 };
 
 const styles = StyleSheet.create({
-    block1 : {flex:0.7,
-    alignItems: 'center',
-    justifyContent:'center',},
-    inputblock : {
-    height : '6%',
-    width : '90%',
+  block1: {flex: 0.7, alignItems: 'center', justifyContent: 'center'},
+  inputblock: {
+    height: '6%',
+    width: '90%',
     paddingHorizontal: 15,
-    borderColor:'#bdbdbd',
-    borderTopWidth:1,
-    borderBottomWidth:1,
-    borderRightWidth:1,
-    borderLeftWidth:1,
-    justifyContent : 'center',
-    },
-    text : {fontSize:48, fontWeight:'bold', color:'black'},
-    input : {fontSize : 20, paddingVertical:8,},
+    borderColor: '#bdbdbd',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+    justifyContent: 'center',
+  },
+  text: {fontSize: 48, fontWeight: 'bold', color: 'black'},
+  input: {fontSize: 20, paddingVertical: 8},
 }); //수정예정
 
 export default App;

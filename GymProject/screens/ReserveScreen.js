@@ -28,7 +28,7 @@ const myReserve = () => {
   Alert.alert('\n이런식으로 팝업 뜨게', '기구명 : xx \n대기 수 : n명');
 };
 
-const Main1Screen = () => {
+const ReserveScreen = () => {
   //회원이 선택한 헬스장의 기구 수, 기구 정보(id, name 등)을 input으로 받습니당
   //서버에서 해당 헬스자의 기구 수, 기구 이름, 대기자 수를 받아옵니당
   let machinenum = 2; //default
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Main1Screen;
+export default ReserveScreen;
