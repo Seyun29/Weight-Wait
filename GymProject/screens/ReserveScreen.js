@@ -11,7 +11,6 @@ import {
   Button,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-
 import Machine from '../components/Machine.js';
 import DateHead from '../components/DateHead.js';
 import {isSearchBarAvailableForCurrentPlatform} from 'react-native-screens';
