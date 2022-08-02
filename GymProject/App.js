@@ -13,8 +13,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen.js';
-//import ReserveScreen from './screens/ReserveScreen.js';
-import ReserveScreen from './screens/NewReserveScreen.js';
+import ReserveScreen from './screens/ReserveScreen.js';
 import SettingScreen from './screens/SettingScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
 

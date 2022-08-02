@@ -1,10 +1,8 @@
 import React from 'react';
-import {Text, View, Button, StyleSheet, SafeAreaView} from 'react-native';
-import DateHead from '../components/DateHead.js';
+import {Text, View, StyleSheet, SafeAreaView} from 'react-native';
 const SettingScreen = () => {
   return (
-    <SafeAreaView contentContainerstyle={styles.contentContainer}>
-      <DateHead />
+    <SafeAreaView style={styles.contentContainer}>
       <View style={styles.baseview}>
         <Text style={styles.tmptext}>임시설정(내정보)화면</Text>
       </View>
@@ -13,7 +11,7 @@ const SettingScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  contentContainer: {flex: 1, alignItems: 'center'},
+  contentContainer: {flex: 1},
   baseview: {flex: 1, justifyContent: 'center', backgroundColor: 'lightblue'},
   tmptext: {fontWeight: 'bold', fontSize: 20, textAlign: 'center'},
 });

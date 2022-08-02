@@ -1,20 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
   View,
   Alert,
   Button,
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import Machine from '../components/Machine.js';
-import DateHead from '../components/DateHead.js';
-import {isSearchBarAvailableForCurrentPlatform} from 'react-native-screens';
-
+import Machine from '../components/newMachine.js';
+//새로고침 기능 추가하기
 const verifyReserve = () => {
   /*서버에 회원정보를 주고 예약한 내역이 있으면 앞에 대기하고 있는 회원 수 return*/
   /*예약 내역이 없으면 False return*/
@@ -28,48 +22,72 @@ const myReserve = () => {
 };
 
 const ReserveScreen = () => {
-  //회원이 선택한 헬스장의 기구 수, 기구 정보(id, name 등)을 input으로 받습니당
-  //서버에서 해당 헬스자의 기구 수, 기구 이름, 대기자 수를 받아옵니당
-  let machinenum = 2; //default
-  let machinename = ['기구1', '기구2']; //default
-  let waitnum = [2, 3]; //default
-  //밑에서 반복문 사용을 위해 함수 선언
-  function iterate() {
-    var blankArray = [];
-    for (var i = 0; i < machinenum; i++) {
-      blankArray.push(
-        <Machine name={machinename[i]} id={i} waitnum={waitnum[i]} />,
-      ); // 배열 삽입 시켜줄때 push, 빼낼때는 pop
-    }
-    return blankArray;
-  }
-  //이렇게 하게되면 페이지를 재접속할때마다 서버에 요청해야하는 단점이 있음 -> 수정 필요
+  //서버에서 해당 헬스장의 총 기구 수, 각 기구별 기구 이름&id 및 대기자 수를 서버에서 받아 machinenum, machines에 넣어주기
+  let machinenum = 2; //총 머신 개수, 임의로 설정
+  const machines = [
+    {name: '기구1', id: 1, waitnum: 2},
+    {name: '기구2', id: 2, waitnum: 3},
+  ]; //임의로 설정
 
+  const [machine, setMachine] = useState(machines);
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'lightblue'}}>
-      <DateHead />
-      <View style={styles.buttonview}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={styles.btn1view}>
         <Button
-          title="나의 예약내역 확인"
-          onPress={myReserve}
+          title="나의 예약내역 조회/수정"
           color={'#26a96a'}
+          onPress={myReserve}
         />
       </View>
-      <ScrollView contentContainerStyle={styles.scrollview}>
-        {iterate()}
-      </ScrollView>
-      <View style={{height: '4%'}} />
-      {/*for margin*/}
+      <View style={styles.seperator}></View>
+      <View style={styles.categoryView}>
+        <Button title="ALL" color={'blue'} />
+        <Button title="상체" color={'grey'} />
+        <Button title="하체" color={'grey'} />
+        <Button title="유산소/기타" color={'grey'} />
+      </View>
+      <View style={styles.seperator}></View>
+      <View style={styles.sortView}>
+        <Button title="정렬 : 대기 많은 순" />
+      </View>
+      <View style={styles.seperator}></View>
+      <View style={styles.scrollView}>
+        {machine.map(item => {
+          return (
+            <View>
+              <Machine
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                waitnum={item.waitnum}></Machine>
+            </View>
+          );
+        })}
+      </View>
+      <View style={{height: '5%'}}></View>
     </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
-  scrollview: {flex: 1, backgroundColor: '#26a98a'},
-  buttonview: {
-    height: '15%',
+  seperator: {
+    height: 1,
+    backgroundColor: 'black',
+    marginVertical: 10,
+  },
+  btn1view: {
+    flex: 0.6,
+    backgroundColor: 'white',
     flexDirection: 'row-reverse',
     alignItems: 'center',
   },
+  categoryView: {
+    flex: 0.5,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  sortView: {flex: 0.5, flexDirection: 'row', marginLeft: 10},
+  scrollView: {flex: 6, backgroundColor: 'white'},
 });
 
 export default ReserveScreen;
