@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "2931885723",
+    "project_id": "fir-ecc48",
+    "storage_bucket": "fir-ecc48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2931885723:android:8cbd2f9d734732a882283e",
+        "android_client_info": {
+          "package_name": "com.gymproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2931885723-8nikonu53fr7s14hrgedlv7kfcls1p44.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymproject",
+            "certificate_hash": "01cb379973d7637949858575c51eeb0c1c80e5cd"
+          }
+        },
+        {
+          "client_id": "2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYcL7U0ir9x0CfJ1zyDcJz2oizrLt08h4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
