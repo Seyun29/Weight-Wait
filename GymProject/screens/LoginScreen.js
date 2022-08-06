@@ -44,13 +44,7 @@ const LoginScreen = () => {
             marginTop: 40,
             flexDirection: 'row',
             alignItems: 'center',
-          }}>
-          <Text style={{fontSize: 20, fontStyle: 'italic'}}>
-            관리자이신가요?
-          </Text>
-          <View style={{width: '15%'}} />
-          <Button title="관리자로 로그인" />
-        </View>
+          }}></View>
       </View>
     </SafeAreaView>
   );
