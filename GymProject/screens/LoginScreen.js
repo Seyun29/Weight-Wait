@@ -111,7 +111,7 @@ const LoginScreen = ({ navigation }) =>{  // I changed from () to ({navigation})
     username: userInfo.user.familyName
   })
 }); //add this 8/2
-    navigation.navigate('Home')  //add this line 8/1
+    navigation.navigate('Home',{userid:userInfo.user.id})  //add this line 8/1,,add {userid:--} 8/6
     setLoading(false)
   }; 
   /* const googleSignIn = async () => {
