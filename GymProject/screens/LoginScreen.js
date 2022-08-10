@@ -69,7 +69,7 @@ import { GoogleSignin, GoogleSigninButton, statusCodes, GoogleSignInAccount } fr
 import React, {useState, setState} from 'react';
 import {View,Text,StatusBar,TouchableOpacity,StyleSheet } from 'react-native';
 import auth from '@react-native-firebase/auth'
-
+import AsyncStorage from '@react-native-async-storage/async-storage'; //add this 8/8
 
 
 
@@ -85,15 +85,38 @@ const LoginScreen = ({ navigation }) =>{  // I changed from () to ({navigation})
     setLoading(true)
     const userInfo  = await GoogleSignin.signIn(); 
     const idToken = userInfo.idToken;
+    const id = JSON.stringify(userInfo.user.id); // add this 8/8
 
+    const storeuserid = async (value) => {
+      try {
+        await AsyncStorage.setItem('@storage_userid' , userInfo.user.id)
+      } catch (e) {
+        console.log('-1');
+        // saving error
+      }
+    } // add this 8/8
+    storeuserid() //add this 8/8
+    const getuserid1 = async() => {
+      try{
+        const value = await AsyncStorage.getItem('@storage_userid');
+        VA=value;
+        console.log(value+"value");
+      }
+      catch(e){
+        console.log('-2');
+      }
+    } //add this 8/8
+    getuserid1(); //add this 8/8
   // Create a Google credential with the token
     const googleCredential = await auth.GoogleAuthProvider.credential(idToken);
-
+    
   // Sign-in the user with the credential
     const res = await auth().signInWithCredential(googleCredential);
+    
     const accessToken = await (await GoogleSignin.getTokens()).accessToken;
     console.log(accessToken);
     console.log(userInfo.user.familyName);
+    console.log(userInfo.user.id);
     fetch("https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/user", {
            method: 'POST',
            headers: {
@@ -128,7 +151,9 @@ const LoginScreen = ({ navigation }) =>{  // I changed from () to ({navigation})
 
       const googleSignout = async () => {
       auth().signOut().then( () => {
+      GoogleSignin.revokeAccess(); //add this line 8/9
       console.log("User signout successfully!");
+
     }).catch(e => Alert.alert('Error',e.message));
   }   //동영상에서 하랬던 거
 

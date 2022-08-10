@@ -25,7 +25,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator(); //added this 8/1
 
 
-const MyStack = () => {
+/* const MyStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -37,7 +37,7 @@ const MyStack = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-};  //added this 8/1
+}; */  //added this 8/1
 
 
 const App = () => {

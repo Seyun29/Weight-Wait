@@ -1,11 +1,47 @@
 import React from 'react';
 import {View, Text, Button, Alert, StyleSheet, Image} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
+
 //현재는 기구명, 대기인원만 표시되지만, 이미지도 추후 추가할것
 const reserve = () => {
   //석우꺼
   /*예약하기버튼, 서버에 회원id랑 예약하고자 하는 머신id주고 성공 or 실패 여부 리턴받기*/
-  Alert.alert('성공/실패에 해당하는 메세지 출력');
-};
+  const getuserid = async () => {
+    try {
+      const id1 = await AsyncStorage.getItem('@storage_userid')
+      console.log(id1);
+      if(id1 !== null) {
+        fetch("https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation", {
+          method: 'POST',
+          headers: {
+          Accept: 'application/json',
+    "Content-Type": 'application/json'
+ },
+ body: JSON.stringify({
+   userid: id1,
+   machineid: '1'
+ })
+}).then((response) => response.json())
+.then((json) => {
+ console.log(json);
+ Alert.alert(JSON.stringify(json));
+ return json;
+})
+.catch((error) => {
+ console.error(error);
+});
+        // value previously stored
+      }
+    } catch(e) {
+      console.log('-1');
+      // error reading value
+    }
+  } // add this 8/8
+  getuserid(); // add this 8/8
+
+  return;
+  
+}; 
 const Machine = ({name, id, waitnum}) => {
   const formatted = `기구명 : ${name}\n\n현재 대기인원 : ${waitnum}명`;
   return (
