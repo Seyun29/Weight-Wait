@@ -65,7 +65,12 @@ const styles = StyleSheet.create({
 }); //수정예정
 export default LoginScreen; */
 
-import { GoogleSignin, GoogleSigninButton, statusCodes, GoogleSignInAccount } from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+  GoogleSignInAccount,
+} from '@react-native-google-signin/google-signin';
 import React, {useState, setState} from 'react';
 import {View,Text,StatusBar,TouchableOpacity,StyleSheet } from 'react-native';
 import auth from '@react-native-firebase/auth'
@@ -74,17 +79,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; //add this
 
 
 
+
 GoogleSignin.configure({
-  webClientId: '2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com',
+  webClientId:
+    '2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com',
 });
 
-const LoginScreen = ({ navigation }) =>{  // I changed from () to ({navigation}) 8/1 16:15
-  const [loading, setLoading] = useState(false)
+const LoginScreen = ({navigation}) => {
+  // I changed from () to ({navigation}) 8/1 16:15
+  const [loading, setLoading] = useState(false);
 
-  const googleSignIn =  async () => {
-    setLoading(true)
-    const userInfo  = await GoogleSignin.signIn(); 
+  const googleSignIn = async () => {
+    setLoading(true);
+    const userInfo = await GoogleSignin.signIn();
     const idToken = userInfo.idToken;
+<<<<<<< HEAD
     const id = JSON.stringify(userInfo.user.id); // add this 8/8
 
     const storeuserid = async (value) => {
@@ -157,50 +166,48 @@ const LoginScreen = ({ navigation }) =>{  // I changed from () to ({navigation})
     }).catch(e => Alert.alert('Error',e.message));
   }   //동영상에서 하랬던 거
 
-
   const [id, SetId] = useState('');
   const [pw, SetPw] = useState('');
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor={'white'} barStyle={"dart-content"}/>
+      <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
       <TouchableOpacity style={styles.btn} onPress={googleSignIn}>
         <Text style={styles.font}>Google-Sign-In</Text>
       </TouchableOpacity>
       <GoogleSigninButton
-        style={{ width: 192, height: 48 }}
+        style={{width: 192, height: 48}}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
         onPress={googleSignIn}
         disabled={loading}
-        />
-        <TouchableOpacity style={styles.btn} onPress={googleSignout}>
+      />
+      <TouchableOpacity style={styles.btn} onPress={googleSignout}>
         <Text style={styles.font}>Google-Sign-out</Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   btn: {
     padding: 8,
     borderWidth: 1,
-    borderWidth: 1,
     borderRadius: 8,
-    borderColor: 'blue'
+    borderColor: 'blue',
   },
   text: {
     fontSize: 16,
   },
   font: {
     fontSize: 24,
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});
 
-export default LoginScreen 
+export default LoginScreen;

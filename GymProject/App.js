@@ -16,9 +16,7 @@ import HomeScreen from './screens/HomeScreen.js';
 import ReserveScreen from './screens/ReserveScreen.js';
 import SettingScreen from './screens/SettingScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'; //I added this 8/1
-
-
+import {createNativeStackNavigator} from '@react-navigation/native-stack'; //I added this 8/1
 
 const Tab = createBottomTabNavigator();
 
@@ -26,18 +24,17 @@ const Stack = createNativeStackNavigator(); //added this 8/1
 
 
 /* const MyStack = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-        />
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }; */  //added this 8/1
+
 
 
 const App = () => {
