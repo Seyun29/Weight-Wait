@@ -93,7 +93,6 @@ const LoginScreen = ({navigation}) => {
     setLoading(true);
     const userInfo = await GoogleSignin.signIn();
     const idToken = userInfo.idToken;
-<<<<<<< HEAD
     const id = JSON.stringify(userInfo.user.id); // add this 8/8
 
     const storeuserid = async (value) => {
