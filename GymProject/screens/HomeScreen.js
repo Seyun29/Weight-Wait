@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, Button, StyleSheet, SafeAreaView} from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'lightblue'}}>
       <View style={styles.baseview}>
@@ -11,9 +11,14 @@ const HomeScreen = () => {
         </Text>
       </View>
     </SafeAreaView>
-  );
+  ); // ({route})랑 Button 8/6추가
 };
-
+/*
+<Button
+        title="예약하러가기"
+        onPress={() => navigation.navigate('Reserve',{userid:route.params.userid})}
+      />  
+*/
 const styles = StyleSheet.create({
   baseview: {flex: 1, justifyContent: 'center', backgroundColor: 'lightblue'},
   tmptext: {fontWeight: 'bold', fontSize: 20, textAlign: 'center'},
