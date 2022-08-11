@@ -1,10 +1,7 @@
 import React from 'react';
 import {Text, View, Button, StyleSheet, SafeAreaView} from 'react-native';
 
-
-
-const HomeScreen = ({navigation,route}) => {
-
+const HomeScreen = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'lightblue'}}>
       <View style={styles.baseview}>
@@ -12,10 +9,10 @@ const HomeScreen = ({navigation,route}) => {
         <Text style={styles.tmptext}>
           {'\n\n'}상단 헤더 및 하단 네비게이션 바 수정 예정
         </Text>
-      </View> 
-    </SafeAreaView>  
+      </View>
+    </SafeAreaView>
   ); // ({route})랑 Button 8/6추가
-}; 
+};
 /*
 <Button
         title="예약하러가기"

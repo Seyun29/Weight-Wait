@@ -36,6 +36,7 @@ const MachineView = ({machine}) => {
             return b.waitnum - a.waitnum;
           });
         });
+
         break;
       case 2:
         setMachine(newmachine => {
@@ -52,31 +53,22 @@ const MachineView = ({machine}) => {
     //sort버튼 onclick 함수
     if (sort_cur === 0) {
       setSorttext(sort_text => '정렬 : 대기 많은 순');
-      setSortcur(sort_cur => {
-        return 1;
-      });
-      console.log(sort_cur);
-      makesort(1);
+      setSortcur(sort_cur => 1);
     } else if (sort_cur === 1) {
       setSorttext(sort_text => {
         return '정렬 : 이름순';
       });
       setSortcur(sort_cur => 2);
-      console.log(sort_cur);
-      makesort(2);
     } else {
       setSorttext(sort_text => {
         return '정렬 : 대기 적은 순';
       });
-      setSortcur(sort_cur => {
-        return 0;
-      });
-      console.log(sort_cur);
-      makesort(3);
+      setSortcur(sort_cur => 0);
     }
   };
   const clicked = categ => {
     //카테고리 선택 버튼 onclick 함수
+    setCategory(categ);
     if (categ === 0) {
       setMachine(machine);
     } else {
@@ -86,9 +78,13 @@ const MachineView = ({machine}) => {
       }
       setMachine(tmpmachine);
     }
-    setCategory(categ);
-    //makesort(sort_cur);
   };
+
+  useEffect(() => {}, [machine]);
+
+  useEffect(() => {
+    makesort(sort_cur);
+  }, [category, sort_cur]);
 
   return (
     <View style={{flex: 7}}>
