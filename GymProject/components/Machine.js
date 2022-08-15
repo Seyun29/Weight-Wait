@@ -7,7 +7,7 @@ const reserve = id => {
   //석우꺼
   /*예약하기버튼, 서버에 회원id랑 예약하고자 하는 머신id주고 성공 or 실패 여부 리턴받기*/
   //인자로 받은 machine id전달받음 -> id 변수
-  const machineid = id;
+  console.log(id);
   const getuserid = async () => {
     try {
       const id1 = await AsyncStorage.getItem('@storage_userid');
@@ -23,15 +23,22 @@ const reserve = id => {
             },
             body: JSON.stringify({
               userid: id1,
-              machineid: '1',
+              machineid: String(id),
             }),
           },
         )
           .then(response => response.json())
           .then(json => {
-            console.log(json);
-            Alert.alert(JSON.stringify(json));
-            return json;
+            if (json==0){
+              console.log("대기순위:"+String(json+1));
+              Alert.alert("대기순위:"+String(json+1));
+              return String(json+1); //대기성공이면 대기번호 리턴
+            }
+            else{
+                 console.log("예약에 실패했습니다.");
+                 return -1;  //대기 실패면 -1 리턴 (-1은 이미 대기목록에 있는 경우, -2는 그 이외에 에러 났을 경우 리턴할건데 서버에다가 대기 성공이면 대기번호  
+            }                // 리턴해주고 대기리스트에 있으면 -1리턴해주고, 다른 이유로 예약실패하면 -2리턴해달라고 그랬음. 지금은 if(json==0)으로 했는데
+                             // 서버 업데이트 되면 if(json==-1) else if(json==-2) else 이런식으로해서 else에다가 대기성공인 경우 로직 짜야할 듯
           })
           .catch(error => {
             console.error(error);
@@ -39,13 +46,13 @@ const reserve = id => {
         // value previously stored
       }
     } catch (e) {
-      console.log('-1');
+      console.log('error'); 
+      return -1; 
       // error reading value
     }
   }; // add this 8/8
-  getuserid(); // add this 8/8
-
-  return;
+  return getuserid(); // add this 8/8
+   // return getuserid() 이런 식으로 하고 getuserid()의 리턴 값을 대기순위로 주도록 바꿔야할 듯. 에러면 -1 리턴
 };
 
 const onReserve = id => {
