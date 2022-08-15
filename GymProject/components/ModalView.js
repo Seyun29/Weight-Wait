@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 
 const ModalView = ({isreserved, usermachine}) => {
-  console.log(isreserved);
   if (isreserved) {
     return (
       <View>

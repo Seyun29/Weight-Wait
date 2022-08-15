@@ -8,6 +8,7 @@ import {
   Button,
   Text,
   Modal,
+  KeyboardAvoidingView,
 } from 'react-native';
 import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
@@ -109,15 +110,14 @@ const ReserveScreen = ({navigation, route, category}) => {
     let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
     tmpusermachine = [
       {name: '기구1', id: 1, waitnum: 2},
-      {name: '기구2', id: 2, waitnum: 3},
+      {name: '기구2', id: 2, waitnum: 3}, //이런식으로 필요함, default 값
     ];
     if (tmpusermachine.length > 0) {
       setIsReserved(true);
     } else {
       setIsReserved(false);
     }
-    //setUserMachine(tmpusermachine); 실제 코드
-    setUserMachine(tmpusermachine); //이런식으로 필요함, default 값
+    setUserMachine(tmpusermachine);
   }; // ReserveScreen밖에 있는 거 주석처리 하고 안으로 가져옴 8/8
 
   let machines = getMachineInfo();
@@ -134,7 +134,7 @@ const ReserveScreen = ({navigation, route, category}) => {
 
   let machine = machines;
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
