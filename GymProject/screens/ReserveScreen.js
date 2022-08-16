@@ -15,7 +15,25 @@ import MachineView from '../components/MachineView.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
 
-const getMachineInfo = () => {
+const getMachineInfo =  () => {
+    fetch('https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/machine?category=7',{
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
+    )
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((error) => {
+      console.error(error);
+      return -1;
+    });
+};
   //석우꺼
   /*서버에 있는 해당 헬스장의 총 기구 정보 객체 배열 형태로 가져오기
 ex )
@@ -29,9 +47,10 @@ ex )
     {name: '기구7', id: 7, waitnum: 7, category : 2},
 ]
 */
-  return;
-};
+  
 
+
+  
 const ReserveScreen = ({navigation, route, category}) => {
   //navigation,route 추가 8/6
   //category : All = 0, 상체 = 1, 하체 = 2, 유산소/기타 = 3
@@ -74,7 +93,7 @@ const ReserveScreen = ({navigation, route, category}) => {
         // error reading value
       }
     };
-    getuserid(); // add this 8/8
+    return getuserid(); // add this 8/8
 
     //const userid=route.params.userid;
 
@@ -100,7 +119,7 @@ const ReserveScreen = ({navigation, route, category}) => {
     //   console.error(error);
     // });  //add this
     /*서버에 회원정보를 주고 예약한 내역이 있으면 기구명과 앞에 대기하고 있는 회원 수 return*/
-    return;
+    
   };
   // add this 8/7 const myReserve랑 const onmyReserve 원래 ReserveScreen 바깥에 있었는데 route로 userid 받아오려고 ReserveScreen 안으로 집어 넣음
 
@@ -130,7 +149,7 @@ const ReserveScreen = ({navigation, route, category}) => {
     {name: '기구6', id: 6, waitnum: 7, category: 1},
     {name: '기구7', id: 7, waitnum: 7, category: 2},
     {name: 'abc', id: 8, waitnum: 4, category: 1},
-  ]; //디폴트값, 테스트용으로 임의 설정
+  ];  //디폴트값, 테스트용으로 임의 설정
 
   let machine = machines;
 
