@@ -129,7 +129,7 @@ const ReserveScreen = ({navigation, route, category}) => {
     let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
     tmpusermachine = [
       {name: '기구1', id: 1, waitnum: 2},
-      {name: '기구2', id: 2, waitnum: 3}, //이런식으로 필요함, default 값
+      {name: '기구2', id: 2, waitnum: 3}, //이런식으로 필요함, default 값, 나중에는 이미지까지 받아와야함
     ];
     if (tmpusermachine.length > 0) {
       setIsReserved(true);
@@ -139,7 +139,7 @@ const ReserveScreen = ({navigation, route, category}) => {
     setUserMachine(tmpusermachine);
   }; // ReserveScreen밖에 있는 거 주석처리 하고 안으로 가져옴 8/8
 
-  let machines = getMachineInfo();
+  let machines = getMachineInfo(); //나중에는 이미지 url도 필요
   machines = [
     {name: '기구1', id: 1, waitnum: 2, category: 1},
     {name: '기구2', id: 2, waitnum: 3, category: 2},

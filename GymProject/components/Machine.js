@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   modalContent: {
-    flex: 0.5,
+    flex: 0.6,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
@@ -152,20 +152,21 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   inputandbutton: {
-    flex: 0.4,
+    flex: 0.5,
     width: '50%',
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   inputblock: {
-    height: '100%',
+    height: '90%',
     paddingHorizontal: 15,
     borderColor: '#555',
     borderWidth: 1,
     borderRadius: 5,
     justifyContent: 'center',
   },
-  input: {fontSize: 13, paddingVertical: 8},
+  input: {fontSize: 11, paddingVertical: 8},
   text: {fontSize: 20, fontWeight: 'bold', textAlign: 'center'},
 });
 export default Machine;

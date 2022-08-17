@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
-
+import MachineModal from './MachineModal.js';
+//usermachine : name, id, waitnum
+//machine component(이미지, name, waitnum, 예약 취소 버튼)도 띄워줘야함
 const ModalView = ({isreserved, usermachine}) => {
   if (isreserved) {
     return (
@@ -8,9 +10,7 @@ const ModalView = ({isreserved, usermachine}) => {
         {usermachine.map(item => {
           return (
             <View key={item.id}>
-              <Text>
-                기구명 : {item.name}, 대기자수 : {item.waitnum}
-              </Text>
+              <MachineModal name={item.name} id={item.id} waitnum={item.waitnum}></MachineModal>
             </View>
           );
         })}
