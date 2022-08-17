@@ -9,7 +9,7 @@ import {
   Button,
   Text,
 } from 'react-native';
-import Machine from '../components/Machine.js';
+import Machine from './Machine.js';
 
 const MachineView = ({machine}) => {
   const [newmachine, setMachine] = useState(
