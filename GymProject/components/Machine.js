@@ -65,7 +65,6 @@ const Machine = ({name, id, waitnum}) => {
     return;
   };
 
-
   const onReserve = (id, time) => {
     const waitnum = reserve(id, time);
     if (waitnum >= 0) {
