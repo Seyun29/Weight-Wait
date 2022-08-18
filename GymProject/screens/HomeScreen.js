@@ -1,27 +1,37 @@
-import React from 'react';
-import {Text, View, Button, StyleSheet, SafeAreaView} from 'react-native';
+import React,{useState} from 'react';
+import {View, StyleSheet, SafeAreaView, Alert} from 'react-native';
+import HomeScreen0 from './HomeScreen0.js';
+import HomeScreen1 from './HomeScreen1.js';
+import HomeScreen2 from './HomeScreen2.js';
 
 const HomeScreen = ({navigation, route}) => {
-  return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'lightblue'}}>
-      <View style={styles.baseview}>
-        <Text style={styles.tmptext}>임시홈화면</Text>
-        <Text style={styles.tmptext}>
-          {'\n\n'}상단 헤더 및 하단 네비게이션 바 수정 예정
-        </Text>
-      </View>
-    </SafeAreaView>
-  ); // ({route})랑 Button 8/6추가
-};
-/*
-<Button
-        title="예약하러가기"
-        onPress={() => navigation.navigate('Reserve',{userid:route.params.userid})}
-      />  
-*/
+  const [casenum, setCaseNum] = useState(2);
+  //casenum = 0: 이용중인기구있음, 1: 이용중인기구없음&이용가능기구존재, 2: 예약내역없음&이용가능기구없음
+  if (casenum === 0){ //이용중인기구있음
+    return (
+     <SafeAreaView style={styles.baseview}>
+     <HomeScreen0/>
+     </SafeAreaView> );
+    }
+   else if (casenum ===1){ //이용중인기구없음&이용가능기구존재
+        return(
+     <SafeAreaView style={styles.baseview}>
+     <HomeScreen1/>
+     </SafeAreaView> );
+   }
+   else if (casenum === 2){ //이용중인기구없음&이용가능기구없음
+        return(
+        <SafeAreaView style={styles.baseview}>
+        <HomeScreen2/>
+        </SafeAreaView> );
+      }
+   else{
+        Alert.alert('예외처리');
+        return(<SafeAreaView></SafeAreaView>);
+   }
+}
 const styles = StyleSheet.create({
-  baseview: {flex: 1, justifyContent: 'center', backgroundColor: 'lightblue'},
-  tmptext: {fontWeight: 'bold', fontSize: 20, textAlign: 'center'},
+  baseview: {flex: 1, backgroundColor: 'white'},
 });
 
 export default HomeScreen;
