@@ -11,7 +11,9 @@ const HomeScreen = ({navigation, route}) => {
   //받아와야하는 정보는 다음과 같다 :
   //1. 이용중인 기구의 id, name, 이용시작시간 (이용중이지 않을경우 3개 다 null혹은 -1값)
   //2. 이용가능한 기구의 id, name, 이용가능시작시간 (이용가능한 기구가 없을 경우 3개 다 null혹은 -1값)
-  //-> 총 6개 변수 필요
+  //-> 이용가능한 기구는 여러개일수있으므로 리스트 형식으로 반환받아야함.
+  //-> 내가 length메소드 사용해서 이용가능한 기구의 수를 체크할것
+  //다시 정리해서 보내줘야할듯 석우한테.
     return;
   };
   const casify=()=>{
@@ -20,6 +22,7 @@ const HomeScreen = ({navigation, route}) => {
   }
   //setCaseNum(checkuser()); -> 이부분에서 infinite loop 에러남, 해결해야할듯.
   //casenum = 0: 이용중인기구있음, 1: 이용중인기구없음&이용가능기구존재, 2: 이용중인기구없음&이용가능기구없음
+  //각 HomeScreen마다 필요한 props들 넘겨주기
   if (casenum === 0){ //이용중인기구있음
     return (
      <SafeAreaView style={styles.baseview}>
