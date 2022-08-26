@@ -14,7 +14,6 @@ import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
-
   
 const ReserveScreen = ({navigation, route, category}) => {
   //navigation,route 추가 8/6
@@ -90,6 +89,7 @@ const ReserveScreen = ({navigation, route, category}) => {
       console.error(error);
       return -1;
     });
+
 },[change1]); //useeffect로 서버에 있는 머신 정보 받아옴
 
  //나중에는 이미지 url도 필요
@@ -114,6 +114,7 @@ console.log(machine);
   
   
   const [myres,setMyres]=useState([]);
+
   const myReserve = () => {
     //route추가 8/7  8/8에 지움
     //석우꺼
@@ -155,6 +156,7 @@ console.log(machine);
     console.log(myres);
     return myres; // add this 8/8
 
+
     //const userid=route.params.userid;
 
     // add this 8/8 여기 userid가 안 받아지는데 이거 받을 수 있게 수정
@@ -187,6 +189,7 @@ console.log(machine);
   const [isreserved, setIsReserved] = useState(false);
   const onmyReserve = () => {
     let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
+
     /*tmpusermachine = [
       {name: '기구1', id: 1, waitnum: 2},
       {name: '기구2', id: 2, waitnum: 3}, //이런식으로 필요함, default 값, 나중에는 이미지까지 받아와야함
@@ -201,6 +204,7 @@ console.log(machine);
   
   
   /* machines = [
+
     {name: '기구1', id: 1, waitnum: 2, category: 1},
     {name: '기구2', id: 2, waitnum: 3, category: 2},
     {name: '기구3', id: 3, waitnum: 4, category: 3},
@@ -208,6 +212,7 @@ console.log(machine);
     {name: '기구5', id: 5, waitnum: 6, category: 2},
     {name: '기구6', id: 6, waitnum: 7, category: 1},
     {name: '기구7', id: 7, waitnum: 7, category: 2},
+
     
   ]; */ //디폴트값, 테스트용으로 임의 설정
 
@@ -237,6 +242,7 @@ console.log(machine);
           color={'#26a96a'}
           onPress={() => {
             onmyReserve();
+
             setTimeout(() => {
               
             }, 300);
@@ -250,6 +256,7 @@ console.log(machine);
     </SafeAreaView>
   );
   
+
 };
 const styles = StyleSheet.create({
   seperator: {

@@ -78,6 +78,7 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
                 return json; }
              
               })
+
             .catch(error => {
               console.error(error);
             });
@@ -85,6 +86,7 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
         }
       } catch (e) {
         console.log('-2');
+
         // error reading value
       }
     }; // add this 8/8
@@ -96,12 +98,15 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
     reserve(id,time);
     /*(const waitnum = reserve(id, time);
     console.log(waitnum);
+
     if (waitnum >= 0) {
       const formatted = `${waitnum}번재로 예약성공`;
       Alert.alert(formatted);
     } else {
       Alert.alert('예약실패');
+
     }*/ 
+
   };
 
   const strformat = '예상 사용시간 입력 후\n하단 버튼을 클릭해주세요.';

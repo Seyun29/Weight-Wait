@@ -52,6 +52,7 @@ const LoginScreen = ({navigation}) => {
 
     storeusername();
 
+
     const getuserid1 = async () => {
       try {
         const value = await AsyncStorage.getItem('@storage_userid');
