@@ -52,7 +52,7 @@ const HomeScreen0 = ({s_time, name ,today}) => {
             <Text style={styles.mediumtext}>경과되었습니다.</Text>
         </View>
         <View style={{flex:0.2, alignItems:'center'}}>
-        <Button title={'이용종료'} onPress={()=>{onfinish()}}/>
+        <Button title={'이용종료'} color={'orange'} onPress={()=>{onfinish()}}/>
         </View>
 
         </View>

@@ -10,7 +10,7 @@ const HomeScreen = ({navigation, route}) => {
   //석우꺼-user id&헬스장 id 넘겨주고 user의 이용정보 리스트 json으로 받아오기
   //받아와야하는 정보는 다음과 같다 :
   //1. 이용중인 기구의 id, name, 이용시작시간 (이용중이지 않을경우 3개 다 null혹은 -1값)
-  //2. 이용가능한 기구의 id, name, 이용가능시작시간 (이용가능한 기구가 없을 경우 3개 다 null혹은 -1값)
+  //2. 이용가능한 기구의 image, id, name, 이용가능시작시간 (이용가능한 기구가 없을 경우 3개 다 null혹은 -1값)
   //-> 이용가능한 기구는 여러개일수있으므로 리스트 형식으로 반환받아야함.
   //-> 내가 length메소드 사용해서 이용가능한 기구의 수를 체크할것
   //다시 정리해서 보내줘야할듯 석우한테.
@@ -31,9 +31,12 @@ const HomeScreen = ({navigation, route}) => {
      </SafeAreaView> );
     }
    else if (casenum ===1){ //이용중인기구없음&이용가능기구존재
+   //이용가능기구객체 -> {id : , name : , time : , image : ,}
+   let availablelist = [{id : 1, name : '앙기모링', time : '4300', image: '../images/default_image.png'},
+   {id : 2, name: '기뮤링', time: '5000', image: '../images/default_image.png'}];
         return(
      <SafeAreaView style={styles.baseview}>
-     <HomeScreen1/>
+     <HomeScreen1 list={availablelist} today={new Date()}/>
      </SafeAreaView> );
    }
    else if (casenum === 2){ //이용중인기구없음&이용가능기구없음

@@ -166,7 +166,6 @@ const MachineView = ({machine,change1,handlerFunction}) => {
                     change2={change2}
                     handlerFunction={handleChange}
                     ></Machine>
-
                 </View>
               );
             })}
