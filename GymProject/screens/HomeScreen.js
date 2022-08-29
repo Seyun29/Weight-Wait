@@ -1,11 +1,21 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, SafeAreaView, Alert} from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView, Alert} from 'react-native';
 import HomeScreen0 from './HomeScreen0.js';
 import HomeScreen1 from './HomeScreen1.js';
 import HomeScreen2 from './HomeScreen2.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const HomeScreen = ({navigation, route}) => {
+const HomeScreen = ({navigation, route, logged}) => {
+  if (!logged) {
+    return (
+      <SafeAreaView>
+        <Text>
+          로그인 후 정상적으로 이용 가능합니다. '로그인' 탭을 눌러
+          로그인해주세요.
+        </Text>
+      </SafeAreaView>
+    );
+  }
   const [casenum, setCaseNum] = useState(1);
   const checkuser = () => {
     //석우꺼-user id&헬스장 id 넘겨주고 user의 이용정보 리스트 json으로 받아오기
