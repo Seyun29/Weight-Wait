@@ -5,7 +5,7 @@ import HomeScreen1 from './HomeScreen1.js';
 import HomeScreen2 from './HomeScreen2.js';
 
 const HomeScreen = ({navigation, route}) => {
-  const [casenum, setCaseNum] = useState(0);
+  const [casenum, setCaseNum] = useState(1);
   const checkuser=()=>{
   //석우꺼-user id&헬스장 id 넘겨주고 user의 이용정보 리스트 json으로 받아오기
   //받아와야하는 정보는 다음과 같다 :
@@ -27,7 +27,7 @@ const HomeScreen = ({navigation, route}) => {
   //s_time, name은 일단 테스트용, s_time은 xxxx의 문자열형식이라고 가정, 수정해야함.
     return (
      <SafeAreaView style={styles.baseview}>
-     <HomeScreen0 s_time={'0000'} name={'벤치??'}/>
+     <HomeScreen0 s_time={'0000'} name={'벤치'} today={new Date()}/>
      </SafeAreaView> );
     }
    else if (casenum ===1){ //이용중인기구없음&이용가능기구존재

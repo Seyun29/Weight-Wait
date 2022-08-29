@@ -14,6 +14,7 @@ import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
+//***force update사용하기***
   
 const ReserveScreen = ({navigation, route, category}) => {
   //navigation,route 추가 8/6
@@ -168,23 +169,10 @@ const ReserveScreen = ({navigation, route, category}) => {
       />
       </View>
       <View style={styles.seperator}></View>
-      {loading===0? (<View style={{flex:7}}></View>) : <MachineView machine={machines} handlerFunction={handlechange} change1={change1}></MachineView>}
+      {loading===0? (<View style={{flex:7}}><Text>기구가 없습니다.</Text></View>) : <MachineView machine={machines} handlerFunction={handlechange} change1={change1}></MachineView>}
       <View style={{height: '5%'}}></View>
     </SafeAreaView>
   );
-  /*
-  {category === 2 ? (
-            <Button title="하체" color={'blue'} />
-          ) : (
-            <Button
-              title="하체"
-              color={'grey'}
-              onPress={() => {
-                clicked(2);
-              }}
-            />
-          )}
-  */
   
 
 };
