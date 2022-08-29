@@ -40,18 +40,16 @@ const LoginScreen = ({navigation}) => {
       }
     }; // add this 8/8
     storeuserid(); //add this 8/8
-    
+
     const storeusername = async value => {
-      try{
-        await AsyncStorage.setItem('@storage_username',userInfo.user.name);
-      } catch(e){
+      try {
+        await AsyncStorage.setItem('@storage_username', userInfo.user.name);
+      } catch (e) {
         console.log('-3');
       }
-
-    }
+    };
 
     storeusername();
-
 
     const getuserid1 = async () => {
       try {
@@ -109,7 +107,7 @@ const LoginScreen = ({navigation}) => {
       <TouchableOpacity style={styles.btn} onPress={googleSignIn}>
         <Text style={styles.font}>Google-Sign-In</Text>
       </TouchableOpacity>
-      <View style={{flex:0.1}}/>
+      <View style={{flex: 0.1}} />
       <TouchableOpacity style={styles.btn} onPress={googleSignout}>
         <Text style={styles.font}>Google-Sign-out</Text>
       </TouchableOpacity>
