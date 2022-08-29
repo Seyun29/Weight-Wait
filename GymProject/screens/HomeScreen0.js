@@ -1,14 +1,11 @@
 import React,{useState} from 'react';
 import {Text, View, Button, StyleSheet, SafeAreaView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //이용중인기구있음
 //이용시작으로부터 경과된 시간 띄워주기, ‘이용종료’ button 구현.
 //카운터기능 구현하기, 이용시작시간&이용중인기구이름 props로 받아와야함.
 //이용종료 버튼 클릭시 서버에 이용종료 보내는 함수 구현
 
-const finish = () => {
-//석우꺼, 서버에 user id, 기구 id주고 이용종료 구현. 성공시 1, 실패시 0 return
-return;
-}
 const onfinish = () => {
 //세윤꺼, 인자 전달 HomeScreen으로부터 뭐뭐받아야하는지 판단해서 짜기.
     const returnval = finish();
@@ -18,6 +15,55 @@ const onfinish = () => {
 }
 
 const HomeScreen0 = ({s_time, name}) => {
+
+    const [userid,setUserid]=useState('');
+    const getuserid = async () => {
+         try{const uid=await AsyncStorage.getItem('@storage_userid');
+              setUserid(uid);
+              return }
+         catch(e){
+              console.log(e);
+    }
+  }
+    getuserid(); // 이제 userid에 사용자 id 들어감
+    const finish = (machineid) => {
+        try{
+            fetch(
+              'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/end',
+              {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  machineid: String(machineid),
+                  userid: String(userid),
+                }),
+              },
+            )
+            .then(response => response.json())
+            .then(json => {
+              console.log(json);
+              try{
+                //제대로 이용종료 되었을 때
+            }
+              catch(e){
+                //이용종료 실패했을 때
+                Alert.alert("이용종료 실패했습니다.") 
+        
+              }
+            })
+          }
+          catch(e){
+               console.log('17');
+               console.log(e);
+             }
+return;
+}
+
+
+
     //카운터 기능 구현하기
     //Date기능 참고 : https://dororongju.tistory.com/116
     //s_time은 00:00이라고 가정. 서버 API가 나와야 어떤식으로 들어올지 알 수 있음. - 추후 수정해야함.

@@ -29,7 +29,10 @@ const ReserveScreen = ({navigation, route, category}) => {
   }
 
   const [loading, setLoading] = useState(0);
+  const [loading2, setLoading2] = useState(0);
+
   const getmachineinfo = () => {
+        setLoading2(loading2+1);
         fetch('https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/machine',{
           method: 'GET',
           headers: {
@@ -58,8 +61,8 @@ const ReserveScreen = ({navigation, route, category}) => {
             let object={name:name1,id:id1,waitnum:waitnum1,category:category1};
             machinelist.push(object);
             }
-          setMachines(machinelist);
-          setLoading(1);
+          setMachines([...machinelist]);
+          setLoading(loading+1);
           })
           .catch((error) => {
                 console.error(error);
@@ -68,6 +71,7 @@ const ReserveScreen = ({navigation, route, category}) => {
 
   }
   useEffect( () => {
+    console.log("useeffect");
     getmachineinfo();
   },[change1]); //useeffect로 서버에 있는 머신 정보 받아옴
 
@@ -85,10 +89,13 @@ const ReserveScreen = ({navigation, route, category}) => {
   getusername(); // 이제 username에 사용자 이름 들어감
   
   const [myres,setMyres]=useState([]);
+  
+  const [loading3,setLoading3] = useState(0);
+  const [loading4,setLoading4] = useState(0);
 
   const myReserve = () => {
-    //route추가 8/7  8/8에 지움
     //석우꺼
+    setLoading3(loading3+1);
     const getuserid = async () => {
       try {
         const value = await AsyncStorage.getItem('@storage_userid');
@@ -120,16 +127,25 @@ const ReserveScreen = ({navigation, route, category}) => {
     };
     getuserid();
     console.log(myres);
+    handlechange();
+    setLoading4(loading4+1);
+    while(loading4!=loading3){
+      console.log('while');
+    }
+    console.log(loading4);
+    console.log(loading3);
     return myres;
   };
   // add this 8/7 const myReserve랑 const onmyReserve 원래 ReserveScreen 바깥에 있었는데 route로 userid 받아오려고 ReserveScreen 안으로 집어 넣음
 
   const [usermachine, setUserMachine] = useState([]);
   const [isreserved, setIsReserved] = useState(false);
+
   const onmyReserve = () => {
     let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
+    console.log("tmpusermachine is"+String(tmpusermachine.length));
     if (tmpusermachine.length > 0) {
-      setIsReserved(true);
+       setIsReserved(true);
     } else {
       setIsReserved(false);
     }
@@ -143,9 +159,12 @@ const ReserveScreen = ({navigation, route, category}) => {
       <Modal transparent={true} visible = {visible} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <ModalView
+             <ModalView
               isreserved={isreserved}
-              usermachine={usermachine}></ModalView>
+              usermachine={usermachine}
+              handlerFunction={handlechange}
+              change1={change1}
+              ></ModalView>
             <Button
               title={'확인'}
               onPress={() => {
@@ -168,7 +187,7 @@ const ReserveScreen = ({navigation, route, category}) => {
       />
       </View>
       <View style={styles.seperator}></View>
-      {loading===0? (<View style={{flex:7}}></View>) : <MachineView machine={machines} handlerFunction={handlechange} change1={change1}></MachineView>}
+      {loading!=loading2? (<View style={{flex:7}}></View>) : <MachineView machine={machines} handlerFunction={handlechange} change1={change1}></MachineView>}
       <View style={{height: '5%'}}></View>
     </SafeAreaView>
   );

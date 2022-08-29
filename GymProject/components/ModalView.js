@@ -4,7 +4,14 @@ import MachineModal from './MachineModal.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 //usermachine : name, id, waitnum
 //machine component(이미지, name, waitnum, 예약 취소 버튼)도 띄워줘야함
-const ModalView = ({isreserved, usermachine}) => {
+const ModalView = ({isreserved, usermachine,change1,handlerFunction}) => {
+    
+  const change2=change1;
+  function handleChange(){
+    handlerFunction();
+    console.log("handlechange()");
+  }
+  
   if (isreserved) {
     return (
       <View>
@@ -15,7 +22,10 @@ const ModalView = ({isreserved, usermachine}) => {
               <MachineModal
                 name={item.name}
                 id={item.id}
-                waitnum={item.waitnum}></MachineModal>
+                waitnum={item.waitnum}
+                change2={change2}
+                handlerFunction={handleChange}
+                ></MachineModal>
             </View>
           );
         })}

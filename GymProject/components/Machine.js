@@ -29,7 +29,6 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
     //석우꺼
     /*예약하기버튼, 서버에 회원id랑 예약하고자 하는 머신id, 예상 사용시간주고 성공 or 실패 여부 리턴받기*/
     //인자로 받은 machine id 변수 -> 예약하고자하는 머신id, 인자로 받은 usetime -> 사용시간 (numeric type)
-    handlechange1();
     const getuserid = async () => {
       try {
         const id1 = await AsyncStorage.getItem('@storage_userid');
@@ -91,6 +90,7 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
       }
     }; // add this 8/8
     getuserid(); // add this 8/8
+    handlechange1();
     return ;
   };
 

@@ -3,7 +3,7 @@ import {View, StyleSheet, SafeAreaView, Alert} from 'react-native';
 import HomeScreen0 from './HomeScreen0.js';
 import HomeScreen1 from './HomeScreen1.js';
 import HomeScreen2 from './HomeScreen2.js';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const HomeScreen = ({navigation, route}) => {
   const [casenum, setCaseNum] = useState(0);
   const checkuser=()=>{
