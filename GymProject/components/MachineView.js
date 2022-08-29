@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import Machine from './Machine.js';
 
-const MachineView = ({machine,change1,handlerFunction}) => {
-  const change2=change1;
-  function handleChange(){
+const MachineView = ({machine, change1, handlerFunction}) => {
+  const change2 = change1;
+  function handleChange() {
     handlerFunction();
-    console.log("handlechange()");
+    console.log('handlechange()');
   }
   const [newmachine, setMachine] = useState(
     machine.sort(function (a, b) {
@@ -164,9 +164,7 @@ const MachineView = ({machine,change1,handlerFunction}) => {
                     name={item.name}
                     waitnum={item.waitnum}
                     change2={change2}
-                    handlerFunction={handleChange}
-                    ></Machine>
-
+                    handlerFunction={handleChange}></Machine>
                 </View>
               );
             })}

@@ -16,9 +16,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // add thi
 import Icon from 'react-native-vector-icons/AntDesign';
 //현재는 기구명, 대기인원만 표시되지만, 이미지도 추후 추가할것
 
-const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
-  const change3=change2;
-  function handlechange1(){
+const Machine = ({name, id, waitnum, navigation, change2, handlerFunction}) => {
+  const change3 = change2;
+  function handlechange1() {
     handlerFunction();
   }
   const formatted = `기구명 : ${name}\n\n현재 대기인원 : ${waitnum}명`;
@@ -52,32 +52,30 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
             .then(response => response.json())
             .then(json => {
               console.log(json);
-              if(json==101){
-                console.log('101');  // 
-                Alert.alert("예약실패, 사용자등록을 먼저 해주세요") // 회원가입이 안 되어 있는 경우
+              if (json == 101) {
+                console.log('101'); //
+                Alert.alert('예약실패, 사용자등록을 먼저 해주세요'); // 회원가입이 안 되어 있는 경우
                 return -1;
-              }
-              else if(json==202){
+              } else if (json == 202) {
                 console.log('202');
-                Alert.alert("현재 3개의 기구를 예약한 상태라 더 이상 예약할 수 없습니다");  //기구 3개를 예약해서 더 이상 예약할 수 없는 경우
+                Alert.alert(
+                  '현재 3개의 기구를 예약한 상태라 더 이상 예약할 수 없습니다',
+                ); //기구 3개를 예약해서 더 이상 예약할 수 없는 경우
                 return -2;
-              }
-              else if(json==303){
+              } else if (json == 303) {
                 console.log('303');
-                Alert.alert("이미 예약하셨습니다.");  // 이미 해당 기구를 예약한 경우
+                Alert.alert('이미 예약하셨습니다.'); // 이미 해당 기구를 예약한 경우
                 return -3;
-              }
-              else if(json==404){
+              } else if (json == 404) {
                 console.log('404');
-                Alert.alert("예약실패"); // 그 밖의 이유로 예약에 실패한 경우
+                Alert.alert('예약실패'); // 그 밖의 이유로 예약에 실패한 경우
                 return -4;
-              }
-              else{
+              } else {
                 console.log(json);
-                Alert.alert(JSON.stringify(json)+'번재로 예약성공'); //예약 성공한 경우
-                return json; }
-             
-              })
+                Alert.alert(JSON.stringify(json) + '번재로 예약성공'); //예약 성공한 경우
+                return json;
+              }
+            })
 
             .catch(error => {
               console.error(error);
@@ -91,11 +89,11 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
       }
     }; // add this 8/8
     getuserid(); // add this 8/8
-    return ;
+    return;
   };
 
   const onReserve = (id, time) => {
-    reserve(id,time);
+    reserve(id, time);
     /*(const waitnum = reserve(id, time);
     console.log(waitnum);
 
@@ -105,8 +103,7 @@ const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
     } else {
       Alert.alert('예약실패');
 
-    }*/ 
-
+    }*/
   };
 
   const strformat = '예상 사용시간 입력 후\n하단 버튼을 클릭해주세요.';
