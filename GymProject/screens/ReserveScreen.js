@@ -77,7 +77,7 @@ const ReserveScreen = ({navigation, route, category}) => {
           };
           machinelist.push(object);
         }
-        setMachines([...machinelist]);
+        setMachines(machinelist);
         setLoading(loading + 1);
       })
       .catch(error => {
@@ -176,7 +176,9 @@ const ReserveScreen = ({navigation, route, category}) => {
           <View style={styles.modalContent}>
             <ModalView
               isreserved={isreserved}
-              usermachine={usermachine}></ModalView>
+              usermachine={usermachine}
+              handlerFunction={handlechange}
+              change1={change1}></ModalView>
             <Button
               title={'확인'}
               onPress={() => {
@@ -197,7 +199,7 @@ const ReserveScreen = ({navigation, route, category}) => {
         />
       </View>
       <View style={styles.seperator}></View>
-      {loading === 0 ? (
+      {loading != loading2 ? (
         <View style={{flex: 7, justifyContent: 'center', alignItems: 'center'}}>
           <View style={{flex: 1}} />
           <Text>현재 예약가능한 기구가 없습니다.</Text>
