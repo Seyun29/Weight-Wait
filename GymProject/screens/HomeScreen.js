@@ -25,10 +25,10 @@ const HomeScreen = ({navigation, route}) => {
   //각 HomeScreen마다 필요한 props들 넘겨주기
   if (casenum === 0) {
     //이용중인기구있음
-    //s_time, name은 일단 테스트용, s_time은 xxxx의 문자열형식이라고 가정, 수정해야함.
+    //s_time, id, name은 일단 테스트용, s_time은 xxxx의 문자열형식이라고 가정, 수정해야함.
     return (
       <SafeAreaView style={styles.baseview}>
-        <HomeScreen0 s_time={'0000'} name={'벤치'} today={new Date()} />
+        <HomeScreen0 s_time={'0000'} id={1} name={'벤치'} today={new Date()} />
       </SafeAreaView>
     );
   } else if (casenum === 1) {
