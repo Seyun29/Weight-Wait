@@ -14,10 +14,13 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
 import Icon from 'react-native-vector-icons/AntDesign';
-
 //현재는 기구명, 대기인원만 표시되지만, 이미지도 추후 추가할것
 
-const Machine = ({name, id, waitnum}) => {
+const Machine = ({name, id, waitnum,navigation,change2,handlerFunction}) => {
+  const change3=change2;
+  function handlechange1(){
+    handlerFunction();
+  }
   const formatted = `기구명 : ${name}\n\n현재 대기인원 : ${waitnum}명`;
   const [visible2, setVisible2] = useState(false); //예약하기 클릭시 팝업제어용
   const [inputtime, setInputTime] = useState('');
@@ -26,10 +29,10 @@ const Machine = ({name, id, waitnum}) => {
     //석우꺼
     /*예약하기버튼, 서버에 회원id랑 예약하고자 하는 머신id, 예상 사용시간주고 성공 or 실패 여부 리턴받기*/
     //인자로 받은 machine id 변수 -> 예약하고자하는 머신id, 인자로 받은 usetime -> 사용시간 (numeric type)
+    handlechange1();
     const getuserid = async () => {
       try {
         const id1 = await AsyncStorage.getItem('@storage_userid');
-        console.log(id1);
         if (id1 !== null) {
           fetch(
             'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation',
@@ -41,39 +44,69 @@ const Machine = ({name, id, waitnum}) => {
               },
               body: JSON.stringify({
                 userid: id1,
-                machineid: '1',
+                machineid: String(machineid),
+                usingtime: String(usetime),
               }),
             },
           )
             .then(response => response.json())
             .then(json => {
               console.log(json);
-              Alert.alert(JSON.stringify(json));
-              return json;
-            })
+              if(json==101){
+                console.log('101');  // 
+                Alert.alert("예약실패, 사용자등록을 먼저 해주세요") // 회원가입이 안 되어 있는 경우
+                return -1;
+              }
+              else if(json==202){
+                console.log('202');
+                Alert.alert("현재 3개의 기구를 예약한 상태라 더 이상 예약할 수 없습니다");  //기구 3개를 예약해서 더 이상 예약할 수 없는 경우
+                return -2;
+              }
+              else if(json==303){
+                console.log('303');
+                Alert.alert("이미 예약하셨습니다.");  // 이미 해당 기구를 예약한 경우
+                return -3;
+              }
+              else if(json==404){
+                console.log('404');
+                Alert.alert("예약실패"); // 그 밖의 이유로 예약에 실패한 경우
+                return -4;
+              }
+              else{
+                console.log(json);
+                Alert.alert(JSON.stringify(json)+'번재로 예약성공'); //예약 성공한 경우
+                return json; }
+             
+              })
+
             .catch(error => {
               console.error(error);
             });
           // value previously stored
         }
       } catch (e) {
-        console.log('-1');
+        console.log('-2');
+
         // error reading value
       }
     }; // add this 8/8
     getuserid(); // add this 8/8
-
-    return;
+    return ;
   };
 
   const onReserve = (id, time) => {
-    const waitnum = reserve(id, time);
+    reserve(id,time);
+    /*(const waitnum = reserve(id, time);
+    console.log(waitnum);
+
     if (waitnum >= 0) {
       const formatted = `${waitnum}번재로 예약성공`;
       Alert.alert(formatted);
     } else {
       Alert.alert('예약실패');
-    }
+
+    }*/ 
+
   };
 
   const strformat = '예상 사용시간 입력 후\n하단 버튼을 클릭해주세요.';

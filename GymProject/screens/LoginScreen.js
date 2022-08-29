@@ -40,6 +40,19 @@ const LoginScreen = ({navigation}) => {
       }
     }; // add this 8/8
     storeuserid(); //add this 8/8
+    
+    const storeusername = async value => {
+      try{
+        await AsyncStorage.setItem('@storage_username',userInfo.user.name);
+      } catch(e){
+        console.log('-3');
+      }
+
+    }
+
+    storeusername();
+
+
     const getuserid1 = async () => {
       try {
         const value = await AsyncStorage.getItem('@storage_userid');
