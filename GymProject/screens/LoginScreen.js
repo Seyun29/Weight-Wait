@@ -89,23 +89,6 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate('Home', {userid: userInfo.user.id}); //add this line 8/1,,add {userid:--} 8/6
     setLoading(false);
   };
-  /* const googleSignIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      this.setState({ userInfo });
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
-      } else {
-        // some other error happened
-      }
-    }
-  }; */
 
   const googleSignout = async () => {
     auth()
@@ -126,13 +109,7 @@ const LoginScreen = ({navigation}) => {
       <TouchableOpacity style={styles.btn} onPress={googleSignIn}>
         <Text style={styles.font}>Google-Sign-In</Text>
       </TouchableOpacity>
-      <GoogleSigninButton
-        style={{width: 192, height: 48}}
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
-        onPress={googleSignIn}
-        disabled={loading}
-      />
+      <View style={{flex:0.1}}/>
       <TouchableOpacity style={styles.btn} onPress={googleSignout}>
         <Text style={styles.font}>Google-Sign-out</Text>
       </TouchableOpacity>
