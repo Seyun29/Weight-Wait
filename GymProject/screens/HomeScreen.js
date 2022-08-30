@@ -5,8 +5,8 @@ import HomeScreen1 from './HomeScreen1.js';
 import HomeScreen2 from './HomeScreen2.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const HomeScreen = ({navigation, route, logged}) => {
-  if (!logged) {
+const HomeScreen = ({navigation, route}) => {
+  /*  if (!logged) {
     return (
       <SafeAreaView>
         <Text>
@@ -15,7 +15,7 @@ const HomeScreen = ({navigation, route, logged}) => {
         </Text>
       </SafeAreaView>
     );
-  }
+  } */
   const [casenum, setCaseNum] = useState(1);
   const checkuser = () => {
     //석우꺼-user id&헬스장 id 넘겨주고 user의 이용정보 리스트 json으로 받아오기

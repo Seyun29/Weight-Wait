@@ -37,7 +37,7 @@ const App = () => {
             <LoginScreen logged={logged} handle1={login} handle2={logout} />
           )}
         />
-        <Tab.Screen name="Home" children={() => <HomeScreen />} />
+        <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Reserve" component={ReserveScreen} />
       </Tab.Navigator>
     </NavigationContainer>

@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'; //add this 8/8
+import HomeScreen from '../screens/HomeScreen.js';
 
 GoogleSignin.configure({
   webClientId:
@@ -91,7 +92,8 @@ const LoginScreen = ({navigation, logged, handle1, handle2}) => {
       },
     ); //add this 8/2
     login();
-    navigation.navigate('Home', {userid: userInfo.user.id}); //add this line 8/1,,add {userid:--} 8/6
+    //navigation.navigate('Home', {userid: userInfo.user.id}); //add this line 8/1,,add {userid:--} 8/6
+    navigation.navigate('Home');
     setLoading(false);
   };
 
