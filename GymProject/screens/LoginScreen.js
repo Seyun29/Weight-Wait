@@ -12,19 +12,26 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Button,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'; //add this 8/8
+import {useNavigation} from '@react-navigation/native';
 
 GoogleSignin.configure({
   webClientId:
     '2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com',
 });
 
-const LoginScreen = ({navigation}) => {
-  // I changed from () to ({navigation}) 8/1 16:15
+const LoginScreen = ({logged, handle1, handle2}) => {
   const [loading, setLoading] = useState(false);
-
+  const navigation = useNavigation();
+  const login = () => {
+    handle1();
+  };
+  const logout = () => {
+    handle2();
+  };
   const googleSignIn = async () => {
     setLoading(true);
     const userInfo = await GoogleSignin.signIn();
@@ -84,7 +91,9 @@ const LoginScreen = ({navigation}) => {
         }),
       },
     ); //add this 8/2
-    navigation.navigate('Home', {userid: userInfo.user.id}); //add this line 8/1,,add {userid:--} 8/6
+    login();
+    //navigation.navigate('Home', {userid: userInfo.user.id}); //add this line 8/1,,add {userid:--} 8/6
+    navigation.navigate('Home');
     setLoading(false);
   };
 
@@ -96,23 +105,50 @@ const LoginScreen = ({navigation}) => {
         console.log('User signout successfully!');
       })
       .catch(e => Alert.alert('Error', e.message));
+    logout();
   }; //동영상에서 하랬던 거
 
-  const [id, SetId] = useState('');
-  const [pw, SetPw] = useState('');
-
-  return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
-      <TouchableOpacity style={styles.btn} onPress={googleSignIn}>
-        <Text style={styles.font}>Google-Sign-In</Text>
-      </TouchableOpacity>
-      <View style={{flex: 0.1}} />
-      <TouchableOpacity style={styles.btn} onPress={googleSignout}>
-        <Text style={styles.font}>Google-Sign-out</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  if (!logged) {
+    return (
+      <View style={styles.container}>
+        <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
+        <View style={{flex: 2, justifyContent: 'flex-end'}}>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>
+            로그인 후 모든 기능을 정상적으로
+          </Text>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>
+            이용하실 수 있습니다.
+          </Text>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>
+            로그인하시려면 하단 버튼을 클릭해주세요
+          </Text>
+        </View>
+        <View style={{flex: 0.2}}></View>
+        <View style={{flex: 3}}>
+          <TouchableOpacity style={styles.btn} onPress={googleSignIn}>
+            <Text style={styles.font}>Google-Sign-In</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
+        <View style={{flex: 2, justifyContent: 'flex-end'}}>
+          <Text style={{fontSize: 20, textAlign: 'center'}}>
+            로그아웃하시려면 하단 버튼을 클릭해주세요
+          </Text>
+        </View>
+        <View style={{flex: 0.5}}></View>
+        <View style={{flex: 3}}>
+          <TouchableOpacity style={styles.btn} onPress={googleSignout}>
+            <Text style={styles.font}>Google-Sign-out</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({

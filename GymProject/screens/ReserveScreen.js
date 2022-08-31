@@ -16,11 +16,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
 //***force update사용하기***
 
-const ReserveScreen = ({navigation, route, category}) => {
-  //navigation,route 추가 8/6
+const ReserveScreen = ({category, logged}) => {
+  if (!logged) {
+    return (
+      <SafeAreaView
+        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>로그인 후 정상적으로 이용 가능합니다.</Text>
+        <Text>하단의 'Account' 탭을 눌러 로그인해주세요.</Text>
+      </SafeAreaView>
+    );
+  }
   //category : All = 0, 상체 = 1, 하체 = 2, 유산소/기타 = 3
   //서버에서 해당 헬스장의 각 기구별 기구 이름&id 및 대기자 수를 서버에서 받아 machinenum, machines에 넣어주기
-  //const userid = route.params.userid; 8/8 주석처리
   const [machines, setMachines] = useState([]);
   const [change1, setChange1] = useState(0); // 예약버튼 누를 때마다 useeffect실행하는데 쓰는 변수 change1
 
