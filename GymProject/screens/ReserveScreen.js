@@ -16,7 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
 //***force update사용하기***
 
-const ReserveScreen = ({category, logged}) => {
+const ReserveScreen = ({logged}) => {
   if (!logged) {
     return (
       <SafeAreaView
@@ -96,7 +96,7 @@ const ReserveScreen = ({category, logged}) => {
       });
   };
   useEffect(() => {
-    console.log('useeffect');
+    console.log('useeffect---');
     getmachineinfo();
   }, [change1]); //useeffect로 서버에 있는 머신 정보 받아옴
 
@@ -187,6 +187,19 @@ const ReserveScreen = ({category, logged}) => {
     }, 2000);
   }; // ReserveScreen밖에 있는 거 주석처리 하고 안으로 가져옴 8/8
 
+  //ModalView에서 렌더링 문제해결 위해 change2 변수선언
+  const [change2, setChange2] = useState(0);
+  const handlechange2 = () => {
+    setChange2(change2 + 1);
+    return;
+  };
+  /*
+  useEffect(() => {
+    console.log('ㅠㅠㅠㅠㅠㅠ');
+    onmyReserve();
+  }, [change2]);
+  */
+
   const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
 
   return (
@@ -209,7 +222,8 @@ const ReserveScreen = ({category, logged}) => {
               <ModalView
                 isreserved={isreserved}
                 usermachine={usermachine}
-                handlerFunction={handlechange}></ModalView>
+                handlerFunction={handlechange}
+                handlerFunction2={handlechange2}></ModalView>
             )}
 
             <Button

@@ -12,10 +12,6 @@ import {
 import Machine from './Machine.js';
 
 const MachineView = ({machine, handlerFunction}) => {
-  function handleChange() {
-    handlerFunction();
-    console.log('handlechange()');
-  }
   const [newmachine, setMachine] = useState(
     machine.sort(function (a, b) {
       return a.waitnum - b.waitnum;
@@ -163,7 +159,7 @@ const MachineView = ({machine, handlerFunction}) => {
                     name={item.name}
                     waitnum={item.waitnum}
                     image={item.image}
-                    handlerFunction={handleChange}></Machine>
+                    handlerFunction={handlerFunction}></Machine>
                 </View>
               );
             })}
