@@ -12,20 +12,20 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Button,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'; //add this 8/8
-import HomeScreen from '../screens/HomeScreen.js';
+import {useNavigation} from '@react-navigation/native';
 
 GoogleSignin.configure({
   webClientId:
     '2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com',
 });
 
-const LoginScreen = ({navigation, logged, handle1, handle2}) => {
-  // I changed from () to ({navigation}) 8/1 16:15
+const LoginScreen = ({logged, handle1, handle2}) => {
   const [loading, setLoading] = useState(false);
-  //const [logged, setLogged] = useState(false);
+  const navigation = useNavigation();
   const login = () => {
     handle1();
   };
@@ -113,17 +113,17 @@ const LoginScreen = ({navigation, logged, handle1, handle2}) => {
       <View style={styles.container}>
         <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
         <View style={{flex: 2, justifyContent: 'flex-end'}}>
-          <Text style={{fontSize: 20, textAlign: 'center'}}>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>
             로그인 후 모든 기능을 정상적으로
           </Text>
-          <Text style={{fontSize: 20, textAlign: 'center'}}>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>
             이용하실 수 있습니다.
           </Text>
-          <Text style={{fontSize: 20, textAlign: 'center'}}>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>
             로그인하시려면 하단 버튼을 클릭해주세요
           </Text>
         </View>
-        <View style={{flex: 0.5}}></View>
+        <View style={{flex: 0.2}}></View>
         <View style={{flex: 3}}>
           <TouchableOpacity style={styles.btn} onPress={googleSignIn}>
             <Text style={styles.font}>Google-Sign-In</Text>

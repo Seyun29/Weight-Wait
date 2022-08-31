@@ -13,7 +13,6 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
-import Icon from 'react-native-vector-icons/AntDesign';
 //현재는 기구명, 대기인원만 표시되지만, 이미지도 추후 추가할것
 
 const Machine = ({name, id, waitnum, navigation, change2, handlerFunction}) => {
@@ -110,9 +109,7 @@ const Machine = ({name, id, waitnum, navigation, change2, handlerFunction}) => {
                     width: '90%',
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
-                  }}>
-                  <Icon name={'closecircle'} size={20} />
-                </View>
+                  }}></View>
                 <Text style={styles.text}>{strformat}</Text>
                 <View style={{height: '10%'}} />
                 <View style={styles.inputandbutton}>

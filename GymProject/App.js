@@ -1,24 +1,14 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Button,
-} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen.js';
 import ReserveScreen from './screens/ReserveScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
-import {createNativeStackNavigator} from '@react-navigation/native-stack'; //I added this 8/1
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator(); //added this 8/1
 
 const App = () => {
   const [logged, setLogged] = useState(false);
@@ -30,35 +20,44 @@ const App = () => {
   };
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Login">
+      <Tab.Navigator
+        initialRouteName="Login"
+        screenOptions={{tabBarActiveTintColor: '#fb8c00'}}>
+        <Tab.Screen
+          name="Home"
+          children={() => <HomeScreen logged={logged} />}
+          options={{
+            title: '홈',
+            tabBarIcon: ({color, size}) => (
+              <Icon name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Reserve"
+          children={() => <ReserveScreen logged={logged} />}
+          options={{
+            title: '예약하기',
+            tabBarIcon: ({color, size}) => (
+              <Icon name="access-time" color={color} size={size} />
+            ),
+          }}
+        />
         <Tab.Screen
           name="Login"
           children={() => (
             <LoginScreen logged={logged} handle1={login} handle2={logout} />
           )}
+          options={{
+            title: '계정관리',
+            tabBarIcon: ({color, size}) => (
+              <Icon name="account-circle" color={color} size={size} />
+            ),
+          }}
         />
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Reserve" component={ReserveScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  block1: {flex: 0.7, alignItems: 'center', justifyContent: 'center'},
-  inputblock: {
-    height: '6%',
-    width: '90%',
-    paddingHorizontal: 15,
-    borderColor: '#bdbdbd',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
-    justifyContent: 'center',
-  },
-  text: {fontSize: 48, fontWeight: 'bold', color: 'black'},
-  input: {fontSize: 20, paddingVertical: 8},
-}); //수정예정
 
 export default App;
