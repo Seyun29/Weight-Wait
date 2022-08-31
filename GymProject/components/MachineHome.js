@@ -35,11 +35,13 @@ const MachineHome = ({name, id, time, image, today}) => {
         .then(response => response.json())
         .then(json => {
           console.log(json);
-          try {
-            //제대로 이용종료 되었을 때
-          } catch (e) {
-            //이용종료 실패했을 때
-            Alert.alert('이용종료 실패했습니다.');
+          if(json["success"]==true){
+            console.log("사용시작성공");
+            return 1
+          }
+          else{
+            console.log("사용시작실패");
+            return -1;
           }
         });
     } catch (e) {

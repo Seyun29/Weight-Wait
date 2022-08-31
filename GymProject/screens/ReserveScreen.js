@@ -45,6 +45,7 @@ const ReserveScreen = ({navigation, route, category}) => {
     )
       .then(response => response.json())
       .then(json => {
+        console.log(json);
         let machinelist = [];
         for (let k = 0; k < json.machinearr.length; k++) {
           let id1 = -1;
@@ -78,7 +79,9 @@ const ReserveScreen = ({navigation, route, category}) => {
           machinelist.push(object);
         }
         setMachines(machinelist);
-        setLoading(loading + 1);
+        setTimeout(() => {
+          setLoading(loading+1);
+        }, 1000);
       })
       .catch(error => {
         console.error(error);
@@ -93,6 +96,8 @@ const ReserveScreen = ({navigation, route, category}) => {
   //나중에는 이미지 url도 필요
 
   const [username, setUsername] = useState(''); //username 저장
+  
+
   const getusername = async () => {
     try {
       const name = await AsyncStorage.getItem('@storage_username');
@@ -103,68 +108,77 @@ const ReserveScreen = ({navigation, route, category}) => {
     }
   };
   getusername(); // 이제 username에 사용자 이름 들어감
-
+  
+  const [userid,setUserid]=useState('');
+  const getuserid= async()=>{
+    const value = await AsyncStorage.getItem('@storage_userid');
+    if (value !== null){
+        setUserid(value);
+    }
+  }
+  getuserid();
+  
   const [myres, setMyres] = useState([]);
   const [loading3, setLoading3] = useState(0);
   const [loading4, setLoading4] = useState(0);
+  const [usermachine, setUserMachine] = useState([]);
 
   const myReserve = () => {
     //석우꺼
-    setLoading3(loading3 + 1);
-    const getuserid = async () => {
-      try {
-        const value = await AsyncStorage.getItem('@storage_userid');
-        if (value !== null) {
-          const url =
-            'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation?userid=' +
-            value;
-          fetch(url, {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
+    console.log('loading3:'+String(loading3));
+    console.log('loading4:'+String(loading4));
+      if (userid !== null) {
+        const url =
+          'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation?userid=' +
+          userid;
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(json => {
+            Alert.alert(JSON.stringify(json));
+            setMyres(json["reservation"]);
+            console.log(myres);
+            setUserMachine(json["reservation"]);
+            setLoading4(loading4 + 1);
+            console.log(loading4);
+            console.log(myres);
+            handlechange();
+            return myres;
+            //setMyres(json['reservation']);
+            //console.log(loading4);
+            //console.log(myres);
           })
-            .then(response => response.json())
-            .then(json => {
-              Alert.alert(JSON.stringify(json));
-              setMyres(json['reservation']);
-              return;
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        }
-      } catch (e) {
-        console.log('-1');
-        // error reading value
+          .catch(error => {
+            console.error(error);
+          });
       }
-    };
-    getuserid();
-    console.log(myres);
     handlechange();
-    setLoading4(loading4 + 1);
-    while (loading4 != loading3) {
-      console.log('while');
-    }
-    console.log(loading4);
-    console.log(loading3);
-    return myres;
+        
   };
   // add this 8/7 const myReserve랑 const onmyReserve 원래 ReserveScreen 바깥에 있었는데 route로 userid 받아오려고 ReserveScreen 안으로 집어 넣음
 
-  const [usermachine, setUserMachine] = useState([]);
+  //const [usermachine, setUserMachine] = useState([]);
   const [isreserved, setIsReserved] = useState(false);
 
   const onmyReserve = () => {
-    let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
-    console.log('tmpusermachine is' + String(tmpusermachine.length));
-    if (tmpusermachine.length > 0) {
-      setIsReserved(true);
-    } else {
-      setIsReserved(false);
-    }
-    setUserMachine(tmpusermachine);
+    setLoading3((loading3)=>{return loading3+1});
+    //let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
+    myReserve();
+    //console.log('tmpusermachine is' + String(tmpusermachine.length));
+    setTimeout(() => {
+      if (myres.length > 0) {
+        setIsReserved(true);
+      } else {
+  
+        setIsReserved(false);
+      }
+      //setUserMachine(myres);
+    }, 2000);
   }; // ReserveScreen밖에 있는 거 주석처리 하고 안으로 가져옴 8/8
 
   const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
@@ -174,11 +188,16 @@ const ReserveScreen = ({navigation, route, category}) => {
       <Modal transparent={true} visible={visible} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <ModalView
+            {loading3!=loading4?(<View style={{flex: 7, justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{flex: 1}} />
+          <Text>현재 예약가능한 기구가 없습니다.</Text>
+          <View style={{flex: 5}} />
+        </View>):(<ModalView
               isreserved={isreserved}
               usermachine={usermachine}
               handlerFunction={handlechange}
-              change1={change1}></ModalView>
+              change1={change1}></ModalView>)}
+            
             <Button
               title={'확인'}
               onPress={() => {
@@ -193,7 +212,6 @@ const ReserveScreen = ({navigation, route, category}) => {
           color={'#26a96a'}
           onPress={() => {
             onmyReserve();
-            setTimeout(() => {}, 300);
             setVisible(true);
           }}
         />
