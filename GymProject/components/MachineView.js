@@ -11,8 +11,7 @@ import {
 } from 'react-native';
 import Machine from './Machine.js';
 
-const MachineView = ({machine, change1, handlerFunction}) => {
-  const change2 = change1;
+const MachineView = ({machine, handlerFunction}) => {
   function handleChange() {
     handlerFunction();
     console.log('handlechange()');
@@ -163,7 +162,7 @@ const MachineView = ({machine, change1, handlerFunction}) => {
                     id={item.id}
                     name={item.name}
                     waitnum={item.waitnum}
-                    change2={change2}
+                    image={item.image}
                     handlerFunction={handleChange}></Machine>
                 </View>
               );

@@ -3,7 +3,7 @@ import {View, Text, Button, Alert, StyleSheet, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
 //나의 예약확인 버튼 클릭시 뜨는 Modal에서 .map()함수를 통한 반복으로 띄워줄 컴포넌트; 이미지, name, waitnum, 예약취소버튼 기능 구현
 
-const MachineModal = ({name, id, waitnum, change2, handlerFunction}) => {
+const MachineModal = ({name, id, waitnum, handlerFunction}) => {
   const formatted = `기구명 : ${name}\n\n현재 대기인원 : ${waitnum}명`;
   const [userid, setUserid] = useState('');
   const getusername = async () => {
@@ -17,7 +17,6 @@ const MachineModal = ({name, id, waitnum, change2, handlerFunction}) => {
   };
   getusername();
 
-  const change3 = change2;
   function handlechange1() {
     handlerFunction();
   }
