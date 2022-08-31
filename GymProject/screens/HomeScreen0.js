@@ -22,7 +22,7 @@ const HomeScreen0 = ({s_time, id, name, today}) => {
   const finish = machineid => {
     try {
       fetch(
-        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/end',
+        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/return',
         {
           method: 'POST',
           headers: {
@@ -39,10 +39,13 @@ const HomeScreen0 = ({s_time, id, name, today}) => {
         .then(json => {
           console.log(json);
           try {
+            console.log("이용종료 성공했습니다.");
+            return true;
             //제대로 이용종료 되었을 때
           } catch (e) {
             //이용종료 실패했을 때
-            Alert.alert('이용종료 실패했습니다.');
+            return false;
+            console.log('이용종료 실패했습니다.');
           }
         });
     } catch (e) {

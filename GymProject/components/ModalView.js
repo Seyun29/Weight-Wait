@@ -10,31 +10,33 @@ const ModalView = ({isreserved, usermachine, change1, handlerFunction}) => {
     handlerFunction();
     console.log('handlechange()');
   }
-  if (isreserved) {
-    return (
-      <View>
-        <Text>나의 예약내역</Text>
-        {usermachine.map(item => {
-          return (
-            <View key={item.id}>
-              <MachineModal
-                name={item.name}
-                id={item.id}
-                waitnum={item.waitnum}
-                change2={change2}
-                handlerFunction={handleChange}></MachineModal>
-            </View>
-          );
-        })}
-      </View>
-    );
-  } else {
+  
+  /*if (isreserved)*/ {
+      return (
+        <View>
+          <Text>나의 예약내역</Text>
+          {usermachine.map(item => {
+            return (
+              <View key={item.id}>
+                <MachineModal
+                  name={item.name}
+                  id={item.id}
+                  waitnum={item.waitnum}
+                  change2={change2}
+                  handlerFunction={handleChange}></MachineModal>
+              </View>
+            );
+          })}
+        </View>
+      );  // isreserved가 값을 받아올 때 느려서 false가 들어와서 이렇게 바꿈..!
+    
+  } /*else {
     return (
       <View>
         <Text>현재 예약중인 기구가 없습니다</Text>
       </View>
     );
-  }
+  }*/
 };
 
 const styles = StyleSheet.create({});
