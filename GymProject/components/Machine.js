@@ -15,7 +15,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
 //현재는 기구명, 대기인원만 표시되지만, 이미지도 추후 추가할것
 
-const Machine = ({name, id, waitnum, navigation, change2, handlerFunction}) => {
+const Machine = ({name, id, waitnum, change2, handlerFunction, image}) => {
   const change3 = change2;
   function handlechange1() {
     handlerFunction();
