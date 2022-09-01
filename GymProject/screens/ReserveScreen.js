@@ -52,13 +52,13 @@ const ReserveScreen = ({category, logged}) => {
     )
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         let machinelist = [];
         for (let k = 0; k < json.machinearr.length; k++) {
           let id1 = -1;
           let name1 = '';
           let category1 = -1;
           let waitnum1 = -1;
+          let image1=''; 
           for (let i = 0; i < json.machinearr[k].length - 1; i++) {
             switch (i) {
               case 0:
@@ -71,7 +71,7 @@ const ReserveScreen = ({category, logged}) => {
                 category1 = Number(json.machinearr[k][i]);
                 break; //machinecategory
               case 3:
-                continue; //machineimage
+                image1=json.machinearr[k][i]; //machineimage 
               case 4:
                 waitnum1 = json.machinearr[k][i].length;
                 break; //waitnumber
@@ -82,10 +82,12 @@ const ReserveScreen = ({category, logged}) => {
             id: id1,
             waitnum: waitnum1,
             category: category1,
+            image: image1, //추가
           };
           machinelist.push(object);
         }
         setMachines(machinelist);
+        console.log(machines);
         setTimeout(() => {
           setLoading(loading+1);
         }, 1000);

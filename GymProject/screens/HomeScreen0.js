@@ -40,11 +40,11 @@ const HomeScreen0 = ({s_time, id, name, today}) => {
           console.log(json);
           try {
             console.log("이용종료 성공했습니다.");
-            return true;
-            //제대로 이용종료 되었을 때
+            return 1;
+            //제대로 이용종료 되었을 때 1 리턴
           } catch (e) {
-            //이용종료 실패했을 때
-            return false;
+            //이용종료 실패했을 때 -1 리턴
+            return -1;
             console.log('이용종료 실패했습니다.');
           }
         });
