@@ -55,12 +55,12 @@ const MachineModal = ({
             tim = json['time'];
             handlechange1();
             handlechange2();
-            Alert.alert('반납되었습니다.');
+            Alert.alert('예약이 취소 되었습니다.');
             return 1;
           } catch (e) {
             handlechange1();
             handlechange2();
-            Alert.alert('반납에 실패했습니다.');
+            Alert.alert('예약취소에 실패했습니다.');
             return -1;
           }
         });
