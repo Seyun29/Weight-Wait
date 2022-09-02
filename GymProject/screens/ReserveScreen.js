@@ -87,18 +87,16 @@ const ReserveScreen = ({logged}) => {
           machinelist.push(object);
         }
         setMachines(machinelist);
-        console.log(machines);
-        setTimeout(() => {
-          setLoading(loading + 1);
-        }, 1000);
+        setLoading(loading+1);
       })
       .catch(error => {
         console.error(error);
+        setLoading(loading+1);
         return -1;
       });
   };
   useEffect(() => {
-    console.log('useeffect---');
+    console.log('getting machine info');
     getmachineinfo();
   }, [change1]); //useeffect로 서버에 있는 머신 정보 받아옴
 
@@ -133,8 +131,7 @@ const ReserveScreen = ({logged}) => {
 
   const myReserve = () => {
     //석우꺼
-    console.log('loading3:' + String(loading3));
-    console.log('loading4:' + String(loading4));
+    setLoading3(loading3+1);
     if (userid !== null) {
       const url =
         'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation?userid=' +
@@ -148,14 +145,12 @@ const ReserveScreen = ({logged}) => {
       })
         .then(response => response.json())
         .then(json => {
-          Alert.alert(JSON.stringify(json));
           setMyres(json['reservation']);
-          console.log(myres);
+          //console.log(myres);
           setUserMachine(json['reservation']);
           setLoading4(loading4 + 1);
-          console.log(loading4);
-          console.log(myres);
-          handlechange();
+          //console.log(loading4);
+          //console.log(myres);
           return myres;
           //setMyres(json['reservation']);
           //console.log(loading4);
@@ -163,30 +158,19 @@ const ReserveScreen = ({logged}) => {
         })
         .catch(error => {
           console.error(error);
+          setLoading4(loading4 + 1);
         });
     }
-    handlechange();
   };
   // add this 8/7 const myReserve랑 const onmyReserve 원래 ReserveScreen 바깥에 있었는데 route로 userid 받아오려고 ReserveScreen 안으로 집어 넣음
 
   //const [usermachine, setUserMachine] = useState([]);
-  const [isreserved, setIsReserved] = useState(false);
 
   const onmyReserve = () => {
-    setLoading3(loading3 => {
-      return loading3 + 1;
-    });
+
     //let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
     myReserve();
     //console.log('tmpusermachine is' + String(tmpusermachine.length));
-    setTimeout(() => {
-      if (myres.length > 0) {
-        setIsReserved(true);
-      } else {
-        setIsReserved(false);
-      }
-      //setUserMachine(myres);
-    }, 2000);
   }; // ReserveScreen밖에 있는 거 주석처리 하고 안으로 가져옴 8/8
 
   //ModalView에서 렌더링 문제해결 위해 change2 변수선언
@@ -195,12 +179,15 @@ const ReserveScreen = ({logged}) => {
     setChange2(change2 + 1);
     return;
   };
-  /*
+
   useEffect(() => {
-    console.log('ㅠㅠㅠㅠㅠㅠ');
     onmyReserve();
   }, [change2]);
-  */
+//기구 업데이트 확인용 임시 useEffect, added by seyun 0902
+  useEffect(()=>{
+  console.log('machines just updated ---')
+  console.log(machines);}, [machines]);
+
 
   const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
 
@@ -222,7 +209,6 @@ const ReserveScreen = ({logged}) => {
               </View>
             ) : (
               <ModalView
-                isreserved={isreserved}
                 usermachine={usermachine}
                 handlerFunction={handlechange}
                 handlerFunction2={handlechange2}></ModalView>
