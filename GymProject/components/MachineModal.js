@@ -50,9 +50,8 @@ const MachineModal = ({
       )
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          //console.log(json);
           try {
-            tim = json['time'];
             handlechange1();
             handlechange2();
             Alert.alert('예약이 취소 되었습니다.');
