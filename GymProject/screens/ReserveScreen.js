@@ -37,6 +37,10 @@ const ReserveScreen = ({logged}) => {
 
   const [loading, setLoading] = useState(0);
   const [loading2, setLoading2] = useState(0);
+  //MachineModal 컴포넌트에 전달할 변수
+  const [category, setCategory] = useState(0);
+  const [sort_cur, setSortcur] = useState(0); //정렬방식, 0 : 대기 적은순, 1 : 대기 많은순, 2 : 이름순
+  const [sort_text, setSorttext] = useState('정렬 : 대기 적은 순');
 
   const getmachineinfo = () => {
     setLoading2(loading2 + 1);
@@ -58,7 +62,7 @@ const ReserveScreen = ({logged}) => {
           let name1 = '';
           let category1 = -1;
           let waitnum1 = -1;
-          let image1=''; 
+          let image1 = '';
           for (let i = 0; i < json.machinearr[k].length - 1; i++) {
             switch (i) {
               case 0:
@@ -71,7 +75,7 @@ const ReserveScreen = ({logged}) => {
                 category1 = Number(json.machinearr[k][i]);
                 break; //machinecategory
               case 3:
-                image1=json.machinearr[k][i]; //machineimage 
+                image1 = json.machinearr[k][i]; //machineimage
               case 4:
                 waitnum1 = json.machinearr[k][i].length;
                 break; //waitnumber
@@ -87,11 +91,11 @@ const ReserveScreen = ({logged}) => {
           machinelist.push(object);
         }
         setMachines(machinelist);
-        setLoading(loading+1);
+        setLoading(loading + 1);
       })
       .catch(error => {
         console.error(error);
-        setLoading(loading+1);
+        setLoading(loading + 1);
         return -1;
       });
   };
@@ -131,7 +135,7 @@ const ReserveScreen = ({logged}) => {
 
   const myReserve = () => {
     //석우꺼
-    setLoading3(loading3+1);
+    setLoading3(loading3 + 1);
     if (userid !== null) {
       const url =
         'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation?userid=' +
@@ -167,7 +171,6 @@ const ReserveScreen = ({logged}) => {
   //const [usermachine, setUserMachine] = useState([]);
 
   const onmyReserve = () => {
-
     //let tmpusermachine = myReserve(); //usermachine : 사용자가 예약한 기구정보
     myReserve();
     //console.log('tmpusermachine is' + String(tmpusermachine.length));
@@ -183,11 +186,7 @@ const ReserveScreen = ({logged}) => {
   useEffect(() => {
     onmyReserve();
   }, [change2]);
-//기구 업데이트 확인용 임시 useEffect, added by seyun 0902
-  useEffect(()=>{
-  console.log('machines just updated ---')
-  console.log(machines);}, [machines]);
-
+  //기구 업데이트 확인용 임시 useEffect, added by seyun 0902
 
   const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
 
@@ -240,9 +239,20 @@ const ReserveScreen = ({logged}) => {
           <View style={{flex: 5}} />
         </View>
       ) : (
+        /*
         <MachineView
           machine={machines}
-          handlerFunction={handlechange}></MachineView>
+          handlerFunction={getmachineinfo}
+          category={category}
+          sort_cur={sort_cur}
+          sort_text={sort_text}
+          setCategory={setCategory}
+          setSortcur={setSortcur}
+          setSorttext={setSorttext}></MachineView>
+          */
+        <MachineView
+          machine={machines}
+          handlerFunction={getmachineinfo}></MachineView>
       )}
       <View style={{height: '5%'}}></View>
     </SafeAreaView>

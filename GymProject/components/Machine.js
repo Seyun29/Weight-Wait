@@ -15,9 +15,8 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
 //현재는 기구명, 대기인원만 표시되지만, 이미지도 추후 추가할것
 
-const Machine = ({name, id, waitnum, change2, handlerFunction, image}) => {
-  const change3 = change2;
-  function handlechange1() {
+const Machine = ({name, id, waitnum, handlerFunction, image}) => {
+  function getmachineinfo() {
     handlerFunction();
   }
   const formatted = `기구명 : ${name}\n\n현재 대기인원 : ${waitnum}명`;
@@ -49,7 +48,7 @@ const Machine = ({name, id, waitnum, change2, handlerFunction, image}) => {
           )
             .then(response => response.json())
             .then(json => {
-              //console.log(json);
+              console.log(json);
               if (json == 101) {
                 console.log('101'); //
                 Alert.alert('예약실패, 사용자등록을 먼저 해주세요'); // 회원가입이 안 되어 있는 경우
@@ -69,7 +68,7 @@ const Machine = ({name, id, waitnum, change2, handlerFunction, image}) => {
                 Alert.alert('예약실패'); // 그 밖의 이유로 예약에 실패한 경우
                 return -4;
               } else {
-                //console.log(json);
+                console.log(json);
                 Alert.alert(JSON.stringify(json) + '번재로 예약성공'); //예약 성공한 경우
                 return json;
               }
@@ -87,7 +86,9 @@ const Machine = ({name, id, waitnum, change2, handlerFunction, image}) => {
       }
     }; // add this 8/8
     getuserid(); // add this 8/8
-    handlechange1();
+    setTimeout(() => {
+      getmachineinfo();
+    }, 1000);
     return;
   };
 
@@ -95,7 +96,6 @@ const Machine = ({name, id, waitnum, change2, handlerFunction, image}) => {
   return (
     <View style={styles.machine}>
       <Modal transparent={true} visible={visible2} animationType="slide">
-        {/*팝업 확인용, visible = {visible2}로 변경해줘야함*/}
         <KeyboardAvoidingView style={{flex: 1}} enabled={false}>
           <View style={styles.modalContainer}>
             <TouchableWithoutFeedback
