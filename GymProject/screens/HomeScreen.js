@@ -16,6 +16,15 @@ const HomeScreen = ({logged}) => {
     );
   }
   const [casenum, setCaseNum] = useState(0);
+  const [userid,setUserid]=useState('');
+  const getuserid= async()=>{
+    const value = await AsyncStorage.getItem('@storage_userid');
+    if (value !== null){
+        setUserid(value);
+    }
+  }
+  getuserid();
+
   const checkuser = () => {
     //석우꺼-user id&헬스장 id 넘겨주고 user의 이용정보 리스트 json으로 받아오기
     //받아와야하는 정보는 다음과 같다 :
@@ -24,6 +33,26 @@ const HomeScreen = ({logged}) => {
     //-> 이용가능한 기구는 여러개일수있으므로 리스트 형식으로 반환받아야함.
     //-> 내가 length메소드 사용해서 이용가능한 기구의 수를 체크할것
     //다시 정리해서 보내줘야할듯 석우한테.
+    if (userid !== null) {
+      const url =
+        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation?userid=' +
+        userid;
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(json => {
+          console.log(json);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+
     return;
   };
   const casify = () => {
