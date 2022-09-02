@@ -70,7 +70,7 @@ const Machine = ({name, id, waitnum, change2, handlerFunction, image}) => {
                 return -4;
               } else {
                 //console.log(json);
-                Alert.alert(JSON.stringify(json) + '번재로 예약성공'); //예약 성공한 경우
+                Alert.alert(JSON.stringify(json) + '번째로 예약성공'); //예약 성공한 경우
                 return json;
               }
             })
