@@ -35,7 +35,7 @@ const HomeScreen = ({logged}) => {
     //다시 정리해서 보내줘야할듯 석우한테.
     if (userid !== null) {
       const url =
-        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/reservation?userid=' +
+        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
         userid;
       fetch(url, {
         method: 'GET',
@@ -46,14 +46,50 @@ const HomeScreen = ({logged}) => {
       })
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          if(json.usinginfo.length!==0){
+            //사용하고 있는 기구가 있는 경우
+            let currentmachine = [];
+            let macid=Number(json.usinginfo[0][0]);
+            let macname=json.usinginfo[0][1];
+            let starttime=json.usinginfo[0][2];
+            let object={
+              machineid: macid,
+              machinename: macname,
+              time:starttime
+            }
+            currentmachine.push(object);
+            return currentmachine;
+            
+        }
+          else if(json.availinfo.length!==0){
+            //사용하고 있는 기구는 없는데 현재 이용가능한 기구가 있는 경우
+            let availablelist=[];
+            for(let i=0;i<json.availinfo.length;i++){
+              let macid1=Number(json.usinginfo[i][0]);
+              let macname1=json.usinginfo[i][1];
+              let availabletime1=json.usinginfo[i][2];
+              let image1=json.usinginfo[i][2]
+              let object1={
+                machineid:macid1,
+                machinename:macname1,
+                availabletime:availabletime1,
+                image:image1
+              }
+              availablelist.push(object1);
+            }
+            return availablelist;
+          }
+          else{
+            //사용하고 있는 기구도 없고 현재 이용가능한 기구도 없는 경우
+            return -1;
+          }
         })
         .catch(error => {
           console.error(error);
+          
         });
     }
 
-    return;
   };
   const casify = () => {
     //내꺼-> checkuser()의 리스트보고 0,1,2 중 하나로 return
