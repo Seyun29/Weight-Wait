@@ -25,7 +25,7 @@ const HomeScreen = ({logged}) => {
   }
   getuserid();
 
-  const checkuser = () => {
+  const checkuser = async (machineid) => {
     //석우꺼-user id&헬스장 id 넘겨주고 user의 이용정보 리스트 json으로 받아오기
     //받아와야하는 정보는 다음과 같다 :
     //1. 이용중인 기구의 id, name, 이용시작시간 (이용중이지 않을경우 3개 다 null혹은 -1값)
@@ -37,7 +37,7 @@ const HomeScreen = ({logged}) => {
       const url =
         'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
         userid;
-      fetch(url, {
+      const resul=await fetch(url, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -46,6 +46,7 @@ const HomeScreen = ({logged}) => {
       })
         .then(response => response.json())
         .then(json => {
+          console.log(json);
           if(json.usinginfo.length!==0){
             //사용하고 있는 기구가 있는 경우
             let currentmachine = [];
@@ -63,36 +64,45 @@ const HomeScreen = ({logged}) => {
         }
           else if(json.availinfo.length!==0){
             //사용하고 있는 기구는 없는데 현재 이용가능한 기구가 있는 경우
-            let availablelist=[];
+            let availablelist1=[];
             for(let i=0;i<json.availinfo.length;i++){
-              let macid1=Number(json.usinginfo[i][0]);
-              let macname1=json.usinginfo[i][1];
-              let availabletime1=json.usinginfo[i][2];
-              let image1=json.usinginfo[i][2]
+              let macid1=Number(json.availinfo[i][0]);
+              let macname1=json.availinfo[i][1];
+              let availabletime1=json.availinfo[i][2];
+              let image1=json.availinfo[i][2]
               let object1={
                 machineid:macid1,
                 machinename:macname1,
                 availabletime:availabletime1,
                 image:image1
               }
-              availablelist.push(object1);
+              availablelist1.push(object1);
             }
-            return availablelist;
+            return availablelist1;
           }
           else{
             //사용하고 있는 기구도 없고 현재 이용가능한 기구도 없는 경우
+            console.log('-1');
             return -1;
           }
         })
         .catch(error => {
           console.error(error);
           
-        });
-    }
+        })
+      
+        
+        
+
+    return resul;
+      }
 
   };
-  const casify = () => {
-    //내꺼-> checkuser()의 리스트보고 0,1,2 중 하나로 return
+  const casify =async () => {
+    //세윤꺼, 인자 전달 HomeScreen으로부터 뭐뭐받아야하는지 판단해서 짜기.
+    const returnval = await finish(id);
+    console.log(returnval);
+    //returnval가 checkuser의 리턴값
     return;
   };
   //setCaseNum(checkuser()); -> 이부분에서 infinite loop 에러남, 해결해야할듯.

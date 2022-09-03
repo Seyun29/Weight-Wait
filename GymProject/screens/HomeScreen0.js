@@ -53,10 +53,12 @@ const HomeScreen0 = ({s_time, id, name, today}) => {
       console.log(e);
     }
     return;
-  };
+  }; 
+
+  
   const onfinish = () => {
     //세윤꺼, 인자 전달 HomeScreen으로부터 뭐뭐받아야하는지 판단해서 짜기.
-    const returnval = finish(id);
+    const returnval =finish(id);
     //이후 returnval 결과에 따라 Alert구현.
     return;
   };
