@@ -3,7 +3,7 @@ import {View, Text, Button, Alert, StyleSheet, Image} from 'react-native';
 import useInterval from '../hooks/useInterval.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MachineHome = ({name, id, time, image, today}) => {
+const MachineHome = ({name, id, time, image, today, handler}) => {
   const [userid, setUserid] = useState('');
   const getuserid = async () => {
     try {
@@ -35,31 +35,29 @@ const MachineHome = ({name, id, time, image, today}) => {
         .then(response => response.json())
         .then(json => {
           console.log(json);
-          if(json["success"]==true){
-            console.log("사용시작성공");
-            return 1  //정상적으로 사용시작 시 1 리턴
-          }
-          else{
-            console.log("사용시작실패");
+          if (json['success'] == true) {
+            console.log('사용시작성공');
+            Alert.alert('이용을 시작합니다.');
+            return 1; //정상적으로 사용시작 시 1 리턴
+          } else {
+            console.log('사용시작실패');
+            Alert.alert('이용시작에 실패했습니다. 다시 시도해주세요.');
             return -1; // 사용시작 실패 시 -1 리턴
           }
         });
     } catch (e) {
       console.log('17');
       console.log(e);
+      Alert.alert('이용시작에 실패했습니다. 다시 시도해주세요.');
     }
     return;
   };
 
-  const onstart = id => {
-    //세윤꺼, start하면 그에 맞게 분기 (state이용)
-    start(id);
-    return;
-  };
   //image경로문제 해결해야함.
-  let s_min = time.substr(0, 2);
+  //'13:04:27'
+  let s_min = time.substr(3, 2);
   s_min = s_min / 1; //정수변환
-  let s_sec = time.substr(2, 2);
+  let s_sec = time.substr(6, 2);
   s_sec = s_sec / 1; //정수변환
 
   const min = today.getMinutes();
@@ -88,7 +86,8 @@ const MachineHome = ({name, id, time, image, today}) => {
         title={'이용시작'}
         color={'orange'}
         onPress={() => {
-          onstart(id);
+          start(id);
+          handler();
         }}></Button>
     </View>
   );

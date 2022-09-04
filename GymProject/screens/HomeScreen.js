@@ -1,9 +1,17 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, SafeAreaView, Alert} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Button,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Alert,
+} from 'react-native';
 import HomeScreen0 from './HomeScreen0.js';
 import HomeScreen1 from './HomeScreen1.js';
 import HomeScreen2 from './HomeScreen2.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import useInterval from '../hooks/useInterval.js';
 
 const HomeScreen = ({logged}) => {
   if (!logged) {
@@ -14,140 +22,196 @@ const HomeScreen = ({logged}) => {
         <Text>하단의 'Account' 탭을 눌러 로그인해주세요.</Text>
       </SafeAreaView>
     );
-  }
-  const [casenum, setCaseNum] = useState(0);
-  const [userid,setUserid]=useState('');
-  const getuserid= async()=>{
-    const value = await AsyncStorage.getItem('@storage_userid');
-    if (value !== null){
-        setUserid(value);
-    }
-  }
-  getuserid();
-
-  const checkuser = async (machineid) => {
-    //석우꺼-user id&헬스장 id 넘겨주고 user의 이용정보 리스트 json으로 받아오기
-    //받아와야하는 정보는 다음과 같다 :
-    //1. 이용중인 기구의 id, name, 이용시작시간 (이용중이지 않을경우 3개 다 null혹은 -1값)
-    //2. 이용가능한 기구의 image, id, name, 이용가능시작시간 (이용가능한 기구가 없을 경우 3개 다 null혹은 -1값)
-    //-> 이용가능한 기구는 여러개일수있으므로 리스트 형식으로 반환받아야함.
-    //-> 내가 length메소드 사용해서 이용가능한 기구의 수를 체크할것
-    //다시 정리해서 보내줘야할듯 석우한테.
-    if (userid !== null) {
-      const url =
-        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
-        userid;
-      const resul=await fetch(url, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(response => response.json())
-        .then(json => {
-          console.log(json);
-          if(json.usinginfo.length!==0){
-            //사용하고 있는 기구가 있는 경우
-            let currentmachine = [];
-            let macid=Number(json.usinginfo[0][0]);
-            let macname=json.usinginfo[0][1];
-            let starttime=json.usinginfo[0][2];
-            let object={
-              machineid: macid,
-              machinename: macname,
-              time:starttime
-            }
-            currentmachine.push(object);
-            return currentmachine;
-            
-        }
-          else if(json.availinfo.length!==0){
-            //사용하고 있는 기구는 없는데 현재 이용가능한 기구가 있는 경우
-            let availablelist1=[];
-            for(let i=0;i<json.availinfo.length;i++){
-              let macid1=Number(json.availinfo[i][0]);
-              let macname1=json.availinfo[i][1];
-              let availabletime1=json.availinfo[i][2];
-              let image1=json.availinfo[i][2]
-              let object1={
-                machineid:macid1,
-                machinename:macname1,
-                availabletime:availabletime1,
-                image:image1
-              }
-              availablelist1.push(object1);
-            }
-            return availablelist1;
-          }
-          else{
-            //사용하고 있는 기구도 없고 현재 이용가능한 기구도 없는 경우
-            console.log('-1');
-            return -1;
-          }
-        })
-        .catch(error => {
-          console.error(error);
-          
-        })
-      
-        
-        
-
-    return resul;
-      }
-
-  };
-  const casify =async () => {
-    //세윤꺼, 인자 전달 HomeScreen으로부터 뭐뭐받아야하는지 판단해서 짜기.
-    const returnval = await finish(id);
-    console.log(returnval);
-    //returnval가 checkuser의 리턴값
-    return;
-  };
-  //setCaseNum(checkuser()); -> 이부분에서 infinite loop 에러남, 해결해야할듯.
-  //casenum = 0: 이용중인기구있음, 1: 이용중인기구없음&이용가능기구존재, 2: 이용중인기구없음&이용가능기구없음
-  //각 HomeScreen마다 필요한 props들 넘겨주기
-  if (casenum === 0) {
-    //이용중인기구있음
-    //s_time, id, name은 일단 테스트용, s_time은 xxxx의 문자열형식이라고 가정, 수정해야함.
-    return (
-      <SafeAreaView style={styles.baseview}>
-        <HomeScreen0 s_time={'0000'} id={1} name={'벤치'} today={new Date()} />
-      </SafeAreaView>
-    );
-  } else if (casenum === 1) {
-    //이용중인기구없음&이용가능기구존재
-    //이용가능기구객체 -> {id : , name : , time : , image : ,}
-    let availablelist = [
-      {
-        id: 1,
-        name: '앙기모링',
-        time: '4300',
-        image: '../images/default_image.png',
-      },
-      {
-        id: 2,
-        name: '기뮤링',
-        time: '5000',
-        image: '../images/default_image.png',
-      },
-    ];
-    return (
-      <SafeAreaView style={styles.baseview}>
-        <HomeScreen1 list={availablelist} today={new Date()} />
-      </SafeAreaView>
-    );
-  } else if (casenum === 2) {
-    //이용중인기구없음&이용가능기구없음
-    return (
-      <SafeAreaView style={styles.baseview}>
-        <HomeScreen2 />
-      </SafeAreaView>
-    );
   } else {
-    Alert.alert('예외처리');
-    return <SafeAreaView></SafeAreaView>;
+    const [casenum, setCaseNum] = useState(2);
+    const [userid, setUserid] = useState('');
+    const [availlist, setAvailList] = useState([
+      {machineid: null, machinename: null, availabletime: null, image: null},
+    ]);
+    const [usinginfo, setUsingInfo] = useState({
+      machineid: null,
+      machinename: null,
+      time: null,
+    });
+    const [change, setChange] = useState(0);
+    const handler = () => {
+      setChange(change + 1);
+    };
+
+    const getuserid = async () => {
+      const value = await AsyncStorage.getItem('@storage_userid');
+      if (value !== null) {
+        setUserid(value);
+      }
+    };
+
+    const checkuser = async machineid => {
+      getuserid();
+      console.log('userid', userid);
+      if (userid !== null) {
+        const url =
+          'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
+          userid;
+        const resul = await fetch(url, {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => response.json())
+          .then(json => {
+            //console.log(json);
+            if (json.usinginfo.length !== 0) {
+              //사용하고 있는 기구가 있는 경우
+              let macid = Number(json.usinginfo[0]);
+              let macname = json.usinginfo[1];
+              let starttime = json.usinginfo[2];
+              let currentmachine = {
+                machineid: macid,
+                machinename: macname,
+                time: starttime,
+              };
+              setCaseNum(0);
+              setUsingInfo(currentmachine);
+              return;
+            } else if (json.availinfo.length !== 0) {
+              //사용하고 있는 기구는 없는데 현재 이용가능한 기구가 있는 경우
+              let availablelist1 = [];
+              for (let i = 0; i < json.availinfo.length; i++) {
+                let macid1 = Number(json.availinfo[i][0]);
+                let macname1 = json.availinfo[i][1];
+                let availabletime1 = json.availinfo[i][2];
+                let image1 = json.availinfo[i][3];
+                let object1 = {
+                  machineid: macid1,
+                  machinename: macname1,
+                  availabletime: availabletime1,
+                  image: image1,
+                };
+                availablelist1.push(object1);
+              }
+              setCaseNum(1);
+              setAvailList(availablelist1);
+              return;
+            } else {
+              //사용하고 있는 기구도 없고 현재 이용가능한 기구도 없는 경우
+              console.log('-1');
+              setCaseNum(2);
+              return;
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            setCaseNum(2);
+            return;
+          });
+        return;
+      }
+      return;
+    };
+
+    useEffect(() => {
+      setTimeout(() => {
+        checkuser();
+      }, 500);
+    }, [change]);
+
+    /*
+    useInterval(() => {
+      checkuser();
+      console.log(userid);
+      console.log('interval');
+    }, 3000); //주기적인 refresh 선언,,
+    */
+
+    //casenum = 0: 이용중인기구있음, 1: 이용중인기구없음&이용가능기구존재, 2: 이용중인기구없음&이용가능기구없음
+    if (casenum === 0) {
+      //이용중인기구있음
+      /*machineid: macid,
+              machinename: macname,
+              time: starttime,
+    */
+      console.log('using:', usinginfo);
+      if (usinginfo.time === null)
+        return (
+          <SafeAreaView style={styles.baseview}>
+            <HomeScreen0
+              s_time={'00:00:00'}
+              id={'-1'}
+              name={'...'}
+              today={new Date()}
+              handler={handler}
+            />
+            <Button
+              title="새로고침"
+              onPress={() => {
+                checkuser();
+              }}
+            />
+          </SafeAreaView>
+        );
+      return (
+        <SafeAreaView style={styles.baseview}>
+          <HomeScreen0
+            s_time={usinginfo.time}
+            id={usinginfo.machineid}
+            name={usinginfo.machinename}
+            today={new Date()}
+            handler={handler}
+          />
+          <Button
+            title="새로고침"
+            onPress={() => {
+              checkuser();
+            }}
+          />
+        </SafeAreaView>
+      );
+    } else if (casenum === 1) {
+      //이용중인기구없음&이용가능기구존재
+      /*machineid: macid1,
+                machinename: macname1,
+                availabletime: availabletime1,
+                image: image1 */
+      console.log('avail:', availlist);
+      return (
+        <SafeAreaView style={styles.baseview}>
+          <HomeScreen1 list={availlist} today={new Date()} handler={handler} />
+          <Button
+            title="새로고침"
+            onPress={() => {
+              checkuser();
+            }}
+          />
+        </SafeAreaView>
+      );
+    } else if (casenum === 2) {
+      //이용중인기구없음&이용가능기구없음
+      return (
+        <SafeAreaView style={styles.baseview}>
+          <HomeScreen2 />
+          <Button
+            title="새로고침"
+            onPress={() => {
+              checkuser();
+            }}
+          />
+        </SafeAreaView>
+      );
+    } else {
+      Alert.alert('예외처리');
+      return (
+        <SafeAreaView>
+          <Button
+            title="새로고침"
+            onPress={() => {
+              checkuser();
+            }}
+          />
+        </SafeAreaView>
+      );
+    }
   }
 };
 const styles = StyleSheet.create({
