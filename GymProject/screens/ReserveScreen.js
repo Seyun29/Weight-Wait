@@ -13,6 +13,8 @@ import {
 import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import useInterval from '../hooks/useInterval.js';
+
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
 //***force update사용하기***
 
@@ -38,9 +40,6 @@ const ReserveScreen = ({logged}) => {
   const [loading, setLoading] = useState(0);
   const [loading2, setLoading2] = useState(0);
   //MachineModal 컴포넌트에 전달할 변수
-  const [category, setCategory] = useState(0);
-  const [sort_cur, setSortcur] = useState(0); //정렬방식, 0 : 대기 적은순, 1 : 대기 많은순, 2 : 이름순
-  const [sort_text, setSorttext] = useState('정렬 : 대기 적은 순');
 
   const getmachineinfo = () => {
     setLoading2(loading2 + 1);
@@ -100,7 +99,6 @@ const ReserveScreen = ({logged}) => {
       });
   };
   useEffect(() => {
-    console.log('getting machine info');
     getmachineinfo();
   }, [change1]); //useeffect로 서버에 있는 머신 정보 받아옴
 
@@ -117,7 +115,6 @@ const ReserveScreen = ({logged}) => {
       console.log(e);
     }
   };
-  getusername(); // 이제 username에 사용자 이름 들어감
 
   const [userid, setUserid] = useState('');
   const getuserid = async () => {
@@ -126,7 +123,11 @@ const ReserveScreen = ({logged}) => {
       setUserid(value);
     }
   };
-  getuserid();
+
+  useEffect(() => {
+    getusername();
+    getuserid();
+  }, [logged]);
 
   const [myres, setMyres] = useState([]);
   const [loading3, setLoading3] = useState(0);
@@ -188,6 +189,13 @@ const ReserveScreen = ({logged}) => {
     onmyReserve();
   }, [change2]);
   //기구 업데이트 확인용 임시 useEffect, added by seyun 0902
+
+  /*
+  useInterval(() => {
+    console.log(userid, username);
+    getmachineinfo();
+  }, 30000); //30초에 한번 자동 업데이트
+  */
 
   const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
 

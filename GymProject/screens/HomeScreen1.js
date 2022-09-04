@@ -5,12 +5,18 @@ import MachineHome from '../components/MachineHome.js';
 //이용가능한 기구리스트 띄워주기, 각 기구별로 ‘이용 시작’ 가능시간까지 남은 시간 띄워주기, ‘이용시작’ button 구현.
 //밑의 내용을 리스트 형식으로 구현, 인당 최대 예약이 3개인 점 고려.
 
-const HomeScreen1 = ({list, today}) => {
+const HomeScreen1 = ({list, today, handler}) => {
   /*
 <Image
         source={require('../images/default_image.png')}
         style={{width: 70, height: 70}}></Image>
 */
+  if (list[0].machinename === null)
+    return (
+      <View>
+        <Text>로딩중...</Text>
+      </View>
+    );
   return (
     <View style={styles.baseview}>
       <View style={{flex: 1, justifyContent: 'center'}}>
@@ -20,17 +26,17 @@ const HomeScreen1 = ({list, today}) => {
           아래에서 이용하실 기구를 선택하세요.
         </Text>
       </View>
-
       <View style={{flex: 3}}>
         {list.map(item => {
           return (
-            <View key={item.id}>
+            <View key={item.machineid}>
               <MachineHome
-                id={item.id}
-                name={item.name}
-                time={item.time}
+                id={item.machineid}
+                name={item.machinename}
+                time={item.availabletime}
                 image={item.image}
-                today={today}></MachineHome>
+                today={today}
+                handler={handler}></MachineHome>
             </View>
           );
         })}

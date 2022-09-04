@@ -86,7 +86,7 @@ const MachineView = ({machine, handlerFunction}) => {
     makesort(sort_cur);
   }, [category, sort_cur]);
 
-  console.log('category :', category); //category 는 정상적으로 전달이 되는데,, 0903,,
+  //console.log('category :', category); //category 는 정상적으로 전달이 되는데,, 0903,,
   //0903 - 일단
 
   return (
