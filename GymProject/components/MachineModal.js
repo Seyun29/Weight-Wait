@@ -35,7 +35,7 @@ const MachineModal = ({
     // 제대로 반납되면 1, 반납 안 되면 -1 리턴
     try {
       fetch(
-        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/return',
+        'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/cancel',
         {
           method: 'POST',
           headers: {
@@ -50,7 +50,7 @@ const MachineModal = ({
       )
         .then(response => response.json())
         .then(json => {
-          //console.log(json);
+          console.log(json);
           try {
             handlechange1();
             handlechange2();

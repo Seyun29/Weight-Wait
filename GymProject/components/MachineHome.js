@@ -37,11 +37,11 @@ const MachineHome = ({name, id, time, image, today}) => {
           console.log(json);
           if(json["success"]==true){
             console.log("사용시작성공");
-            return 1
+            return 1  //정상적으로 사용시작 시 1 리턴
           }
           else{
             console.log("사용시작실패");
-            return -1;
+            return -1; // 사용시작 실패 시 -1 리턴
           }
         });
     } catch (e) {
