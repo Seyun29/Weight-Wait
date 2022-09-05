@@ -226,14 +226,15 @@ const ReserveScreen = ({logged}) => {
               title={'확인'}
               onPress={() => {
                 setVisible('false');
-              }}></Button>
+              }}
+              color = {'orange'}></Button>
           </View>
         </View>
       </Modal>
       <View style={styles.btn1view}>
         <Button
           title="나의 예약내역 조회/수정"
-          color={'#26a96a'}
+          color={'orange'}
           onPress={() => {
             onmyReserve();
             setVisible(true);

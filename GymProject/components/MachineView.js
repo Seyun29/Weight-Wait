@@ -93,7 +93,7 @@ const MachineView = ({machine, handlerFunction}) => {
     <View style={{flex: 7}}>
       <View style={styles.categoryView}>
         {category === 0 ? (
-          <Button title="ALL" color={'blue'} />
+          <Button title="ALL" color={'orange'} />
         ) : (
           <Button
             title="ALL"
@@ -104,7 +104,7 @@ const MachineView = ({machine, handlerFunction}) => {
           />
         )}
         {category === 1 ? (
-          <Button title="상체" color={'blue'} />
+          <Button title="상체" color={'orange'} />
         ) : (
           <Button
             title="상체"
@@ -115,7 +115,7 @@ const MachineView = ({machine, handlerFunction}) => {
           />
         )}
         {category === 2 ? (
-          <Button title="하체" color={'blue'} />
+          <Button title="하체" color={'orange'} />
         ) : (
           <Button
             title="하체"
@@ -126,7 +126,7 @@ const MachineView = ({machine, handlerFunction}) => {
           />
         )}
         {category === 3 ? (
-          <Button title="유산소/기타" color={'blue'} />
+          <Button title="유산소/기타" color={'orange'} />
         ) : (
           <Button
             title="유산소/기타"
@@ -146,6 +146,7 @@ const MachineView = ({machine, handlerFunction}) => {
           onPress={() => {
             sortclicked();
           }}
+          color={'orange'}
         />
       </View>
 

@@ -150,6 +150,7 @@ const HomeScreen = ({logged}) => {
               onPress={() => {
                 checkuser(userid);
               }}
+              color={'orange'}
             />
           </SafeAreaView>
         );
@@ -167,6 +168,7 @@ const HomeScreen = ({logged}) => {
             onPress={() => {
               checkuser(userid);
             }}
+            color={'orange'}
           />
         </SafeAreaView>
       );
@@ -185,6 +187,7 @@ const HomeScreen = ({logged}) => {
             onPress={() => {
               checkuser(userid);
             }}
+            color={'orange'}
           />
         </SafeAreaView>
       );
@@ -198,6 +201,7 @@ const HomeScreen = ({logged}) => {
             onPress={() => {
               checkuser(userid);
             }}
+            color={'orange'}
           />
         </SafeAreaView>
       );
@@ -210,6 +214,7 @@ const HomeScreen = ({logged}) => {
             onPress={() => {
               checkuser(userid);
             }}
+            color = {'orange'}
           />
         </SafeAreaView>
       );

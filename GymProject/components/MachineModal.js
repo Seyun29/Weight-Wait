@@ -79,7 +79,8 @@ const MachineModal = ({
       </View>
       <Button
         title="예약취소"
-        onPress={() => machinereturn(id, userid)}></Button>
+        onPress={() => machinereturn(id, userid)}
+        color="orange"></Button>
     </View>
   );
 };
