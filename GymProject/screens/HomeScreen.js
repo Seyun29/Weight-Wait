@@ -43,6 +43,8 @@ const HomeScreen = ({logged}) => {
       if (value !== null) {
         setUserid(value);
       }
+      else
+        setUserid(null);
     };
 
     const checkuser = async machineid => {

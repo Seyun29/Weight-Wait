@@ -149,7 +149,7 @@ const MachineView = ({machine, handlerFunction}) => {
         />
       </View>
 
-      <View style={styles.seperator}></View>
+      <View style={{height:9}}></View>
 
       <View style={styles.scrollView}>
         <ScrollView style={{backgroundColor: 'white'}}>

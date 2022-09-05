@@ -81,7 +81,9 @@ const MachineHome = ({name, id, time, image, today, handler}) => {
       <Image
         source={require('../images/default_image.png')}
         style={{width: 90, height: 90}}></Image>
-      {gap < 0 ? <Text>{formatted3}</Text> : <Text>{formatted2}</Text>}
+      <View style={{width:'50%'}}>
+      {gap < 0 ? <Text style={{fontSize:15}}>{formatted3}</Text> : <Text style={{fontSize: 15}}>{formatted2}</Text>}
+      </View>
       <Button
         title={'이용시작'}
         color={'orange'}

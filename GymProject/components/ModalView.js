@@ -9,13 +9,23 @@ const ModalView = ({
   handlerFunction,
   handlerFunction2,
 }) => {
-
+    if (usermachine.length == 0)
+        return(
+        <View style={{flex:0.9}}>
+                      <Text style={{fontSize: 20, textAlign:'center', fontWeight:'bold'}}>예약내역</Text>
+                        <View style={{flex: 2}} />
+                        <Text>예약내역이 존재하지 않습니다.</Text>
+                        <Text>이용을 원하시는 기구를 예약해 주세요.</Text>
+                        <View style={{flex: 5}} />
+        </View>
+        )
     return (
-      <View>
-        <Text>나의 예약내역</Text>
+      <View style={{flex:0.9}}>
+        <Text style={{fontSize: 20, textAlign:'center', fontWeight:'bold'}}>예약내역</Text>
+        <View style={{height: '90%', alignItems: 'center'}}>
         {usermachine.map(item => {
           return (
-            <View key={item.id}>
+            <View key={item.id} style={{alignItems: 'center'}}>
               <MachineModal
                 name={item.name}
                 id={item.id}
@@ -25,6 +35,7 @@ const ModalView = ({
             </View>
           );
         })}
+        </View>
       </View>
     );
 
