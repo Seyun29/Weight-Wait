@@ -25,7 +25,6 @@ const HomeScreen = ({logged}) => {
   } else {
     const [gap, setGap] = useState(0);
     const calcGap = (s_time, today) => {
-        console.log(s_time);
         let s_min = (s_time.substr(3, 2) / 1);
         let s_sec = (s_time.substr(6, 2) / 1);
         const min = today.getMinutes();
@@ -34,9 +33,7 @@ const HomeScreen = ({logged}) => {
         if (min - s_min < 0) dif_min = 60 + dif_min;
         let dif_sec = sec - s_sec;
         if (sec - s_sec < 0) dif_sec = 60 + dif_sec;
-
         setGap(dif_min*60 + dif_sec);
-        console.log(dif_min, ',', dif_sec);
         return (dif_min*60 + dif_sec);
     }
 
@@ -127,10 +124,9 @@ const HomeScreen = ({logged}) => {
       }
       return;
     };
-    useEffect(()=>{
-        getuserid();
-    }, []);
+
     useEffect(() => {
+      getuserid();
       setTimeout(() => {
         checkuser(userid);
       }, 500);
