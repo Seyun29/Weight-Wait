@@ -23,6 +23,23 @@ const HomeScreen = ({logged}) => {
       </SafeAreaView>
     );
   } else {
+    const [gap, setGap] = useState(0);
+    const calcGap = (s_time, today) => {
+        console.log(s_time);
+        let s_min = (s_time.substr(3, 2) / 1);
+        let s_sec = (s_time.substr(6, 2) / 1);
+        const min = today.getMinutes();
+        const sec = today.getSeconds();
+        let dif_min = min - s_min;
+        if (min - s_min < 0) dif_min = 60 + dif_min;
+        let dif_sec = sec - s_sec;
+        if (sec - s_sec < 0) dif_sec = 60 + dif_sec;
+
+        setGap(dif_min*60 + dif_sec);
+        console.log(dif_min, ',', dif_sec);
+        return (dif_min*60 + dif_sec);
+    }
+
     const [casenum, setCaseNum] = useState(2);
     const [userid, setUserid] = useState('');
     const [availlist, setAvailList] = useState([
@@ -118,6 +135,10 @@ const HomeScreen = ({logged}) => {
         checkuser(userid);
       }, 500);
     }, [change]);
+    useEffect(()=>{
+    if((casenum == 0) && (usinginfo.time != null))
+        calcGap(usinginfo.time, new Date());
+    },[usinginfo.time])
 
     /*
     useInterval(() => {
@@ -139,10 +160,8 @@ const HomeScreen = ({logged}) => {
         return (
           <SafeAreaView style={styles.baseview}>
             <HomeScreen0
-              s_time={'00:00:00'}
               id={'-1'}
               name={'...'}
-              today={new Date()}
               handler={handler}
             />
             <Button
@@ -154,14 +173,14 @@ const HomeScreen = ({logged}) => {
             />
           </SafeAreaView>
         );
+
       return (
         <SafeAreaView style={styles.baseview}>
           <HomeScreen0
-            s_time={usinginfo.time}
             id={usinginfo.machineid}
             name={usinginfo.machinename}
-            today={new Date()}
             handler={handler}
+            gap={gap}
           />
           <Button
             title="새로고침"

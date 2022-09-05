@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //카운터기능 구현하기, 이용시작시간&이용중인기구이름 props로 받아와야함.
 //이용종료 버튼 클릭시 서버에 이용종료 보내는 함수 구현
 
-const HomeScreen0 = ({s_time, id, name, today, handler}) => {
+const HomeScreen0 = ({id, name, handler, gap}) => {
   const [userid, setUserid] = useState('');
   const getuserid = async () => {
     try {
@@ -70,31 +70,34 @@ const HomeScreen0 = ({s_time, id, name, today, handler}) => {
   //today의 값은 HomeScreen0이 처음 렌더링될떄의 그 값임. (이용종료를 누를 때 어떻게 분기하고 useState쓸지 생각)
   //s_time은 00:00이라고 가정. 서버 API가 나와야 어떤식으로 들어올지 알 수 있음. - 추후 수정해야함.
   //밑의 시간관련 코드는 처음 렌더링될떄 한번만 실행되므로 배워서 수정해야함. + 새로고침 기능 구현
-  const [gapp, setGapp] = useState(0);
-
+  const [gapp, setGapp] = useState(gap);
+  useInterval(() => {
+  //console.log(gapp);
+  setGapp(gapp + 1);
+  }, 1000);
 
   const formatted2 = `${parseInt(gapp / 60)}분 ${gapp % 60}초`;
-
-  useEffect(()=>{let s_min = (s_time.substr(3, 2) / 1);
-                 let s_sec = (s_time.substr(6, 2) / 1);
-                 const min = today.getMinutes();
-                 const sec = today.getSeconds();
-                 let dif_min = min - s_min;
-                 if (min - s_min < 0) dif_min = dif_min + 60;
-                 let dif_sec = sec - s_sec;
-                 if (sec - s_sec < 0) dif_sec = dif_sec + 60;
-                 setGapp(dif_min*60 + dif_sec);
+/*
+  useEffect(()=>{
+  console.log('호에에에에')
+  let s_min = (s_time.substr(3, 2) / 1);
+  let s_sec = (s_time.substr(6, 2) / 1);
+  const min = today.getMinutes();
+  const sec = today.getSeconds();
+  let dif_min = min - s_min;
+  if (min - s_min < 0) dif_min = dif_min + 60;
+  let dif_sec = sec - s_sec;
+  if (sec - s_sec < 0) dif_sec = dif_sec + 60;
+  setGapp(dif_min*60 + dif_sec);
 
                  console.log('시작시간 : ', s_min, '분', s_sec, '초');
                  console.log('현재시간 : ', min, '분', sec, '초');
                  console.log('diff :', dif_min, '분', dif_sec, '초');
                  console.log('gap :', gapp);
                  }, []);
+                 */
  //GAP이 현재시간 - 0으로 설정되는이유???
-  useInterval(() => {
-  console.log(gapp);
-  setGapp(gapp + 1);
-  }, 1000);
+
 
   return (
     <View style={{flex: 1}}>
