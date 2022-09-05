@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -25,7 +25,7 @@ const HomeScreen0 = ({s_time, id, name, today, handler}) => {
       console.log(e);
     }
   };
-  getuserid(); // 이제 userid에 사용자 id 들어감
+  useEffect(()=>{getuserid();}, []); // 이제 userid에 사용자 id 들어감
   const finish = machineid => {
     try {
       fetch(
@@ -70,6 +70,8 @@ const HomeScreen0 = ({s_time, id, name, today, handler}) => {
   //today의 값은 HomeScreen0이 처음 렌더링될떄의 그 값임. (이용종료를 누를 때 어떻게 분기하고 useState쓸지 생각)
   //s_time은 00:00이라고 가정. 서버 API가 나와야 어떤식으로 들어올지 알 수 있음. - 추후 수정해야함.
   //밑의 시간관련 코드는 처음 렌더링될떄 한번만 실행되므로 배워서 수정해야함. + 새로고침 기능 구현
+  const [gap, setGap] = useState(0);
+
   let s_min = s_time.substr(3, 2);
   s_min = s_min / 1; //정수변환
   let s_sec = s_time.substr(6, 2);
@@ -82,15 +84,17 @@ const HomeScreen0 = ({s_time, id, name, today, handler}) => {
   if (sec - s_sec < 0) dif_sec = dif_sec + 60;
 
   const tmp = dif_min * 60 + dif_sec;
-  const [gap, setGap] = useState(tmp);
   const formatted2 = `${parseInt(gap / 60)}분 ${gap % 60}초`;
 
+  useEffect(()=>{setGap(tmp);}, []);
+
   useInterval(() => {
+  console.log(gap);
     setGap(gap + 1);
-    //console.log('시작시간 : ', s_min, '분', s_sec, '초');
-    //console.log('현재시간 : ', min, '분', sec, '초');
-    //console.log('diff :', dif_min, '분', dif_sec, '초');
-    //console.log('gap :', gap);
+    console.log('시작시간 : ', s_min, '분', s_sec, '초');
+    console.log('현재시간 : ', min, '분', sec, '초');
+    console.log('diff :', dif_min, '분', dif_sec, '초');
+    console.log('gap :', gap);
   }, 1000);
 
   return (
