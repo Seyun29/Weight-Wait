@@ -151,7 +151,7 @@ const ReserveScreen = ({logged}) => {
       })
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          //console.log(json);
           setMyres(json['reservation']);
           //console.log(myres);
           setUserMachine(json['reservation']);
