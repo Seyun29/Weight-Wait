@@ -122,9 +122,7 @@ const ReserveScreen = ({logged}) => {
     const value = await AsyncStorage.getItem('@storage_userid');
     if (value !== null) {
       setUserid(value);
-    }
-    else
-      setUserid(null);
+    } else setUserid(null);
   };
 
   useEffect(() => {
@@ -208,8 +206,15 @@ const ReserveScreen = ({logged}) => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             {loading3 != loading4 ? (
-              <View style={{flex:0.9}}>
-              <Text style={{fontSize: 20, textAlign:'center', fontWeight:'bold'}}>예약내역</Text>
+              <View style={{flex: 0.9}}>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                  }}>
+                  예약내역
+                </Text>
                 <View style={{flex: 2}} />
                 <Text>로딩중입니다.</Text>
                 <Text>잠시만 기다려주세요...</Text>
@@ -227,7 +232,7 @@ const ReserveScreen = ({logged}) => {
               onPress={() => {
                 setVisible('false');
               }}
-              color = {'orange'}></Button>
+              color={'orange'}></Button>
           </View>
         </View>
       </Modal>

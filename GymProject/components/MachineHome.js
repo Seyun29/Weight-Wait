@@ -3,7 +3,7 @@ import {View, Text, Button, Alert, StyleSheet, Image} from 'react-native';
 import useInterval from '../hooks/useInterval.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MachineHome = ({name, id, time, image, today, handler}) => {
+const MachineHome = ({name, id, time, image, handler}) => {
   const [userid, setUserid] = useState('');
   const getuserid = async () => {
     try {
@@ -55,40 +55,66 @@ const MachineHome = ({name, id, time, image, today, handler}) => {
 
   //image경로문제 해결해야함.
   //'13:04:27'
+
   let s_min = time.substr(3, 2);
   s_min = s_min / 1; //정수변환
   let s_sec = time.substr(6, 2);
   s_sec = s_sec / 1; //정수변환
 
-  const min = today.getMinutes();
-  const sec = today.getSeconds();
-  let dif_min = min - s_min;
+  const calculator = () => {
+    today = new Date();
+    const min = today.getMinutes();
+    const sec = today.getSeconds();
+    let dif_min = min - s_min;
+    if (dif_min < 0) dif_min += 60;
+    let dif_sec = sec - s_sec;
+    if (dif_sec < 0) {
+      dif_sec += 60;
+      dif_min -= 1;
+    }
+    let tmp = dif_min * 60 + dif_sec;
+    if (tmp <= 0) return 180;
+    return 180 - tmp;
+  };
 
-  if (min - s_min < 0) dif_min = dif_min + 60;
-  let dif_sec = sec - s_sec;
-  if (sec - s_sec < 0) dif_sec = dif_sec + 60;
+  const [gap, setGap] = useState(calculator());
+  const [formatted2, setFormatted2] = useState(
+    `기구명 : ${name}\n\n이용까지 남은시간 : ${parseInt(gap / 60)}분 ${
+      gap % 60
+    }초`,
+  );
 
-  const [gap, setGap] = useState(180 - (dif_min * 60 + dif_sec));
   useInterval(() => {
-    setGap(gap - 1);
+    setGap(calculator());
+    setFormatted2(
+      `기구명 : ${name}\n\n이용까지 남은시간 : ${parseInt(gap / 60)}분 ${
+        gap % 60
+      }초`,
+    );
   }, 1000);
-  const formatted2 = `기구명 : ${name}\n\n이용까지 남은시간 : ${parseInt(
-    gap / 60,
-  )}분 ${gap % 60}초`;
+
+  //const formatted2 = `기구명 : ${name}\n\n이용까지 남은시간 : ${parseInt(
+  //  gap / 60,
+  //)}분 ${gap % 60}초`;
   const formatted3 = `기구명 : ${name}\n\n이용까지 남은시간 : 이용불가`;
   return (
     <View style={styles.machine}>
       <Image
         source={require('../images/default_image.png')}
         style={{width: 90, height: 90}}></Image>
-      <View style={{width:'50%'}}>
-      {gap < 0 ? <Text style={{fontSize:15}}>{formatted3}</Text> : <Text style={{fontSize: 15}}>{formatted2}</Text>}
+      <View style={{width: '50%'}}>
+        {gap < 0 ? (
+          <Text style={{fontSize: 15}}>{formatted3}</Text>
+        ) : (
+          <Text style={{fontSize: 15}}>{formatted2}</Text>
+        )}
       </View>
       <Button
         title={'이용시작'}
         color={'orange'}
         onPress={() => {
           start(id);
+          setGap(0);
           handler();
         }}></Button>
     </View>

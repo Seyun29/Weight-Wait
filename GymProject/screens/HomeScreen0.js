@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //카운터기능 구현하기, 이용시작시간&이용중인기구이름 props로 받아와야함.
 //이용종료 버튼 클릭시 서버에 이용종료 보내는 함수 구현
 
-const HomeScreen0 = ({id, name, handler, gap}) => {
+const HomeScreen0 = ({id, name, time, handler}) => {
   const [userid, setUserid] = useState('');
   const getuserid = async () => {
     try {
@@ -25,7 +25,9 @@ const HomeScreen0 = ({id, name, handler, gap}) => {
       console.log(e);
     }
   };
-  useEffect(()=>{getuserid();}, []); // 이제 userid에 사용자 id 들어감
+  useEffect(() => {
+    getuserid();
+  }, []); // 이제 userid에 사용자 id 들어감
   const finish = machineid => {
     try {
       fetch(
@@ -62,7 +64,6 @@ const HomeScreen0 = ({id, name, handler, gap}) => {
       console.log(e);
       Alert.alert('이용종료에 실패했습니다. 다시 시도해주세요.');
     }
-    Alert.alert('이용종료에 실패했습니다. 다시 시도해주세요.');
     return;
   };
 
@@ -70,14 +71,38 @@ const HomeScreen0 = ({id, name, handler, gap}) => {
   //today의 값은 HomeScreen0이 처음 렌더링될떄의 그 값임. (이용종료를 누를 때 어떻게 분기하고 useState쓸지 생각)
   //s_time은 00:00이라고 가정. 서버 API가 나와야 어떤식으로 들어올지 알 수 있음. - 추후 수정해야함.
   //밑의 시간관련 코드는 처음 렌더링될떄 한번만 실행되므로 배워서 수정해야함. + 새로고침 기능 구현
-  const [gapp, setGapp] = useState(gap);
+  let s_min = time.substr(3, 2);
+  s_min = s_min / 1; //정수변환
+  let s_sec = time.substr(6, 2);
+  s_sec = s_sec / 1; //정수변환
+
+  const calculator = () => {
+    today = new Date();
+    const min = today.getMinutes();
+    const sec = today.getSeconds();
+    let dif_min = min - s_min;
+    if (dif_min < 0) dif_min += 60;
+    let dif_sec = sec - s_sec;
+    if (dif_sec < 0) {
+      dif_sec += 60;
+      dif_min -= 1;
+    }
+    let tmp = dif_min * 60 + dif_sec;
+    if (tmp < 0) return 0;
+    return tmp;
+  };
+  const [gap, setGap] = useState(calculator());
+
+  const [formatted2, setFormatted2] = useState(
+    `${parseInt(gap / 60)}분 ${gap % 60}초`,
+  );
+
   useInterval(() => {
-  //console.log(gapp);
-  setGapp(gapp + 1);
+    setGap(calculator());
+    setFormatted2(`${parseInt(gap / 60)}분 ${gap % 60}초`);
   }, 1000);
 
-  const formatted2 = `${parseInt(gapp / 60)}분 ${gapp % 60}초`;
-/*
+  /*
   useEffect(()=>{
   console.log('호에에에에')
   let s_min = (s_time.substr(3, 2) / 1);
@@ -96,8 +121,7 @@ const HomeScreen0 = ({id, name, handler, gap}) => {
                  console.log('gap :', gapp);
                  }, []);
                  */
- //GAP이 현재시간 - 0으로 설정되는이유???
-
+  //GAP이 현재시간 - 0으로 설정되는이유???
 
   return (
     <View style={{flex: 1}}>
@@ -120,6 +144,7 @@ const HomeScreen0 = ({id, name, handler, gap}) => {
           color={'orange'}
           onPress={() => {
             finish(id);
+            setGap(0);
             handler();
           }}
         />
