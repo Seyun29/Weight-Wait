@@ -43,11 +43,11 @@ const HomeScreen = ({logged}) => {
       if (value !== null) {
         setUserid(value);
       }
+      else
+        setUserid(null);
     };
 
-    const checkuser = async machineid => {
-      getuserid();
-      console.log('userid', userid);
+    const checkuser = async (userid) => {
       if (userid !== null) {
         const url =
           'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
@@ -110,16 +110,18 @@ const HomeScreen = ({logged}) => {
       }
       return;
     };
-
+    useEffect(()=>{
+        getuserid();
+    }, []);
     useEffect(() => {
       setTimeout(() => {
-        checkuser();
+        checkuser(userid);
       }, 500);
     }, [change]);
 
     /*
     useInterval(() => {
-      checkuser();
+      await checkuser();
       console.log(userid);
       console.log('interval');
     }, 3000); //주기적인 refresh 선언,,
@@ -146,7 +148,7 @@ const HomeScreen = ({logged}) => {
             <Button
               title="새로고침"
               onPress={() => {
-                checkuser();
+                checkuser(userid);
               }}
             />
           </SafeAreaView>
@@ -163,7 +165,7 @@ const HomeScreen = ({logged}) => {
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser();
+              checkuser(userid);
             }}
           />
         </SafeAreaView>
@@ -181,7 +183,7 @@ const HomeScreen = ({logged}) => {
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser();
+              checkuser(userid);
             }}
           />
         </SafeAreaView>
@@ -194,7 +196,7 @@ const HomeScreen = ({logged}) => {
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser();
+              checkuser(userid);
             }}
           />
         </SafeAreaView>
@@ -206,7 +208,7 @@ const HomeScreen = ({logged}) => {
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser();
+              checkuser(userid);
             }}
           />
         </SafeAreaView>

@@ -113,6 +113,7 @@ const ReserveScreen = ({logged}) => {
       return;
     } catch (e) {
       console.log(e);
+      setUsername('');
     }
   };
 
@@ -122,6 +123,8 @@ const ReserveScreen = ({logged}) => {
     if (value !== null) {
       setUserid(value);
     }
+    else
+      setUserid(null);
   };
 
   useEffect(() => {
@@ -205,14 +208,11 @@ const ReserveScreen = ({logged}) => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             {loading3 != loading4 ? (
-              <View
-                style={{
-                  flex: 7,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <View style={{flex: 1}} />
-                <Text>현재 예약가능한 기구가 없습니다.</Text>
+              <View style={{flex:0.9}}>
+              <Text style={{fontSize: 20, textAlign:'center', fontWeight:'bold'}}>예약내역</Text>
+                <View style={{flex: 2}} />
+                <Text>로딩중입니다.</Text>
+                <Text>잠시만 기다려주세요...</Text>
                 <View style={{flex: 5}} />
               </View>
             ) : (

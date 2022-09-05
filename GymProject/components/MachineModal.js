@@ -10,7 +10,7 @@ const MachineModal = ({
   handlerFunction,
   handlerFunction2,
 }) => {
-  const formatted = `기구명 : ${name}\n\n현재 대기인원 : ${waitnum}명`;
+  const formatted = `${name}\n대기자 수 : ${waitnum}명`;
   const [userid, setUserid] = useState('');
   const getusername = async () => {
     try {
@@ -73,8 +73,10 @@ const MachineModal = ({
     <View style={styles.machine}>
       <Image
         source={require('../images/default_image.png')}
-        style={{width: 70, height: 70}}></Image>
-      <Text>{formatted}</Text>
+        style={{width: 60, height: 60}}></Image>
+      <View style={{width:'55%', alignItems:'center', justifyContent: 'center'}}>
+      <Text style={{fontSize: 15}}>{formatted}</Text>
+      </View>
       <Button
         title="예약취소"
         onPress={() => machinereturn(id, userid)}></Button>
@@ -84,12 +86,11 @@ const MachineModal = ({
 
 const styles = StyleSheet.create({
   machine: {
+    width: '95%',
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingTop: 7,
     paddingBottom: 7,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
     alignItems: 'center',
   },
 });

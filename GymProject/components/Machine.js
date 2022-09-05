@@ -19,7 +19,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
   function getmachineinfo() {
     handlerFunction();
   }
-  const formatted = `기구명 : ${name}\n\n현재 대기인원 : ${waitnum}명`;
+  const formatted = `${name}\n\n대기자 수 : ${waitnum}명`;
   const [visible2, setVisible2] = useState(false); //예약하기 클릭시 팝업제어용
   const [inputtime, setInputTime] = useState('');
 
@@ -142,7 +142,10 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
       <Image
         source={require('../images/default_image.png')}
         style={{width: 70, height: 70}}></Image>
-      <Text>{formatted}</Text>
+      {/*<Image source={{uri: 'www.google.com'}}/>*/}
+      <View style={{width: '40%', justifyContent: 'center'}}>
+        <Text style={{fontSize: 15}}>{formatted}</Text>
+      </View>
       <Button title="예약하기" onPress={() => setVisible2(true)}></Button>
     </View>
   );
@@ -151,12 +154,12 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
 const styles = StyleSheet.create({
   machine: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
     paddingTop: 7,
     paddingBottom: 7,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
+    borderTopColor: 'black',
+    borderTopWidth: 1,
     alignItems: 'center',
+    justifyContent: 'space-around',
   },
   modalContainer: {
     flex: 1,
