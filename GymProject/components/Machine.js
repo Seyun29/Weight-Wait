@@ -131,7 +131,8 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
                       tmp *= 1; //numeric으로 형변환
                       reserve(id, tmp);
                       setVisible2(false);
-                    }}></Button>
+                    }}
+                    color={"orange"}></Button>
                   {/*예약 후 Alert로 전달*/}
                 </View>
               </View>
@@ -146,7 +147,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
       <View style={{width: '40%', justifyContent: 'center'}}>
         <Text style={{fontSize: 15}}>{formatted}</Text>
       </View>
-      <Button title="예약하기" onPress={() => setVisible2(true)}></Button>
+      <Button title="예약하기" onPress={() => setVisible2(true)} color={'orange'}></Button>
     </View>
   );
 };
