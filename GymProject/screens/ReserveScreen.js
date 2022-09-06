@@ -12,8 +12,8 @@ import {
 } from 'react-native';
 import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
+import TmpMachineView from '../components/TmpMachineView.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import useInterval from '../hooks/useInterval.js';
 
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
 //***force update사용하기***
@@ -248,12 +248,15 @@ const ReserveScreen = ({logged}) => {
       </View>
       <View style={styles.seperator}></View>
       {loading != loading2 ? (
-        <View style={{flex: 7, justifyContent: 'center', alignItems: 'center'}}>
-          <View style={{flex: 1}} />
-          <Text>현재 예약가능한 기구가 없습니다.</Text>
-          <View style={{flex: 5}} />
-        </View>
+        <TmpMachineView />
       ) : (
+        /*
+        <MachineView
+          machine={[]}
+          handlerFunction={() => {
+            return;
+          }}></MachineView>
+          */
         /*
         <MachineView
           machine={machines}

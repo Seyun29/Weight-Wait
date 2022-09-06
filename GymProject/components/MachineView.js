@@ -1,19 +1,15 @@
 import {loadPartialConfig} from '@babel/core';
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View, Button} from 'react-native';
+import {
+  ScrollView,
+  RefreshControl,
+  StyleSheet,
+  View,
+  Button,
+} from 'react-native';
 import Machine from './Machine.js';
 
 const MachineView = ({machine, handlerFunction}) => {
-  /*const MachineView = ({
-  machine,
-  handlerFunction,
-  category,
-  sort_cur,
-  sort_text,
-  setCategory,
-  setSortcur,
-  setSorttext,
-}) => {*/
   const [newmachine, setMachine] = useState(
     machine.sort(function (a, b) {
       return a.waitnum - b.waitnum;
@@ -88,6 +84,16 @@ const MachineView = ({machine, handlerFunction}) => {
 
   //console.log('category :', category); //category 는 정상적으로 전달이 되는데,, 0903,,
   //0903 - 일단
+  const [refresh, setRefresh] = useState(false);
+  //요거 어떻게 쓰는거임?
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+  const onRefresh = React.useCallback(() => {
+    setRefresh(true);
+    handlerFunction();
+    wait(500).then(() => setRefresh(false));
+  }, []);
 
   return (
     <View style={{flex: 7}}>
@@ -150,10 +156,18 @@ const MachineView = ({machine, handlerFunction}) => {
         />
       </View>
 
-      <View style={{height:9}}></View>
+      <View style={{height: 9}}></View>
 
       <View style={styles.scrollView}>
-        <ScrollView style={{backgroundColor: 'white'}}>
+        <ScrollView
+          style={{backgroundColor: 'white'}}
+          refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={onRefresh}
+              colors={['orange']}
+            />
+          }>
           <View style={{flex: 1}}>
             {newmachine.map(item => {
               return (
@@ -190,7 +204,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  sortView: {flex: 0.6, flexDirection: 'row', marginLeft: 10},
+  sortView: {
+    flex: 0.6,
+    flexDirection: 'row',
+    marginLeft: 10,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
   scrollView: {flex: 6, backgroundColor: 'white'},
 });
 
