@@ -8,7 +8,12 @@ const MachineHome = ({name, id, time, image, today, handler}) => {
   const getuserid = async () => {
     try {
       const uid = await AsyncStorage.getItem('@storage_userid');
-      setUserid(uid);
+      if (uid !== null) {
+        setUserid(uid);
+      }
+      else{
+        setUserid(null);
+    };
       return;
     } catch (e) {
       console.log(e);

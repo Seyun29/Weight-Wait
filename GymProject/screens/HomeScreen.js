@@ -43,9 +43,10 @@ const HomeScreen = ({logged}) => {
       if (value !== null) {
         setUserid(value);
       }
-      else
+      else{
         setUserid(null);
     };
+  }
 
     const checkuser = async (userid) => {
       if (userid !== null) {

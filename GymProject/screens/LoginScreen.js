@@ -100,8 +100,14 @@ const LoginScreen = ({logged, handle1, handle2}) => {
   const googleSignout = async () => {
     auth()
       .signOut()
-      .then(() => {
+      .then(async () => {
         GoogleSignin.revokeAccess(); //add this line 8/9
+        try {
+          await AsyncStorage.setItem('@storage_username', '');
+          await AsyncStorage.setItem('@storage_userid', '');
+        } catch (e) {
+          console.log('-3');
+        }
         console.log('User signout successfully!');
       })
       .catch(e => Alert.alert('Error', e.message));
