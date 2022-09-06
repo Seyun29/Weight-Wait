@@ -8,7 +8,9 @@ import {
   Alert,
 } from 'react-native';
 import HomeScreen0 from './HomeScreen0.js';
+import HomeScreen0tmp from './HomeScreen0tmp.js';
 import HomeScreen1 from './HomeScreen1.js';
+import HomeScreen1tmp from './HomeScreen1tmp.js';
 import HomeScreen2 from './HomeScreen2.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useInterval from '../hooks/useInterval.js';
@@ -42,12 +44,13 @@ const HomeScreen = ({logged}) => {
       const value = await AsyncStorage.getItem('@storage_userid');
       if (value !== null) {
         setUserid(value);
-      }
-      else
-        setUserid(null);
+      } else setUserid(null);
     };
+    getuserid();
 
-    const checkuser = async (userid) => {
+    const checkuser = async () => {
+      await getuserid();
+      console.log('시작 : ', userid);
       if (userid !== null) {
         const url =
           'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
@@ -64,6 +67,7 @@ const HomeScreen = ({logged}) => {
             //console.log(json);
             if (json.usinginfo.length !== 0) {
               //사용하고 있는 기구가 있는 경우
+              setCaseNum(0);
               let macid = Number(json.usinginfo[0]);
               let macname = json.usinginfo[1];
               let starttime = json.usinginfo[2];
@@ -72,11 +76,11 @@ const HomeScreen = ({logged}) => {
                 machinename: macname,
                 time: starttime,
               };
-              setCaseNum(0);
               setUsingInfo(currentmachine);
               return;
             } else if (json.availinfo.length !== 0) {
               //사용하고 있는 기구는 없는데 현재 이용가능한 기구가 있는 경우
+              setCaseNum(1);
               let availablelist1 = [];
               for (let i = 0; i < json.availinfo.length; i++) {
                 let macid1 = Number(json.availinfo[i][0]);
@@ -91,7 +95,6 @@ const HomeScreen = ({logged}) => {
                 };
                 availablelist1.push(object1);
               }
-              setCaseNum(1);
               setAvailList(availablelist1);
               return;
             } else {
@@ -107,18 +110,14 @@ const HomeScreen = ({logged}) => {
             return;
           });
         return;
-      }
-      return;
+      } else handler();
     };
-    useEffect(()=>{
-        getuserid();
-    }, []);
+
     useEffect(() => {
       setTimeout(() => {
-        checkuser(userid);
+        checkuser();
       }, 500);
     }, [change]);
-
     /*
     useInterval(() => {
       await checkuser();
@@ -135,38 +134,33 @@ const HomeScreen = ({logged}) => {
               time: starttime,
     */
       console.log('using:', usinginfo);
-      if (usinginfo.time === null)
+      if (usinginfo.time == null)
         return (
           <SafeAreaView style={styles.baseview}>
-            <HomeScreen0
-              s_time={'00:00:00'}
-              id={'-1'}
-              name={'...'}
-              today={new Date()}
-              handler={handler}
-            />
+            <HomeScreen0tmp />
             <Button
               title="새로고침"
               onPress={() => {
-                checkuser(userid);
+                checkuser();
               }}
+              color={'orange'}
             />
           </SafeAreaView>
         );
       return (
         <SafeAreaView style={styles.baseview}>
           <HomeScreen0
-            s_time={usinginfo.time}
             id={usinginfo.machineid}
             name={usinginfo.machinename}
-            today={new Date()}
+            time={usinginfo.time}
             handler={handler}
           />
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser(userid);
+              checkuser();
             }}
+            color={'orange'}
           />
         </SafeAreaView>
       );
@@ -177,14 +171,16 @@ const HomeScreen = ({logged}) => {
                 availabletime: availabletime1,
                 image: image1 */
       console.log('avail:', availlist);
+      if (availlist[0].machinename === null) return <HomeScreen1tmp />;
       return (
         <SafeAreaView style={styles.baseview}>
-          <HomeScreen1 list={availlist} today={new Date()} handler={handler} />
+          <HomeScreen1 list={availlist} handler={handler} />
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser(userid);
+              checkuser();
             }}
+            color={'orange'}
           />
         </SafeAreaView>
       );
@@ -196,8 +192,9 @@ const HomeScreen = ({logged}) => {
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser(userid);
+              checkuser();
             }}
+            color={'orange'}
           />
         </SafeAreaView>
       );
@@ -208,8 +205,9 @@ const HomeScreen = ({logged}) => {
           <Button
             title="새로고침"
             onPress={() => {
-              checkuser(userid);
+              checkuser();
             }}
+            color={'orange'}
           />
         </SafeAreaView>
       );

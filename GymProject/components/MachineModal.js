@@ -74,12 +74,14 @@ const MachineModal = ({
       <Image
         source={require('../images/default_image.png')}
         style={{width: 60, height: 60}}></Image>
-      <View style={{width:'55%', alignItems:'center', justifyContent: 'center'}}>
+      <View style={{width:'5%'}}/>
+      <View style={{width:'55%', justifyContent: 'center'}}>
       <Text style={{fontSize: 15}}>{formatted}</Text>
       </View>
       <Button
         title="예약취소"
-        onPress={() => machinereturn(id, userid)}></Button>
+        onPress={() => machinereturn(id, userid)}
+        color="orange"></Button>
     </View>
   );
 };
