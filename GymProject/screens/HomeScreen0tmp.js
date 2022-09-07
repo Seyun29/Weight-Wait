@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
   },
   mediumtext: {fontSize: 30, textAlign: 'center'},
   bigtext: {fontSize: 60, fontWeight: 'bold', textAlign: 'center'},

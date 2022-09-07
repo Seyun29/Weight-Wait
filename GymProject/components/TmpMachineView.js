@@ -1,11 +1,18 @@
-import React from 'react';
-import {ScrollView, StyleSheet, View, Button} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  ScrollView,
+  RefreshControl,
+  StyleSheet,
+  View,
+  Button,
+} from 'react-native';
+import Machine from './Machine.js';
 
 const TmpMachineView = () => {
   return (
     <View style={{flex: 7}}>
       <View style={styles.categoryView}>
-        <Button title="ALL" color={'orange'} />
+        <Button title="ALL" color={'#d38657'} />
 
         <Button title="상체" color={'grey'} />
 
@@ -17,28 +24,29 @@ const TmpMachineView = () => {
       <View style={styles.seperator}></View>
 
       <View style={styles.sortView}>
-        <Button title={'정렬 : 대기 적은 순'} color={'orange'} />
+        <Button title={'정렬 : 대기 적은 순'} color={'#d38657'} />
       </View>
 
       <View style={{height: 9}}></View>
 
       <View style={styles.scrollView}>
-        <ScrollView style={{backgroundColor: 'white'}}>
+        <ScrollView style={{backgroundColor: '#FFF8F3'}}>
           <View style={{flex: 1}}></View>
         </ScrollView>
       </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   seperator: {
     height: 1,
-    backgroundColor: 'black',
-    marginVertical: 10,
+    backgroundColor: '#d38657',
+    marginVertical: 7,
   },
   categoryView: {
     flex: 0.6,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
@@ -49,7 +57,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  scrollView: {flex: 6, backgroundColor: 'white'},
+  scrollView: {
+    flex: 6,
+    backgroundColor: '#FFF8F3',
+    borderTopColor: '#d38657',
+    borderTopWidth: 1,
+  },
 });
 
 export default TmpMachineView;

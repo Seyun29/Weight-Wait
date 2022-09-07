@@ -22,7 +22,16 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Login"
-        screenOptions={{tabBarActiveTintColor: '#fb8c00'}}>
+        screenOptions={{
+          tabBarActiveTintColor: '#2B8E99',
+          tabBarInactiveTintColor: 'grey',
+          tabBarStyle: {backgroundColor: '#FFF8F3'},
+          headerTitleAlign: 'center',
+          headerTitleStyle: {fontWeight: 'medium', letterSpacing: 2.5},
+          headerStyle: {
+            backgroundColor: '#FFF8F3',
+          },
+        }}>
         <Tab.Screen
           name="Home"
           children={() => <HomeScreen logged={logged} />}
@@ -31,6 +40,7 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <Icon name="home" color={color} size={size} />
             ),
+            headerTitle: 'HOME',
           }}
         />
         <Tab.Screen
@@ -41,6 +51,7 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <Icon name="access-time" color={color} size={size} />
             ),
+            headerTitle: 'RESERVE',
           }}
         />
         <Tab.Screen
@@ -53,6 +64,7 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <Icon name="account-circle" color={color} size={size} />
             ),
+            headerTitle: 'ACCOUNT',
           }}
         />
       </Tab.Navigator>

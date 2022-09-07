@@ -10,10 +10,9 @@ const MachineHome = ({name, id, time, image, handler}) => {
       const uid = await AsyncStorage.getItem('@storage_userid');
       if (uid !== null) {
         setUserid(uid);
-      }
-      else{
+      } else {
         setUserid(null);
-    };
+      }
       return;
     } catch (e) {
       console.log(e);
@@ -109,14 +108,14 @@ const MachineHome = ({name, id, time, image, handler}) => {
         style={{width: 90, height: 90}}></Image>
       <View style={{width: '50%'}}>
         {gap < 0 ? (
-          <Text style={{fontSize: 15}}>{formatted3}</Text>
+          <Text style={{fontSize: 15, color: 'black'}}>{formatted3}</Text>
         ) : (
-          <Text style={{fontSize: 15}}>{formatted2}</Text>
+          <Text style={{fontSize: 15, color: 'black'}}>{formatted2}</Text>
         )}
       </View>
       <Button
         title={'이용시작'}
-        color={'orange'}
+        color={'#d38657'}
         onPress={() => {
           start(id);
           setGap(0);

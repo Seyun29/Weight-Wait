@@ -17,10 +17,9 @@ const MachineModal = ({
       const uid = await AsyncStorage.getItem('@storage_userid');
       if (uid !== null) {
         setUserid(uid);
-      }
-      else{
+      } else {
         setUserid(null);
-    };
+      }
       return;
     } catch (e) {
       console.log(e);
@@ -79,14 +78,14 @@ const MachineModal = ({
       <Image
         source={require('../images/default_image.png')}
         style={{width: 60, height: 60}}></Image>
-      <View style={{width:'5%'}}/>
-      <View style={{width:'55%', justifyContent: 'center'}}>
-      <Text style={{fontSize: 15}}>{formatted}</Text>
+      <View style={{width: '5%'}} />
+      <View style={{width: '55%', justifyContent: 'center'}}>
+        <Text style={{fontSize: 15, color: '#30404d'}}>{formatted}</Text>
       </View>
       <Button
         title="예약취소"
         onPress={() => machinereturn(id, userid)}
-        color="orange"></Button>
+        color="#d38657"></Button>
     </View>
   );
 };
