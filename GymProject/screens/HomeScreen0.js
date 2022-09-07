@@ -144,19 +144,10 @@ const HomeScreen0 = ({id, name, time, handler}) => {
           colors={['#d38657']}
         />
       }>
-      <View style={{flex: 0.2, justifyContent: 'center'}}>
+      <View style={{flex: 0.25, justifyContent: 'flex-end'}}>
         <Text
           style={{
-            fontSize: 35,
-            fontWeight: 'medium',
-            textAlign: 'center',
-            color: '#30404d',
-          }}>
-          현재 이용중인 기구
-        </Text>
-        <Text
-          style={{
-            fontSize: 35,
+            fontSize: 40,
             fontWeight: 'bold',
             textAlign: 'center',
             color: 'black',
@@ -186,7 +177,7 @@ const HomeScreen0 = ({id, name, time, handler}) => {
 
 const styles = StyleSheet.create({
   baseview: {
-    flex: 0.5,
+    flex: 0.4,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFF8F3',

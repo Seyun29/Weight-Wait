@@ -152,7 +152,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
         </KeyboardAvoidingView>
       </Modal>
       <Image
-        source={require('../images/default_image.png')}
+        source={require('../images/default_image.jpg')}
         style={{width: 70, height: 70}}></Image>
       {/*<Image source={{uri: 'www.google.com'}}/>*/}
       <View style={{width: '40%', justifyContent: 'center'}}>
