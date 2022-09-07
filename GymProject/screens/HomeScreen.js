@@ -37,6 +37,7 @@ const HomeScreen = ({logged}) => {
     });
     const [change, setChange] = useState(0);
     const handler = () => {
+      console.log('handle');
       setChange(change + 1);
     };
 
@@ -53,7 +54,7 @@ const HomeScreen = ({logged}) => {
 
     const checkuser = async () => {
       await getuserid();
-      console.log('시작 : ', userid);
+      //console.log('시작 : ', userid);
       if (userid !== null) {
         const url =
           'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
@@ -158,13 +159,8 @@ const HomeScreen = ({logged}) => {
             time={usinginfo.time}
             handler={handler}
           />
-          <Button
-            title="새로고침"
-            onPress={() => {
-              checkuser();
-            }}
-            color={'orange'}
-          />
+         <Text style={{fontWeight:'bold', fontSize:15, textAlign:'center'}}>아래로 당겨서 새로고침</Text>
+         <View style={{flex:0.1}}/>
         </SafeAreaView>
       );
     } else if (casenum === 1) {
@@ -178,27 +174,17 @@ const HomeScreen = ({logged}) => {
       return (
         <SafeAreaView style={styles.baseview}>
           <HomeScreen1 list={availlist} handler={handler} />
-          <Button
-            title="새로고침"
-            onPress={() => {
-              checkuser();
-            }}
-            color={'orange'}
-          />
+          <Text style={{fontWeight:'bold', fontSize:15, textAlign:'center'}}>아래로 당겨서 새로고침</Text>
+          <View style={{flex:0.1}}/>
         </SafeAreaView>
       );
     } else if (casenum === 2) {
       //이용중인기구없음&이용가능기구없음
       return (
         <SafeAreaView style={styles.baseview}>
-          <HomeScreen2 />
-          <Button
-            title="새로고침"
-            onPress={() => {
-              checkuser();
-            }}
-            color={'orange'}
-          />
+          <HomeScreen2 handlerFunction={handler}/>
+          <Text style={{fontWeight:'bold', fontSize:15, textAlign:'center'}}>아래로 당겨서 새로고침</Text>
+          <View style={{flex:0.1}}/>
         </SafeAreaView>
       );
     } else {

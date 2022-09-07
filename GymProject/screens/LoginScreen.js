@@ -119,13 +119,13 @@ const LoginScreen = ({logged, handle1, handle2}) => {
       <View style={styles.container}>
         <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
         <View style={{flex: 2, justifyContent: 'flex-end'}}>
-          <Text style={{fontSize: 14, textAlign: 'center'}}>
+          <Text style={{fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>
             로그인 후 모든 기능을 정상적으로
           </Text>
-          <Text style={{fontSize: 14, textAlign: 'center'}}>
+          <Text style={{fontSize: 18, textAlign: 'center', fontWeight:'bold'}}>
             이용하실 수 있습니다.
           </Text>
-          <Text style={{fontSize: 14, textAlign: 'center'}}>
+          <Text style={{fontSize: 18, textAlign: 'center', fontWeight:'bold'}}>
             로그인하시려면 하단 버튼을 클릭해주세요
           </Text>
         </View>
@@ -142,11 +142,14 @@ const LoginScreen = ({logged, handle1, handle2}) => {
       <View style={styles.container}>
         <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
         <View style={{flex: 2, justifyContent: 'flex-end'}}>
-          <Text style={{fontSize: 20, textAlign: 'center'}}>
-            로그아웃하시려면 하단 버튼을 클릭해주세요
+          <Text style={{fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>
+            로그아웃하시려면
+          </Text>
+          <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>
+          하단 버튼을 클릭해주세요
           </Text>
         </View>
-        <View style={{flex: 0.5}}></View>
+        <View style={{flex: 0.2}}></View>
         <View style={{flex: 3}}>
           <TouchableOpacity style={styles.btn} onPress={googleSignout}>
             <Text style={styles.font}>Google-Sign-out</Text>
@@ -162,6 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white'
   },
   btn: {
     padding: 8,
@@ -171,6 +175,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+
   },
   font: {
     fontSize: 24,

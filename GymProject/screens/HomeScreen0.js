@@ -5,7 +5,7 @@ import {
   Button,
   StyleSheet,
   SafeAreaView,
-  Alert,
+  Alert, ScrollView, RefreshControl
 } from 'react-native';
 import useInterval from '../hooks/useInterval.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -127,9 +127,18 @@ const HomeScreen0 = ({id, name, time, handler}) => {
                  }, []);
                  */
   //GAP이 현재시간 - 0으로 설정되는이유???
-
+const [refresh, setRefresh] = useState(false);
+    const onRefresh = React.useCallback(() => {
+      setRefresh(true);
+      handler();
+      setRefresh(false);})
   return (
-    <View style={{flex: 1}}>
+    <ScrollView contentContainerStyle={{flex: 1}} refreshControl={<RefreshControl
+                                                                  refreshing={refresh}
+                                                                  onRefresh={onRefresh}
+                                                                  colors={['orange']}/>} >
+
+
       <View style={{flex: 0.2, justifyContent: 'center'}}>
         <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
           현재 이용중인 기구
@@ -154,7 +163,7 @@ const HomeScreen0 = ({id, name, time, handler}) => {
           }}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

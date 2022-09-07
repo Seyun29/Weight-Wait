@@ -8,7 +8,7 @@ import {
   Button,
   Text,
   Modal,
-  KeyboardAvoidingView,
+  TouchableWithoutFeedback
 } from 'react-native';
 import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
@@ -233,7 +233,6 @@ const ReserveScreen = ({logged}) => {
                 handlerFunction={handlechange}
                 handlerFunction2={handlechange2}></ModalView>
             )}
-
             <Button
               title={'확인'}
               onPress={() => {
@@ -286,8 +285,8 @@ const ReserveScreen = ({logged}) => {
 
 const styles = StyleSheet.create({
   seperator: {
-    height: 1,
-    backgroundColor: 'black',
+    height: 3,
+    backgroundColor: 'orange',
     marginVertical: 10,
   },
   btn1view: {
@@ -314,7 +313,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'black',
+    borderColor: 'orange',
     borderWidth: 4,
     borderRadius: 20,
   },

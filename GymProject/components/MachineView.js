@@ -194,8 +194,8 @@ MachineView.defaultProps = {
 
 const styles = StyleSheet.create({
   seperator: {
-    height: 1,
-    backgroundColor: 'black',
+    height: 3,
+    backgroundColor: 'orange',
     marginVertical: 10,
   },
   categoryView: {
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  scrollView: {flex: 6, backgroundColor: 'white'},
+  scrollView: {flex: 6, backgroundColor: 'white', borderTopColor: 'orange', borderTopWidth:2},
 });
 
 export default MachineView;

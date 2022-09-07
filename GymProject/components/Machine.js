@@ -11,8 +11,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
+  TouchableOpacity
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
+import Icon from 'react-native-vector-icons/MaterialIcons';
 //현재는 기구명, 대기인원만 표시되지만, 이미지도 추후 추가할것
 
 const Machine = ({name, id, waitnum, handlerFunction, image}) => {
@@ -105,11 +107,17 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
               <View style={styles.modalContent}>
                 <View
                   style={{
-                    height: '15%',
-                    width: '90%',
+                    height: '20%',
+                    width: '95%',
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
-                  }}></View>
+                    alignItems:'flex-end',
+                    }}>
+                    <TouchableOpacity onPress={()=>{setVisible2(false)}}>
+                        <Icon name="close" color={'orange'} size={25} />
+                    </TouchableOpacity>
+                </View>
+                <View style={{height:'3%'}}/>
                 <Text style={styles.text}>{strformat}</Text>
                 <View style={{height: '10%'}} />
                 <View style={styles.inputandbutton}>
@@ -157,8 +165,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 7,
     paddingBottom: 7,
-    borderTopColor: 'black',
-    borderTopWidth: 1,
+    borderBottomColor: 'orange',
+    borderBottomWidth: 2,
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -172,25 +180,25 @@ const styles = StyleSheet.create({
     flex: 0.6,
     backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: 'black',
-    borderWidth: 4,
+    borderColor: 'orange',
+    borderWidth: 3,
     borderRadius: 20,
   },
   inputandbutton: {
-    flex: 0.5,
+    height: '20%',
     width: '50%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   inputblock: {
-    height: '90%',
+    height: '100%',
     paddingHorizontal: 15,
     borderColor: '#555',
     borderWidth: 1,
     borderRadius: 5,
     justifyContent: 'center',
+    alignItems:'center',
   },
   input: {fontSize: 11, paddingVertical: 8},
   text: {fontSize: 20, fontWeight: 'bold', textAlign: 'center'},
