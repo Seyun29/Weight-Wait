@@ -99,7 +99,7 @@ const MachineView = ({machine, handlerFunction}) => {
     <View style={{flex: 7}}>
       <View style={styles.categoryView}>
         {category === 0 ? (
-          <Button title="ALL" color={'orange'} />
+          <Button title="ALL" color={'#d38657'} />
         ) : (
           <Button
             title="ALL"
@@ -110,7 +110,7 @@ const MachineView = ({machine, handlerFunction}) => {
           />
         )}
         {category === 1 ? (
-          <Button title="상체" color={'orange'} />
+          <Button title="상체" color={'#d38657'} />
         ) : (
           <Button
             title="상체"
@@ -121,7 +121,7 @@ const MachineView = ({machine, handlerFunction}) => {
           />
         )}
         {category === 2 ? (
-          <Button title="하체" color={'orange'} />
+          <Button title="하체" color={'#d38657'} />
         ) : (
           <Button
             title="하체"
@@ -132,7 +132,7 @@ const MachineView = ({machine, handlerFunction}) => {
           />
         )}
         {category === 3 ? (
-          <Button title="유산소/기타" color={'orange'} />
+          <Button title="유산소/기타" color={'#d38657'} />
         ) : (
           <Button
             title="유산소/기타"
@@ -152,7 +152,7 @@ const MachineView = ({machine, handlerFunction}) => {
           onPress={() => {
             sortclicked();
           }}
-          color={'orange'}
+          color={'#d38657'}
         />
       </View>
 
@@ -160,12 +160,12 @@ const MachineView = ({machine, handlerFunction}) => {
 
       <View style={styles.scrollView}>
         <ScrollView
-          style={{backgroundColor: 'white'}}
+          style={{backgroundColor: '#FFF8F3'}}
           refreshControl={
             <RefreshControl
               refreshing={refresh}
               onRefresh={onRefresh}
-              colors={['orange']}
+              colors={['#d38657']}
             />
           }>
           <View style={{flex: 1}}>
@@ -195,12 +195,12 @@ MachineView.defaultProps = {
 const styles = StyleSheet.create({
   seperator: {
     height: 1,
-    backgroundColor: 'black',
-    marginVertical: 10,
+    backgroundColor: '#d38657',
+    marginVertical: 7,
   },
   categoryView: {
     flex: 0.6,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
@@ -211,7 +211,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  scrollView: {flex: 6, backgroundColor: 'white'},
+  scrollView: {
+    flex: 6,
+    backgroundColor: '#FFF8F3',
+    borderTopColor: '#d38657',
+    borderTopWidth: 1,
+  },
 });
 
 export default MachineView;

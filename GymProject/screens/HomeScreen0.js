@@ -6,6 +6,8 @@ import {
   StyleSheet,
   SafeAreaView,
   Alert,
+  ScrollView,
+  RefreshControl,
 } from 'react-native';
 import useInterval from '../hooks/useInterval.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,10 +23,9 @@ const HomeScreen0 = ({id, name, time, handler}) => {
       const uid = await AsyncStorage.getItem('@storage_userid');
       if (uid !== null) {
         setUserid(uid);
-      }
-      else{
+      } else {
         setUserid(null);
-    };
+      }
       return;
     } catch (e) {
       console.log(e);
@@ -127,14 +128,39 @@ const HomeScreen0 = ({id, name, time, handler}) => {
                  }, []);
                  */
   //GAP이 현재시간 - 0으로 설정되는이유???
-
+  const [refresh, setRefresh] = useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefresh(true);
+    handler();
+    setRefresh(false);
+  });
   return (
-    <View style={{flex: 1}}>
+    <ScrollView
+      contentContainerStyle={{flex: 1}}
+      refreshControl={
+        <RefreshControl
+          refreshing={refresh}
+          onRefresh={onRefresh}
+          colors={['#d38657']}
+        />
+      }>
       <View style={{flex: 0.2, justifyContent: 'center'}}>
-        <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
+        <Text
+          style={{
+            fontSize: 35,
+            fontWeight: 'medium',
+            textAlign: 'center',
+            color: '#30404d',
+          }}>
           현재 이용중인 기구
         </Text>
-        <Text style={{fontSize: 35, fontWeight: 'bold', textAlign: 'center'}}>
+        <Text
+          style={{
+            fontSize: 35,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: 'black',
+          }}>
           {name}
         </Text>
       </View>
@@ -146,7 +172,7 @@ const HomeScreen0 = ({id, name, time, handler}) => {
       <View style={{flex: 0.2, alignItems: 'center'}}>
         <Button
           title={'이용종료'}
-          color={'orange'}
+          color={'#d38657'}
           onPress={() => {
             finish(id);
             setGap(0);
@@ -154,7 +180,7 @@ const HomeScreen0 = ({id, name, time, handler}) => {
           }}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -163,10 +189,15 @@ const styles = StyleSheet.create({
     flex: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
   },
-  mediumtext: {fontSize: 30, textAlign: 'center'},
-  bigtext: {fontSize: 60, fontWeight: 'bold', textAlign: 'center'},
+  mediumtext: {fontSize: 30, textAlign: 'center', color: '#30404d'},
+  bigtext: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'black',
+  },
 });
 
 export default HomeScreen0;
