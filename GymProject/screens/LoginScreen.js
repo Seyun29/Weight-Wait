@@ -117,15 +117,33 @@ const LoginScreen = ({logged, handle1, handle2}) => {
   if (!logged) {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
+        <StatusBar backgroundColor={'#FFF8F3'} barStyle={'dark-content'} />
         <View style={{flex: 2, justifyContent: 'flex-end'}}>
-          <Text style={{fontSize: 18, textAlign: 'center', fontWeight: 'bold'}}>
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#30404d',
+            }}>
             로그인 후 모든 기능을 정상적으로
           </Text>
-          <Text style={{fontSize: 18, textAlign: 'center', fontWeight:'bold'}}>
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#30404d',
+            }}>
             이용하실 수 있습니다.
           </Text>
-          <Text style={{fontSize: 18, textAlign: 'center', fontWeight:'bold'}}>
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#30404d',
+            }}>
             로그인하시려면 하단 버튼을 클릭해주세요
           </Text>
         </View>
@@ -140,13 +158,27 @@ const LoginScreen = ({logged, handle1, handle2}) => {
   } else {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor={'white'} barStyle={'dart-content'} />
+        <StatusBar backgroundColor={'#FFF8F3'} barStyle={'dark-content'} />
         <View style={{flex: 2, justifyContent: 'flex-end'}}>
-          <Text style={{fontSize: 20, textAlign: 'center', fontWeight:'bold'}}>
+          <Text
+            style={{
+              fontSize: 20,
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#30404d',
+              letterSpacing: 1,
+            }}>
             로그아웃하시려면
           </Text>
-          <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>
-          하단 버튼을 클릭해주세요
+          <Text
+            style={{
+              fontSize: 20,
+              textAlign: 'center',
+              fontWeight: 'bold',
+              color: '#30404d',
+              letterSpacing: 0.5,
+            }}>
+            하단 버튼을 클릭해주세요
           </Text>
         </View>
         <View style={{flex: 0.2}}></View>
@@ -165,21 +197,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: '#FFF8F3',
   },
   btn: {
     padding: 8,
-    borderWidth: 1,
-    borderRadius: 8,
-    borderColor: 'blue',
+    //borderWidth: 1,
+    borderRadius: 10,
+    borderColor: '#1E3C66',
+    backgroundColor: '#d38657',
   },
   text: {
     fontSize: 16,
-
   },
   font: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#FFF8F3',
   },
 });
 

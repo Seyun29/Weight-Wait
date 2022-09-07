@@ -25,7 +25,7 @@ const HomeScreen1tmp = () => {
 };
 
 const styles = StyleSheet.create({
-  baseview: {flex: 1, backgroundColor: 'white'},
+  baseview: {flex: 1, backgroundColor: '#FFF8F3'},
   mediumtext: {fontSize: 20, textAlign: 'center'},
   bigtext: {fontSize: 25, fontWeight: 'bold', textAlign: 'center'},
 });

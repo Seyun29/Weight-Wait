@@ -8,7 +8,7 @@ import {
   Button,
   Text,
   Modal,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from 'react-native';
 import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
@@ -22,9 +22,15 @@ const ReserveScreen = ({logged}) => {
   if (!logged) {
     return (
       <SafeAreaView
-        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#FFF8F3',
+        }}>
         <Text>로그인 후 정상적으로 이용 가능합니다.</Text>
-        <Text>하단의 'Account' 탭을 눌러 로그인해주세요.</Text>
+        <Text>하단의 '계정관리' 탭을 눌러 로그인해주세요.</Text>
+        <View style={{height: '50%'}} />
       </SafeAreaView>
     );
   }
@@ -111,10 +117,9 @@ const ReserveScreen = ({logged}) => {
       const name = await AsyncStorage.getItem('@storage_username');
       if (name !== null) {
         setUsername(name);
-      }
-      else{
+      } else {
         setUsername(null);
-    };
+      }
       return;
     } catch (e) {
       console.log(e);
@@ -127,9 +132,9 @@ const ReserveScreen = ({logged}) => {
     const value = await AsyncStorage.getItem('@storage_userid');
     if (value !== null) {
       setUserid(value);
+    } else {
+      setUserid(null);
     }
-    else {
-      setUserid(null);}
   };
 
   useEffect(() => {
@@ -208,7 +213,7 @@ const ReserveScreen = ({logged}) => {
   const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFF8F3'}}>
       <Modal transparent={true} visible={visible} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -238,14 +243,14 @@ const ReserveScreen = ({logged}) => {
               onPress={() => {
                 setVisible('false');
               }}
-              color={'orange'}></Button>
+              color={'#d38657'}></Button>
           </View>
         </View>
       </Modal>
       <View style={styles.btn1view}>
         <Button
           title="나의 예약내역 조회/수정"
-          color={'orange'}
+          color={'#d38657'}
           onPress={() => {
             onmyReserve();
             setVisible(true);
@@ -253,7 +258,11 @@ const ReserveScreen = ({logged}) => {
         />
       </View>
       <View style={styles.seperator}></View>
-      {loading != loading2 ? (
+      {loading != loading2 /*
+        <MachineView
+          machine={machines}
+          handlerFunction={getmachineinfo}></MachineView>
+          */ ? (
         <TmpMachineView />
       ) : (
         /*
@@ -262,18 +271,7 @@ const ReserveScreen = ({logged}) => {
           handlerFunction={() => {
             return;
           }}></MachineView>
-          */
-        /*
-        <MachineView
-          machine={machines}
-          handlerFunction={getmachineinfo}
-          category={category}
-          sort_cur={sort_cur}
-          sort_text={sort_text}
-          setCategory={setCategory}
-          setSortcur={setSortcur}
-          setSorttext={setSorttext}></MachineView>
-          */
+        */
         <MachineView
           machine={machines}
           handlerFunction={getmachineinfo}></MachineView>
@@ -285,24 +283,24 @@ const ReserveScreen = ({logged}) => {
 
 const styles = StyleSheet.create({
   seperator: {
-    height: 3,
-    backgroundColor: 'orange',
+    height: 2,
+    backgroundColor: '#d38657',
     marginVertical: 10,
   },
   btn1view: {
     flex: 0.6,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
     flexDirection: 'row-reverse',
     alignItems: 'center',
   },
   categoryView: {
     flex: 0.5,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
   sortView: {flex: 0.5, flexDirection: 'row', marginLeft: 10},
-  scrollView: {flex: 6, backgroundColor: 'white'},
+  scrollView: {flex: 6, backgroundColor: '#FFF8F3'},
   modalContainer: {
     flex: 1,
     padding: 20,
@@ -310,11 +308,11 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 0.5,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'orange',
-    borderWidth: 4,
+    borderColor: '#d38657',
+    borderWidth: 2,
     borderRadius: 20,
   },
 });

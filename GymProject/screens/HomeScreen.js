@@ -19,9 +19,15 @@ const HomeScreen = ({logged}) => {
   if (!logged) {
     return (
       <SafeAreaView
-        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#FFF8F3',
+        }}>
         <Text>로그인 후 정상적으로 이용 가능합니다.</Text>
-        <Text>하단의 'Account' 탭을 눌러 로그인해주세요.</Text>
+        <Text>하단의 '계정관리' 탭을 눌러 로그인해주세요.</Text>
+        <View style={{height: '50%'}} />
       </SafeAreaView>
     );
   } else {
@@ -45,11 +51,10 @@ const HomeScreen = ({logged}) => {
       const value = await AsyncStorage.getItem('@storage_userid');
       if (value !== null) {
         setUserid(value);
-      }
-      else{
+      } else {
         setUserid(null);
+      }
     };
-  }
     getuserid();
 
     const checkuser = async () => {
@@ -142,13 +147,16 @@ const HomeScreen = ({logged}) => {
         return (
           <SafeAreaView style={styles.baseview}>
             <HomeScreen0tmp />
-            <Button
-              title="새로고침"
-              onPress={() => {
-                checkuser();
-              }}
-              color={'orange'}
-            />
+            <Text
+              style={{
+                fontWeight: 'bold',
+                fontSize: 12,
+                textAlign: 'center',
+                color: 'grey',
+              }}>
+              아래로 당겨서 새로고침
+            </Text>
+            <View style={{flex: 0.1}} />
           </SafeAreaView>
         );
       return (
@@ -159,8 +167,16 @@ const HomeScreen = ({logged}) => {
             time={usinginfo.time}
             handler={handler}
           />
-         <Text style={{fontWeight:'bold', fontSize:15, textAlign:'center'}}>아래로 당겨서 새로고침</Text>
-         <View style={{flex:0.1}}/>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 12,
+              textAlign: 'center',
+              color: 'grey',
+            }}>
+            아래로 당겨서 새로고침
+          </Text>
+          <View style={{flex: 0.1}} />
         </SafeAreaView>
       );
     } else if (casenum === 1) {
@@ -170,25 +186,56 @@ const HomeScreen = ({logged}) => {
                 availabletime: availabletime1,
                 image: image1 */
       console.log('avail:', availlist);
-      if (availlist[0].machinename === null) return <HomeScreen1tmp />;
+      if (availlist[0].machinename === null)
+        return (
+          <SafeAreaView style={styles.baseview}>
+            <HomeScreen1tmp />
+            <Text
+              style={{
+                fontWeight: 'bold',
+                fontSize: 12,
+                textAlign: 'center',
+                color: 'grey',
+              }}>
+              아래로 당겨서 새로고침
+            </Text>
+            <View style={{flex: 0.1}} />
+          </SafeAreaView>
+        );
       return (
         <SafeAreaView style={styles.baseview}>
           <HomeScreen1 list={availlist} handler={handler} />
-          <Text style={{fontWeight:'bold', fontSize:15, textAlign:'center'}}>아래로 당겨서 새로고침</Text>
-          <View style={{flex:0.1}}/>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 12,
+              textAlign: 'center',
+              color: 'grey',
+            }}>
+            아래로 당겨서 새로고침
+          </Text>
+          <View style={{flex: 0.1}} />
         </SafeAreaView>
       );
     } else if (casenum === 2) {
       //이용중인기구없음&이용가능기구없음
       return (
         <SafeAreaView style={styles.baseview}>
-          <HomeScreen2 handlerFunction={handler}/>
-          <Text style={{fontWeight:'bold', fontSize:15, textAlign:'center'}}>아래로 당겨서 새로고침</Text>
-          <View style={{flex:0.1}}/>
+          <HomeScreen2 handlerFunction={handler} />
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 12,
+              textAlign: 'center',
+              color: 'grey',
+            }}>
+            아래로 당겨서 새로고침
+          </Text>
+          <View style={{flex: 0.1}} />
         </SafeAreaView>
       );
     } else {
-      Alert.alert('예외처리');
+      Alert.alert('다시 시도해주세요');
       return (
         <SafeAreaView>
           <Button
@@ -204,7 +251,7 @@ const HomeScreen = ({logged}) => {
   }
 };
 const styles = StyleSheet.create({
-  baseview: {flex: 1, backgroundColor: 'white'},
+  baseview: {flex: 1, backgroundColor: '#FFF8F3'},
 });
 
 export default HomeScreen;

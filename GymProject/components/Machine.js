@@ -11,7 +11,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -111,13 +111,16 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
                     width: '95%',
                     flexDirection: 'row',
                     justifyContent: 'flex-end',
-                    alignItems:'flex-end',
+                    alignItems: 'flex-end',
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setVisible2(false);
                     }}>
-                    <TouchableOpacity onPress={()=>{setVisible2(false)}}>
-                        <Icon name="close" color={'orange'} size={25} />
-                    </TouchableOpacity>
+                    <Icon name="close" color={'#d38657'} size={25} />
+                  </TouchableOpacity>
                 </View>
-                <View style={{height:'3%'}}/>
+                <View style={{height: '3%'}} />
                 <Text style={styles.text}>{strformat}</Text>
                 <View style={{height: '10%'}} />
                 <View style={styles.inputandbutton}>
@@ -140,7 +143,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
                       reserve(id, tmp);
                       setVisible2(false);
                     }}
-                    color={"orange"}></Button>
+                    color={'#d38657'}></Button>
                   {/*예약 후 Alert로 전달*/}
                 </View>
               </View>
@@ -153,9 +156,12 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
         style={{width: 70, height: 70}}></Image>
       {/*<Image source={{uri: 'www.google.com'}}/>*/}
       <View style={{width: '40%', justifyContent: 'center'}}>
-        <Text style={{fontSize: 15}}>{formatted}</Text>
+        <Text style={{fontSize: 15, color: '#30404d'}}>{formatted}</Text>
       </View>
-      <Button title="예약하기" onPress={() => setVisible2(true)} color={'orange'}></Button>
+      <Button
+        title="예약하기"
+        onPress={() => setVisible2(true)}
+        color={'#d38657'}></Button>
     </View>
   );
 };
@@ -165,8 +171,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 7,
     paddingBottom: 7,
-    borderBottomColor: 'orange',
-    borderBottomWidth: 2,
+    borderBottomColor: '#d38657',
+    borderBottomWidth: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -178,10 +184,10 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 0.6,
-    backgroundColor: 'white',
+    backgroundColor: '#FFF8F3',
     alignItems: 'center',
-    borderColor: 'orange',
-    borderWidth: 3,
+    borderColor: '#d38657',
+    borderWidth: 2,
     borderRadius: 20,
   },
   inputandbutton: {
@@ -194,13 +200,13 @@ const styles = StyleSheet.create({
   inputblock: {
     height: '100%',
     paddingHorizontal: 15,
-    borderColor: '#555',
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
     justifyContent: 'center',
-    alignItems:'center',
+    alignItems: 'center',
   },
   input: {fontSize: 11, paddingVertical: 8},
-  text: {fontSize: 20, fontWeight: 'bold', textAlign: 'center'},
+  text: {fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: 'black'},
 });
 export default Machine;
