@@ -31,6 +31,7 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <Icon name="home" color={color} size={size} />
             ),
+            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
@@ -41,6 +42,7 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <Icon name="access-time" color={color} size={size} />
             ),
+            unmountOnBlur: true,
           }}
         />
         <Tab.Screen
@@ -53,6 +55,7 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <Icon name="account-circle" color={color} size={size} />
             ),
+          unmountOnBlur: true,
           }}
         />
       </Tab.Navigator>

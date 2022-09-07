@@ -26,7 +26,7 @@ const HomeScreen = ({logged}) => {
     );
   } else {
     const [casenum, setCaseNum] = useState(2);
-    const [userid, setUserid] = useState('');
+    const [userid, setUserid] = useState(null);
     const [availlist, setAvailList] = useState([
       {machineid: null, machinename: null, availabletime: null, image: null},
     ]);
@@ -44,20 +44,23 @@ const HomeScreen = ({logged}) => {
       const value = await AsyncStorage.getItem('@storage_userid');
       if (value !== null) {
         setUserid(value);
+        return value;
       }
       else{
         setUserid(null);
+        return null;
     };
   }
     getuserid();
 
     const checkuser = async () => {
-      await getuserid();
-      console.log('시작 : ', userid);
-      if (userid !== null) {
+      const usid=await getuserid();
+      console.log('시작 : ', usid);
+      if (usid !== null) {
+        console.log(usid);
         const url =
           'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
-          userid;
+          usid;
         const resul = await fetch(url, {
           method: 'GET',
           headers: {
@@ -67,7 +70,7 @@ const HomeScreen = ({logged}) => {
         })
           .then(response => response.json())
           .then(json => {
-            //console.log(json);
+            console.log(json);
             if (json.usinginfo.length !== 0) {
               //사용하고 있는 기구가 있는 경우
               setCaseNum(0);
