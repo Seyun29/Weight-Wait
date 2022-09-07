@@ -12,16 +12,21 @@ const MachineModal = ({
 }) => {
   const formatted = `${name}\n대기자 수 : ${waitnum}명`;
   const [userid, setUserid] = useState('');
-  const getusername = async () => {
+  const getuserid = async () => {
     try {
       const uid = await AsyncStorage.getItem('@storage_userid');
-      setUserid(uid);
+      if (uid !== null) {
+        setUserid(uid);
+      }
+      else{
+        setUserid(null);
+    };
       return;
     } catch (e) {
       console.log(e);
     }
   };
-  getusername();
+  getuserid();
 
   function handlechange1() {
     handlerFunction();

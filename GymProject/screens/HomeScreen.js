@@ -44,8 +44,11 @@ const HomeScreen = ({logged}) => {
       const value = await AsyncStorage.getItem('@storage_userid');
       if (value !== null) {
         setUserid(value);
-      } else setUserid(null);
+      }
+      else{
+        setUserid(null);
     };
+  }
     getuserid();
 
     const checkuser = async () => {

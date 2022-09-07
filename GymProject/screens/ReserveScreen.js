@@ -109,11 +109,16 @@ const ReserveScreen = ({logged}) => {
   const getusername = async () => {
     try {
       const name = await AsyncStorage.getItem('@storage_username');
-      setUsername(name);
+      if (name !== null) {
+        setUsername(name);
+      }
+      else{
+        setUsername(null);
+    };
       return;
     } catch (e) {
       console.log(e);
-      setUsername('');
+      setUsername(null);
     }
   };
 
@@ -122,7 +127,9 @@ const ReserveScreen = ({logged}) => {
     const value = await AsyncStorage.getItem('@storage_userid');
     if (value !== null) {
       setUserid(value);
-    } else setUserid(null);
+    }
+    else {
+      setUserid(null);}
   };
 
   useEffect(() => {
