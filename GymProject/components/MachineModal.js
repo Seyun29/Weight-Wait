@@ -76,7 +76,7 @@ const MachineModal = ({
   return (
     <View style={styles.machine}>
       <Image
-        source={require('../images/default_image.png')}
+        source={require('../images/default_image.jpg')}
         style={{width: 60, height: 60}}></Image>
       <View style={{width: '5%'}} />
       <View style={{width: '55%', justifyContent: 'center'}}>

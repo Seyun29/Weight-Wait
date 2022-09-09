@@ -104,7 +104,7 @@ const MachineHome = ({name, id, time, image, handler}) => {
   return (
     <View style={styles.machine}>
       <Image
-        source={require('../images/default_image.png')}
+        source={require('../images/default_image.jpg')}
         style={{width: 90, height: 90}}></Image>
       <View style={{width: '50%'}}>
         {gap < 0 ? (
