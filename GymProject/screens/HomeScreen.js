@@ -62,7 +62,6 @@ const HomeScreen = ({logged}) => {
 
     const checkuser = async () => {
       const usid=await getuserid();
-      console.log('시작 : ', usid);
       if (usid !== null) {
         console.log(usid);
 

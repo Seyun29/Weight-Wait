@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 import ModalView from '../components/ModalView.js';
 import MachineView from '../components/MachineView.js';
-import TmpMachineView from '../components/TmpMachineView.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //새로고침 기능 추가하기 - 밑으로 드래그해서 새로고침, 내비개이션바 크릭해서 새로고침
@@ -43,12 +42,9 @@ const ReserveScreen = ({logged}) => {
     setChange1(change1 + 1);
   }
 
-  const [loading, setLoading] = useState(0);
-  const [loading2, setLoading2] = useState(0);
   //MachineModal 컴포넌트에 전달할 변수
 
   const getmachineinfo = () => {
-    setLoading2(loading2 + 1);
     fetch(
       'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/machine',
       {
@@ -96,11 +92,9 @@ const ReserveScreen = ({logged}) => {
           machinelist.push(object);
         }
         setMachines(machinelist);
-        setLoading(loading + 1);
       })
       .catch(error => {
         console.error(error);
-        setLoading(loading + 1);
         return -1;
       });
   };
@@ -203,13 +197,6 @@ const ReserveScreen = ({logged}) => {
   }, [change2]);
   //기구 업데이트 확인용 임시 useEffect, added by seyun 0902
 
-  /*
-  useInterval(() => {
-    console.log(userid, username);
-    getmachineinfo();
-  }, 30000); //30초에 한번 자동 업데이트
-  */
-
   const [visible, setVisible] = useState(false); //나의 예약확인버튼 클릭시 팝업제어용
 
   return (
@@ -258,24 +245,9 @@ const ReserveScreen = ({logged}) => {
         />
       </View>
       <View style={styles.seperator}></View>
-      {loading != loading2 /*
-        <MachineView
-          machine={machines}
-          handlerFunction={getmachineinfo}></MachineView>
-          */ ? (
-        <TmpMachineView />
-      ) : (
-        /*
-        <MachineView
-          machine={[]}
-          handlerFunction={() => {
-            return;
-          }}></MachineView>
-        */
-        <MachineView
-          machine={machines}
-          handlerFunction={getmachineinfo}></MachineView>
-      )}
+      <MachineView
+       machine={machines}
+       handlerFunction={getmachineinfo}></MachineView>
       <View style={{height: '5%'}}></View>
     </SafeAreaView>
   );
