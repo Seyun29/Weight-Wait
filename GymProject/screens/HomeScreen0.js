@@ -108,26 +108,6 @@ const HomeScreen0 = ({id, name, time, handler}) => {
     setFormatted2(`${parseInt(gap / 60)}분 ${gap % 60}초`);
   }, 1000);
 
-  /*
-  useEffect(()=>{
-  console.log('호에에에에')
-  let s_min = (s_time.substr(3, 2) / 1);
-  let s_sec = (s_time.substr(6, 2) / 1);
-  const min = today.getMinutes();
-  const sec = today.getSeconds();
-  let dif_min = min - s_min;
-  if (min - s_min < 0) dif_min = dif_min + 60;
-  let dif_sec = sec - s_sec;
-  if (sec - s_sec < 0) dif_sec = dif_sec + 60;
-  setGapp(dif_min*60 + dif_sec);
-
-                 console.log('시작시간 : ', s_min, '분', s_sec, '초');
-                 console.log('현재시간 : ', min, '분', sec, '초');
-                 console.log('diff :', dif_min, '분', dif_sec, '초');
-                 console.log('gap :', gapp);
-                 }, []);
-                 */
-  //GAP이 현재시간 - 0으로 설정되는이유???
   const [refresh, setRefresh] = useState(false);
   const onRefresh = React.useCallback(() => {
     setRefresh(true);
