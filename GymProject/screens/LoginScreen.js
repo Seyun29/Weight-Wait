@@ -43,10 +43,10 @@ const LoginScreen = ({logged, handle1, handle2}) => {
 
   useInterval(() => {
     if (logged) {
-      console.log('interval working ...');
+      //console.log('interval working ...');
       let returnval = isNotification();
-      returnval = ['bench']; //default value, 삭제예정
-      console.log(returnval != 0);
+      returnval = []; //default value, 삭제예정
+      //console.log(returnval != 0);
       if (returnval != 0) {
         let num = returnval.length;
         let today = new Date();
