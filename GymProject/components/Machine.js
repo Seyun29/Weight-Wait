@@ -138,6 +138,10 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
                   <Button
                     title="예약하기"
                     onPress={() => {
+                      if (inputtime == '') {
+                        Alert.alert('예상 사용시간을 입력해주세요');
+                        return;
+                      }
                       let tmp = inputtime;
                       tmp *= 1; //numeric으로 형변환
                       reserve(id, tmp);
