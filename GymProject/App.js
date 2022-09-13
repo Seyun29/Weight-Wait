@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -7,10 +7,22 @@ import ReserveScreen from './screens/ReserveScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import PushNotification from 'react-native-push-notification'; //added on 0910
 
 const Tab = createBottomTabNavigator();
+const createChannels = () => {
+  //added on 0910
+  PushNotification.createChannel({
+    channelId: '1',
+    channelName: 'Test Channel',
+  });
+};
 
 const App = () => {
+  useEffect(() => {
+    createChannels();
+  }, []); //added this on 0910
+
   const [logged, setLogged] = useState(false);
   const login = () => {
     setLogged(true);
@@ -66,7 +78,6 @@ const App = () => {
             tabBarIcon: ({color, size}) => (
               <Icon name="account-circle" color={color} size={size} />
             ),
-          unmountOnBlur: true,
             headerTitle: 'ACCOUNT',
           }}
         />
