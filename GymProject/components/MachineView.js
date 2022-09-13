@@ -10,7 +10,11 @@ import {
 import Machine from './Machine.js';
 
 const MachineView = ({machine, handlerFunction}) => {
-  const [newmachine, setMachine] = useState([]);
+  const [newmachine, setMachine] = useState(
+    machine.sort(function (a, b) {
+      return a.waitnum - b.waitnum;
+    }),
+  );
   const [category, setCategory] = useState(0);
   const [sort_cur, setSortcur] = useState(0); //정렬방식, 0 : 대기 적은순, 1 : 대기 많은순, 2 : 이름순
   const [sort_text, setSorttext] = useState('정렬 : 대기 적은 순');
@@ -73,11 +77,7 @@ const MachineView = ({machine, handlerFunction}) => {
       setMachine(tmpmachine);
     }
   };
-  useEffect(()=>{
-  setMachine(machine.sort(function (a, b) {
-                   return a.waitnum - b.waitnum;
-                 }),);
-  },);
+
   useEffect(() => {
     makesort(sort_cur);
   }, [category, sort_cur]);
