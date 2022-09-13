@@ -18,7 +18,7 @@ import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'; //add this 8/8
 import {useNavigation} from '@react-navigation/native';
 import useInterval from '../hooks/useInterval.js';
-import PushNotification from "react-native-push-notification"; //added on 0910
+import PushNotification from 'react-native-push-notification'; //added on 0910
 
 GoogleSignin.configure({
   webClientId:
@@ -26,7 +26,7 @@ GoogleSignin.configure({
 });
 
 const LoginScreen = ({logged, handle1, handle2}) => {
-    const isNotification = () => {
+  const isNotification = () => {
     //석우꺼 : 서버에 userid넘겨주고 해당 user에게 올 알림이 없으면 0 리턴,
     //해당 user에게 올 알림이 있는 경우 기구이름리턴. ex) return 'bench'
     //알림이 여러개인 경우, ['bench', 'treadmil'] ...
@@ -38,29 +38,30 @@ const LoginScreen = ({logged, handle1, handle2}) => {
     //프론트에서 특정 userid에 대한 알림이 있는지 요청이오면 없는 경우 0, 있는 경우 알림을 보낼 기구이름 리스트를
     //보내주면됨. (ex. ['treadmil', 'squat rack1'])
     //보내준 이후 해당 user의 알림큐는 삭제해서 초기화시켜줘야함!!
-        return;
-    };
+    return;
+  };
 
-    useInterval(()=>{
-      if(logged){
-          console.log('interval working ...');
-          let returnval = isNotification();
-          returnval = ['default1', 'default2']; //default value, 삭제예정
-          console.log(returnval != 0)
-          if(returnval != 0){
-            let num = returnval.length;
-            let today = new Date();
-            while (num > 0){
-                PushNotification.localNotification({
-                    channelId:'1',
-                    title:`[${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}] 기구이용 가능 알림`,
-                    message: `이제 ${returnval[num-1]}을(를) 이용하실 수 있습니다.`,
-                    allowWhileIdle:'true' });
-                num -= 1;
-            }
-          }
+  useInterval(() => {
+    if (logged) {
+      console.log('interval working ...');
+      let returnval = isNotification();
+      returnval = ['bench']; //default value, 삭제예정
+      console.log(returnval != 0);
+      if (returnval != 0) {
+        let num = returnval.length;
+        let today = new Date();
+        while (num > 0) {
+          PushNotification.localNotification({
+            channelId: '1',
+            title: `[${returnval[num - 1]}] 이용가능 알림`,
+            message: `홈 화면에서 이용을 시작하실 수 있습니다.`,
+            allowWhileIdle: 'true',
+          });
+          num -= 1;
+        }
       }
-    }, 5000); //added by Seyun on 0910
+    }
+  }, 5000); //added by Seyun on 0910
 
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();

@@ -7,22 +7,19 @@ import ReserveScreen from './screens/ReserveScreen.js';
 import LoginScreen from './screens/LoginScreen.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import PushNotification from "react-native-push-notification"; //added on 0910
-
+import PushNotification from 'react-native-push-notification'; //added on 0910
 
 const Tab = createBottomTabNavigator();
-const createChannels = () => { //added on 0910
-    PushNotification.createChannel(
-        {
-            channelId: '1',
-            channelName: "Test Channel"
-        }
-    )
-}
+const createChannels = () => {
+  //added on 0910
+  PushNotification.createChannel({
+    channelId: '1',
+    channelName: 'Test Channel',
+  });
+};
 
 const App = () => {
-
-  useEffect(()=>{
+  useEffect(() => {
     createChannels();
   }, []); //added this on 0910
 

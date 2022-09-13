@@ -13,7 +13,6 @@ import HomeScreen1 from './HomeScreen1.js';
 import HomeScreen1tmp from './HomeScreen1tmp.js';
 import HomeScreen2 from './HomeScreen2.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import useInterval from '../hooks/useInterval.js';
 
 const HomeScreen = ({logged}) => {
   if (!logged) {
@@ -31,7 +30,7 @@ const HomeScreen = ({logged}) => {
       </SafeAreaView>
     );
   } else {
-    const [casenum, setCaseNum] = useState(2);
+    const [casenum, setCaseNum] = useState(3);
     const [userid, setUserid] = useState(null);
     const [availlist, setAvailList] = useState([
       {machineid: null, machinename: null, availabletime: null, image: null},
@@ -52,16 +51,15 @@ const HomeScreen = ({logged}) => {
       if (value !== null) {
         setUserid(value);
         return value;
-      }
-      else{
+      } else {
         setUserid(null);
         return null;
-      } 
+      }
     };
     getuserid();
 
     const checkuser = async () => {
-      const usid=await getuserid();
+      const usid = await getuserid();
       if (usid !== null) {
         console.log(usid);
 
@@ -239,16 +237,19 @@ const HomeScreen = ({logged}) => {
         </SafeAreaView>
       );
     } else {
-      Alert.alert('다시 시도해주세요');
       return (
-        <SafeAreaView>
-          <Button
-            title="새로고침"
-            onPress={() => {
-              checkuser();
-            }}
-            color={'orange'}
-          />
+        <SafeAreaView
+          style={{
+            flex: 1,
+            backgroundColor: '#FFF8F3',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={{flex: 0.2}} />
+          <Text style={styles.text}>로딩중입니다</Text>
+          <View style={{flex: 0.02}} />
+          <Text style={styles.text}>잠시만 기다려주세요</Text>
+          <View style={{flex: 0.4}} />
         </SafeAreaView>
       );
     }
@@ -256,6 +257,12 @@ const HomeScreen = ({logged}) => {
 };
 const styles = StyleSheet.create({
   baseview: {flex: 1, backgroundColor: '#FFF8F3'},
+  text: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'grey',
+  },
 });
 
 export default HomeScreen;
