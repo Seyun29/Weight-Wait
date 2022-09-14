@@ -10,8 +10,8 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView,
   TouchableOpacity,
+  Dimensions
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -95,10 +95,11 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
   };
 
   const strformat = '예상 사용시간 입력 후\n하단 버튼을 클릭해주세요.';
+  const windowHeight = Dimensions.get('window').height;
   return (
     <View style={styles.machine}>
       <Modal transparent={true} visible={visible2} animationType="slide">
-        <KeyboardAvoidingView style={{flex: 1}} enabled={false}>
+        <View style={{height:windowHeight, width:'100%'}}>
           <View style={styles.modalContainer}>
             <TouchableWithoutFeedback
               onPress={() => {
@@ -153,7 +154,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
               </View>
             </TouchableWithoutFeedback>
           </View>
-        </KeyboardAvoidingView>
+         </View>
       </Modal>
       <Image
         source={require('../images/default_image.jpg')}
