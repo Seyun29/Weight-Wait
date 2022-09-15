@@ -70,7 +70,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
                 Alert.alert('예약실패'); // 그 밖의 이유로 예약에 실패한 경우
                 return -4;
               } else {
-                Alert.alert(JSON.stringify(json) + '번째로 예약성공'); //예약 성공한 경우
+                Alert.alert(JSON.stringify(json["waitnum"]) + '번째로 예약성공\n예상대기시간:'+JSON.stringify(json["waittime"])+'분'); //예약 성공한 경우
 
                 return json;
               }
