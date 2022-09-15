@@ -18,7 +18,7 @@ import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage'; //add this 8/8
 import {useNavigation} from '@react-navigation/native';
 import useInterval from '../hooks/useInterval.js';
-import PushNotification from 'react-native-push-notification'; //added on 0910
+//import PushNotification from 'react-native-push-notification'; //added on 0910
 
 GoogleSignin.configure({
   webClientId:
@@ -26,13 +26,12 @@ GoogleSignin.configure({
 });
 
 const LoginScreen = ({logged, handle1, handle2}) => {
+
   const isNotification = () => {
     /*석우꺼 : 서버에 userid넘겨주고 해당 user에게 올 알림이 없으면 0 리턴,
     해당 user에게 올 알림이 있는 경우 기구이름으로 된 리스트 리턴. 
     ex) return ['bench']
-    알림이 여러개인 경우, ['bench', 'treadmil'] ... */
-
-    /*
+    알림이 여러개인 경우, ['bench', 'treadmil'] ...
     서버에서는 유저 배열 (혹은 딕셔너리)를 만들어서 유지하고 있다가
     user가 이용가능한 상태가 될때마다 (대기자가 0명인 기구를 예약한 경우 or 이전 대기자가 이용을 종료한 경우)
     해당 기구이름을 해당 user의 알림 큐에 추가.
@@ -44,7 +43,7 @@ const LoginScreen = ({logged, handle1, handle2}) => {
     */
     return;
   };
-
+/*
   useInterval(() => {
     if (logged) {
       //console.log('interval working ...');
@@ -66,6 +65,7 @@ const LoginScreen = ({logged, handle1, handle2}) => {
       }
     }
   }, 5000); //added by Seyun on 0910
+ */
 
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
