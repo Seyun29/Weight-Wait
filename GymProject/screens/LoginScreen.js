@@ -104,7 +104,7 @@ const LoginScreen = ({logged, handle1, handle2}) => {
     const getuserid1 = async () => {
       try {
         const value = await AsyncStorage.getItem('@storage_userid');
-        console.log(value + 'value');
+        //console.log(value + 'value');
       } catch (e) {
         console.log('-2');
       }

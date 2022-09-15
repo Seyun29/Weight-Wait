@@ -42,7 +42,7 @@ const HomeScreen = ({logged}) => {
     });
     const [change, setChange] = useState(0);
     const handler = () => {
-      console.log('handle');
+      //console.log('handle');
       setChange(change + 1);
     };
 
@@ -61,7 +61,7 @@ const HomeScreen = ({logged}) => {
     const checkuser = async () => {
       const usid = await getuserid();
       if (usid !== null) {
-        console.log(usid);
+        //console.log(usid);
 
         const url =
           'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/checkuser?userid=' +
@@ -75,7 +75,7 @@ const HomeScreen = ({logged}) => {
         })
           .then(response => response.json())
           .then(json => {
-            console.log(json);
+            //console.log(json);
             if (json.usinginfo.length !== 0) {
               //사용하고 있는 기구가 있는 경우
               setCaseNum(0);
@@ -110,7 +110,7 @@ const HomeScreen = ({logged}) => {
               return;
             } else {
               //사용하고 있는 기구도 없고 현재 이용가능한 기구도 없는 경우
-              console.log('-1');
+              //console.log('-1');
               setCaseNum(2);
               return;
             }

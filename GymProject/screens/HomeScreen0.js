@@ -52,7 +52,7 @@ const HomeScreen0 = ({id, name, time, handler}) => {
       )
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          //console.log(json);
           try {
             console.log('이용종료 성공했습니다.');
             Alert.alert('이용을 종료합니다.');

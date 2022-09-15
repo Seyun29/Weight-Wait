@@ -54,7 +54,7 @@ const MachineModal = ({
       )
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          //console.log(json);
           try {
             handlechange1();
             handlechange2();

@@ -50,7 +50,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
           )
             .then(response => response.json())
             .then(json => {
-              console.log(json);
+              //console.log(json);
               if (json == 101) {
                 console.log('101'); //
                 Alert.alert('예약실패, 사용자등록을 먼저 해주세요'); // 회원가입이 안 되어 있는 경우

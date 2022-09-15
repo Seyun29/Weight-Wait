@@ -38,7 +38,7 @@ const MachineHome = ({name, id, time, image, handler}) => {
       )
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          //console.log(json);
           if (json['success'] == true) {
             console.log('사용시작성공');
             Alert.alert('이용을 시작합니다.');
