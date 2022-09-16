@@ -223,6 +223,7 @@ const ReserveScreen = ({logged}) => {
                   style={{
                     fontSize: 20,
                     textAlign: 'center',
+
                     fontWeight: 'bold',
                   }}>
                   예약내역
