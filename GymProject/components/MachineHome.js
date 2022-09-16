@@ -103,9 +103,7 @@ const MachineHome = ({name, id, time, image, handler}) => {
   const formatted3 = `기구명 : ${name}\n\n이용까지 남은시간 : 이용불가`;
   return (
     <View style={styles.machine}>
-      <Image
-        source={require('../images/default_image.jpg')}
-        style={{width: 90, height: 90}}></Image>
+      <Image source={{uri: image}} style={{width: 90, height: 90}}></Image>
       <View style={{width: '50%'}}>
         {gap < 0 ? (
           <Text style={{fontSize: 15, color: 'black'}}>{formatted3}</Text>
