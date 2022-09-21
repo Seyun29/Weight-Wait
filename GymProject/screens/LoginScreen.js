@@ -26,7 +26,6 @@ GoogleSignin.configure({
 });
 
 const LoginScreen = ({logged, handle1, handle2}) => {
-
   const isNotification = () => {
     /*석우꺼 : 서버에 userid넘겨주고 해당 user에게 올 알림이 없으면 0 리턴,
     해당 user에게 올 알림이 있는 경우 기구이름으로 된 리스트 리턴. 
@@ -43,7 +42,7 @@ const LoginScreen = ({logged, handle1, handle2}) => {
     */
     return;
   };
-/*
+  /*
   useInterval(() => {
     if (logged) {
       //console.log('interval working ...');
@@ -139,21 +138,21 @@ const LoginScreen = ({logged, handle1, handle2}) => {
     setLoading(false);
   };
   const masterSignOut = async () => {
-           try {
-            await AsyncStorage.setItem('@storage_username', '');
-            await AsyncStorage.setItem('@storage_userid', '');
-          } catch (e) {
-            console.log('-3');
-          }
-          console.log('User signout successfully!');
-          setMaster(false);
-          logout();
+    try {
+      await AsyncStorage.setItem('@storage_username', '');
+      await AsyncStorage.setItem('@storage_userid', '');
+    } catch (e) {
+      console.log('-3');
     }
+    console.log('User signout successfully!');
+    setMaster(false);
+    logout();
+  };
   const googleSignout = async () => {
-    if (master){
-        masterSignOut();
-        console.log('관리자 로그아웃')
-        return;
+    if (master) {
+      masterSignOut();
+      console.log('관리자 로그아웃');
+      return;
     }
     auth()
       .signOut()
@@ -171,48 +170,47 @@ const LoginScreen = ({logged, handle1, handle2}) => {
     logout();
   }; //동영상에서 하랬던 거
 
-  const masterSignIn = async () => { //playstore검수용, 관리자 로그인 기능..
-     setLoading(true);
-     const storeuserid = async value => {
-       try {
-         await AsyncStorage.setItem('@storage_userid', '111');
-       } catch (e) {
-         console.log('-1');
-            // saving error
-       }
-     }; // add this 8/8
-     storeuserid(); //add this 8/8
+  const masterSignIn = async () => {
+    //playstore검수용, 관리자 로그인 기능..
+    setLoading(true);
+    const storeuserid = async value => {
+      try {
+        await AsyncStorage.setItem('@storage_userid', '111');
+      } catch (e) {
+        console.log('-1');
+        // saving error
+      }
+    }; // add this 8/8
+    storeuserid(); //add this 8/8
 
-     const storeusername = async value => {
-       try {
-         await AsyncStorage.setItem('@storage_username', '관리자');
-       } catch (e) {
-         console.log('-3');
-       }
-     };
-     storeusername();
+    const storeusername = async value => {
+      try {
+        await AsyncStorage.setItem('@storage_username', '관리자');
+      } catch (e) {
+        console.log('-3');
+      }
+    };
+    storeusername();
 
-     fetch(
-       'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/user',
-       {
-         method: 'POST',
-         headers: {
-           Accept: 'application/json',
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({
-           userid: '111',
-           username: '관리자',
-         }),
-       },
-     ); //add this 8/2
-     login();
-     navigation.navigate('Home');
-     setLoading(false);
-     setMaster(true);
-  }
-
-
+    fetch(
+      'https://so6wenvyg8.execute-api.ap-northeast-2.amazonaws.com/dev/user',
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userid: '111',
+          username: '관리자',
+        }),
+      },
+    ); //add this 8/2
+    login();
+    navigation.navigate('Home');
+    setLoading(false);
+    setMaster(true);
+  };
 
   if (!logged) {
     return (
@@ -254,10 +252,12 @@ const LoginScreen = ({logged, handle1, handle2}) => {
           </TouchableOpacity>
         </View>
         <View style={{flex: 1}}>
-                  <TouchableOpacity onPress={masterSignIn}>
-                    <Text style={{fontSize:12, fontWeight:'bold'}}>* 관리자로 로그인하시려면 클릭하세요</Text>
-                  </TouchableOpacity>
-          </View>
+          <TouchableOpacity onPress={masterSignIn}>
+            <Text style={{fontSize: 12, fontWeight: 'bold'}}>
+              * 관리자로 로그인하시려면 클릭하세요
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   } else {
