@@ -11,7 +11,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // add this 8/8
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -70,7 +70,12 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
                 Alert.alert('예약실패'); // 그 밖의 이유로 예약에 실패한 경우
                 return -4;
               } else {
-                Alert.alert(JSON.stringify(json["waitnum"]) + '번째로 예약성공\n예상대기시간:'+JSON.stringify(json["waittime"])+'분'); //예약 성공한 경우
+                Alert.alert(
+                  JSON.stringify(json['waitnum']) +
+                    '번째로 예약성공\n예상대기시간:' +
+                    JSON.stringify(json['waittime']) +
+                    '분',
+                ); //예약 성공한 경우
 
                 return json;
               }
@@ -99,7 +104,7 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
   return (
     <View style={styles.machine}>
       <Modal transparent={true} visible={visible2} animationType="slide">
-        <View style={{height:windowHeight, width:'100%'}}>
+        <View style={{height: windowHeight, width: '100%'}}>
           <View style={styles.modalContainer}>
             <TouchableWithoutFeedback
               onPress={() => {
@@ -154,11 +159,9 @@ const Machine = ({name, id, waitnum, handlerFunction, image}) => {
               </View>
             </TouchableWithoutFeedback>
           </View>
-         </View>
+        </View>
       </Modal>
-      <Image
-        source={require('../images/default_image.jpg')}
-        style={{width: 70, height: 70}}></Image>
+      <Image source={{uri: image}} style={{width: 70, height: 70}}></Image>
       {/*<Image source={{uri: 'www.google.com'}}/>*/}
       <View style={{width: '40%', justifyContent: 'center'}}>
         <Text style={{fontSize: 15, color: '#30404d'}}>{formatted}</Text>
