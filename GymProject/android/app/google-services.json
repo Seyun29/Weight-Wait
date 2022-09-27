@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "831994245288-3eo595mf33krfbfblrlds9arbbtbcvpk.apps.googleusercontent.com",
+          "client_id": "831994245288-0s0v9gm5hdh736trsqcnbsbbr98l641s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gymproject",
-            "certificate_hash": "85a671b1a02188fe171cfe64ab61383d0db4bc67"
+            "certificate_hash": "e8be07660d20e6c40206c53e522b0ba8b962eb37"
           }
         },
         {
