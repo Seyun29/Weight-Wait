@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "project_number": "831994245288",
+    "project_id": "weight-wait",
+    "storage_bucket": "weight-wait.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831994245288:android:04c2bb83886c7d273b929d",
+        "android_client_info": {
+          "package_name": "com.gymproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831994245288-0s0v9gm5hdh736trsqcnbsbbr98l641s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymproject",
+            "certificate_hash": "e8be07660d20e6c40206c53e522b0ba8b962eb37"
+          }
+        },
+        {
+          "client_id": "831994245288-vgkejfp40ea3mernfiiheeeqo8fr903b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymproject",
+            "certificate_hash": "4eb9d17f2601947086b591f5085e94533df30d51"
+          }
+        },
+        {
+          "client_id": "831994245288-hh4f1mndj0htlm9bb48tqe452191kred.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEmmI622N4GiHvPx17zb8xs-56-hCpnNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831994245288-hh4f1mndj0htlm9bb48tqe452191kred.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831994245288:android:870bb4845eb401883b929d",
+        "android_client_info": {
+          "package_name": "com.weightwait"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831994245288-3djkv6vodv8n0ancuroq3ka3g1ving79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.weightwait",
+            "certificate_hash": "5672d2733cb192a83a18e0256fd1573af00b65a1"
+          }
+        },
+        {
+          "client_id": "831994245288-tcnf8ls72pb4bqhb6lhgel66dun3pjr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.weightwait",
+            "certificate_hash": "e8be07660d20e6c40206c53e522b0ba8b962eb37"
+          }
+        },
+        {
+          "client_id": "831994245288-hh4f1mndj0htlm9bb48tqe452191kred.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEmmI622N4GiHvPx17zb8xs-56-hCpnNw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831994245288-hh4f1mndj0htlm9bb48tqe452191kred.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
