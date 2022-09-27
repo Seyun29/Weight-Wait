@@ -1,4 +1,4 @@
-package com.gymproject.newarchitecture;
+package com.weightwait.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.gymproject.BuildConfig;
-import com.gymproject.newarchitecture.components.MainComponentsRegistry;
-import com.gymproject.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.weightwait.BuildConfig;
+import com.weightwait.newarchitecture.components.MainComponentsRegistry;
+import com.weightwait.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
