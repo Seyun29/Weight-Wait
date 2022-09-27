@@ -22,7 +22,7 @@ import useInterval from '../hooks/useInterval.js';
 
 GoogleSignin.configure({
   webClientId:
-    '2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com',
+    '831994245288-hh4f1mndj0htlm9bb48tqe452191kred.apps.googleusercontent.com',
 });
 
 const LoginScreen = ({logged, handle1, handle2}) => {

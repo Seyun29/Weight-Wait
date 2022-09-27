@@ -1,41 +1,49 @@
 {
   "project_info": {
-    "project_number": "2931885723",
-    "project_id": "fir-ecc48",
-    "storage_bucket": "fir-ecc48.appspot.com"
+    "project_number": "831994245288",
+    "project_id": "weight-wait",
+    "storage_bucket": "weight-wait.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:2931885723:android:8cbd2f9d734732a882283e",
+        "mobilesdk_app_id": "1:831994245288:android:04c2bb83886c7d273b929d",
         "android_client_info": {
           "package_name": "com.gymproject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "2931885723-8nikonu53fr7s14hrgedlv7kfcls1p44.apps.googleusercontent.com",
+          "client_id": "831994245288-3eo595mf33krfbfblrlds9arbbtbcvpk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gymproject",
-            "certificate_hash": "01cb379973d7637949858575c51eeb0c1c80e5cd"
+            "certificate_hash": "85a671b1a02188fe171cfe64ab61383d0db4bc67"
           }
         },
         {
-          "client_id": "2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com",
+          "client_id": "831994245288-vgkejfp40ea3mernfiiheeeqo8fr903b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gymproject",
+            "certificate_hash": "4eb9d17f2601947086b591f5085e94533df30d51"
+          }
+        },
+        {
+          "client_id": "831994245288-hh4f1mndj0htlm9bb48tqe452191kred.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDYcL7U0ir9x0CfJ1zyDcJz2oizrLt08h4"
+          "current_key": "AIzaSyBEmmI622N4GiHvPx17zb8xs-56-hCpnNw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "2931885723-73sv03pffs2m9v6l84p1t0bimha7nktt.apps.googleusercontent.com",
+              "client_id": "831994245288-hh4f1mndj0htlm9bb48tqe452191kred.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
